@@ -1,0 +1,24 @@
+{
+  "name": "darli",
+  "version": "1.0.0",
+  "description": "first nodejs project :)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "fullcalendar": "^6.1.15",
+    "helmet": "^7.1.0",
+    "jquery": "^3.7.1",
+    "morgan": "^1.10.0",
+    "mssql": "^11.0.1",
+    "popper.js": "^1.16.1"
+  }
+}
