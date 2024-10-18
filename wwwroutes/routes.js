@@ -14,20 +14,16 @@ wwwrouter.use("/index", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "index.html"));
 });
 
-wwwrouter.use("/propuestas_candidato1", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_candidato1.html"));
+wwwrouter.use("/propuestas", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_candidatos.html"));
 });
 
-wwwrouter.use("/propuestas_candidato2", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_candidato2.html"));
+wwwrouter.use("/informacion", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "informacion_candidatos.html"));
 });
 
-wwwrouter.use("/propuestas_candidato3", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_candidato3.html"));
-});
-
-wwwrouter.use("/calendar", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "calendar.html"));
+wwwrouter.use("/eventos_noticias", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "eventos_noticias.html"));
 });
 
 export default wwwrouter;

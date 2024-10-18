@@ -15,7 +15,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
-    <title>Elecciones-2024</title>
+    <title>Guarder</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -30,9 +30,10 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <script src="/fullcalendar-6.1.15/dist/index.global.min.js"></script>
   </head>
 
-  <body>
+  <body class="sub_page">
     <div class="hero_area">
       <!-- header section strats -->
       <div class="hero_bg_box">
@@ -64,7 +65,7 @@
           <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
               <a class="navbar-brand" href="index.html">
-                <span> Elecciones-2024 </span>
+                <span> Guarder </span>
               </a>
               <button
                 class="navbar-toggler"
@@ -85,7 +86,7 @@
                 <ul class="navbar-nav">
                   <li class="nav-item active">
                     <a class="nav-link" href="index"
-                      >Home <span class="sr-only">(current)</span></a
+                      >Home </a
                     >
                   </li>
 
@@ -98,7 +99,9 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="eventos_noticias"> Eventos-Noticias </a>
+                    <a class="nav-link" href="eventos_noticias">
+                      Eventos-Noticias <span class="sr-only">(current)</span>
+                    </a>
                   </li>
 
                   <li class="nav-item">
@@ -111,149 +114,17 @@
         </div>
       </header>
       <!-- end header section -->
-      <!-- slider section -->
-      <section class="slider_section">
-        <div
-          id="carouselExampleIndicators"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-7">
-                    <div class="detail-box">
-                      <h1>
-                        Universidad Técnica de Ambato <br />
-                        <span> UTA </span>
-                      </h1>
-                      <p>Educarse es aprender a ser libres.</p>
-                      <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-7">
-                    <div class="detail-box">
-                      <h1>
-                        Elecciones-2024 <br />
-                        <span> UTA </span>
-                      </h1>
-                      <p>Educarse es aprender a ser libres.</p>
-                      <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-7">
-                    <div class="detail-box">
-                      <h1>
-                        Your Saftey <br />
-                        <span> Our Responsibility </span>
-                      </h1>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod magna aliqua. Ut enim ad minim veniam
-                      </p>
-                      <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container idicator_container">
-            <ol class="carousel-indicators">
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="0"
-                class="active"
-              ></li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="1"
-              ></li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="2"
-              ></li>
-            </ol>
-          </div>
-        </div>
-      </section>
-      <!-- end slider section -->
     </div>
 
-    <!-- team section -->
+    <!-- service section -->
 
-    <section class="team_section layout_padding">
+    <section class="service_section layout_padding">
       <div class="container">
-        <div class="heading_container heading_center">
-          <h2>Candidatos</h2>
-          <p>
-            Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a
-            euismod suspendisse vel, sed quam nulla mauris iaculis. Erat eget
-            vitae malesuada, tortor tincidunt porta lorem lectus.
-          </p>
-        </div>
-        <div class="row">
-          <!-- Candidato 1 -->
-          <div class="col-md-4 col-sm-6 mx-auto">
-            <div class="box">
-              <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 1 -->
-                <a href="informacion_candidatos.html#informacion_candidato1">
-                  <img src="images/t1.jpg" alt="Candidato 1" />
-                </a>
-              </div>
-              <div class="detail-box">
-                <h5>Candidato 1</h5>
-                <h6 class="">Cargo</h6>
-              </div>
-            </div>
-          </div>
-
-          <!-- Candidato 2 -->
-          <div class="col-md-4 col-sm-6 mx-auto">
-            <div class="box">
-              <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 2 -->
-                <a href="informacion_candidatos.html#informacion_candidato2">
-                  <img src="images/t2.jpg" alt="Candidato 2" />
-                </a>
-              </div>
-              <div class="detail-box">
-                <h5>Candidato 2</h5>
-                <h6 class="">Cargo</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btn-box">
-          <a href=""> View All </a>
-        </div>
+        <div id="calendar"></div>
       </div>
     </section>
 
-    <!-- end team section -->
+    <!-- end service section -->
 
     <!-- info section -->
     <section class="info_section">
@@ -349,5 +220,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/calendar.js"></script>
   </body>
 </html>
