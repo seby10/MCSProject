@@ -2,7 +2,7 @@ import sql from "mssql";
 
 const connectionSettings = {
   server: "localhost",
-  database: "darliDB",
+  database: "elecciones2024",
   user: "sa",
   password: "15abril2004",
   options: {
