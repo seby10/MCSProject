@@ -1,4 +1,4 @@
-const URL = "http://localhost:4000/proyectoMCS";
+const URL = "http://localhost:4000/MCSPROJECT";
 
 const getCandidatoByID = async (id) => {
   const response = await $.ajax({

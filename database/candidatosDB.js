@@ -1,15 +1,11 @@
-import sql from 'mssql';
 import { getConnection } from "../helpers/connection.js";
 
 export const getCandidatoByIDFromDB = async (id) => {
   try {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("ID_CAN", sql.Int, id) 
-      .execute("sp_GetCandidatoByID");
+    const connection = await getConnection();
+    const [result] = await connection.query("CALL sp_GetCandidatoByID(?)", [id]);
 
-    return result.recordset;
+    return result[0]; // Retorna los resultados del procedimiento almacenado
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener el candidato");

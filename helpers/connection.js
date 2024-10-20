@@ -1,22 +1,10 @@
-import sql from "mssql";
+import mysql from 'mysql2/promise';
 
-const connectionSettings = {
-  server: "localhost",
-  database: "elecciones2024",
-  user: "sa",
-  password: "15abril2004",
-  options: {
-    encrypt: true,
-    trustServerCertificate: true,
-  },
+export const getConnection = async () => {
+  return await mysql.createConnection({
+    host: 'localhost',        // Cambia si no es localhost
+    user: 'root',       // Usuario de MySQL
+    password: '', // Contraseña de MySQL
+    database: 'elecciones2024', // Nombre de la base de datos
+  });
 };
-
-export async function getConnection() {
-  try {
-    return await sql.connect(connectionSettings);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export { sql };
