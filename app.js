@@ -23,7 +23,7 @@ app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'wwwroot')));
 
-app.use('/proyectoMCS', router);
+app.use('/MCSPROJECT', router);
 app.use('/', wwwrouter);
 
 app.listen(port, () => {
