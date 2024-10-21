@@ -1,3 +1,4 @@
+const URL = "http://localhost:4000/MCSPROJECT";
 const radios = document.querySelectorAll('input[name="voto"]');
 const submitButtonVoto = document.getElementById('submitVoto');
 const submitButtonSugerencia = document.getElementById('submitVoto');
@@ -15,35 +16,38 @@ radios.forEach(radio => {
   });
 });
 
-  const URL = "http://localhost:4000/MCSPROJECT";
 
   document.getElementById('submitVoto').addEventListener('click', async function() {
     const radios = document.querySelectorAll('input[name="voto"]');
     let selectedId = null;
-  
-    // Busca la opción seleccionada
+
     radios.forEach(radio => {
       if (radio.checked) {
-        selectedId = radio.value; // Obtener el valor (id) de la opción seleccionada
+        selectedId = radio.value; 
       }
     });
   
-    // Verifica si se ha seleccionado alguna opción
     if (selectedId) {
       try {
         const currentDate = new Date().toISOString().split('T')[0]; 
-        // Llamada AJAX para enviar el voto
+        
         const response = await $.ajax({
-          url: `${URL}/votos/addVotos`, // Cambia esta URL según tu endpoint
+          url: `${URL}/votos/addVotos`, 
           type: "POST",
           data: {
-            canVoto: selectedId, // Envía el id de la opción seleccionada
+            canVoto: selectedId, 
             date: currentDate
           },
           dataType: "json",
         });
   
-        console.log(response); // Maneja la respuesta según sea necesario
+        console.log(response); 
+        submitButtonVoto.disabled = true;
+        radios.forEach(radio => {
+          radio.disabled = true;
+        });
+        
+        alert("Voto enviado correctamente.");
       } catch (error) {
         console.error("Error al enviar el voto:", error);
       }

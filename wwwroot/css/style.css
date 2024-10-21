@@ -70,6 +70,7 @@ input[type="radio"] {
 }
 
 .heading_container.heading_center {
+  margin-top: 50px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -108,8 +109,30 @@ input[type="radio"] {
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: cente50
 }
+.custom-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; 
+  transition: background-color 0.3s ease;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+}
+
+.option-image {
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
 
 .hero_bg_box .img-box {
   width: 100%;

@@ -1,9 +1,8 @@
-import { getConnection } from "../helpers/connection.js"; // Asegúrate de que la ruta sea correcta
-
+import { getConnection } from "../helpers/connection.js"; 
 export const insertVotosDB = async ({ canVoto, date }) => {
   try {
-    const connection = await getConnection(); // Obtén la conexión
-    const query = 'CALL spInsertarVoto(?, ?)'; // Llama al stored procedure
+    const connection = await getConnection(); 
+    const query = 'CALL spInsertarVoto(?, ?)'; 
     const [result] = await connection.execute(query, [canVoto, date]);
     console.log('Vote inserted:', result);
     return result;
