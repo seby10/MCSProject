@@ -5,7 +5,7 @@ export const getConnection = async () => {
     host: 'localhost',        
     user: 'root',       
     password: '', 
-    database: 'elecciones2024', 
-    port: 3307,
+    database: 'elecciones2024',
+    //port: 3307; Dayle y Jhanina descomentar
   });
 };

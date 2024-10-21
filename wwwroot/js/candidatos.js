@@ -19,7 +19,7 @@ const formatDate = (dateString) => {
 
 const displayCandidatos = (candidato1, candidato2) => {
   $("#informacion_candidato1 h2").text(
-    "Información de " + candidato1.NOM_CAN + " " + candidato1.APE_CAN
+    candidato1.NOM_CAN + " " + candidato1.APE_CAN
   );
   $("#informacion_candidato1 p").html(
     `<strong>Fecha de Nacimiento:</strong> ${formatDate(
@@ -31,7 +31,7 @@ const displayCandidatos = (candidato1, candidato2) => {
   );
 
   $("#informacion_candidato2 h2").text(
-    "Información de " + candidato2.NOM_CAN + " " + candidato2.APE_CAN
+    candidato2.NOM_CAN + " " + candidato2.APE_CAN
   );
   $("#informacion_candidato2 p").html(
     `<strong>Fecha de Nacimiento:</strong> ${formatDate(
@@ -43,8 +43,23 @@ const displayCandidatos = (candidato1, candidato2) => {
   );
 };
 
+const showCandidatos = (candidato1, candidato2) => {
+  $(".col-md-4")
+    .eq(0)
+    .find("h5")
+    .text(candidato1.NOM_CAN + " " + candidato1.APE_CAN);
+  $(".col-md-4").eq(0).find("h6").text(candidato1.CAR_CAN);
+
+  $(".col-md-4")
+    .eq(1)
+    .find("h5")
+    .text(candidato2.NOM_CAN + " " + candidato2.APE_CAN);
+  $(".col-md-4").eq(1).find("h6").text(candidato2.CAR_CAN);
+};
+
 $(document).ready(async () => {
   const candidato1 = await getCandidatoByID(1);
   const candidato2 = await getCandidatoByID(2);
   displayCandidatos(candidato1, candidato2);
+  showCandidatos(candidato1, candidato2);
 });
