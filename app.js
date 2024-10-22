@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import wwwrouter from './wwwroutes/routes.js';
+import eventosNoticiasRouter from './routes/eventosNoticias.js'; 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -23,8 +24,9 @@ app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'wwwroot')));
 
-app.use('/proyectoMCS', router);
+app.use('/MCSPROJECT', router);
 app.use('/', wwwrouter);
+app.use('/api/eventos_noticias', eventosNoticiasRouter); 
 
 app.listen(port, () => {
   console.log(`Test app listening at http://localhost:${port}`)
