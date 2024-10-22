@@ -9,6 +9,30 @@ body {
   gap: 10px; 
   align-items: center; 
 }
+#correoContainer {
+  display: none;
+}
+/* Centrar el modal verticalmente */
+.modal-dialog {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Hacer que el contenedor del modal ocupe toda la altura de la pantalla */
+}
+
+/* Estilo opcional para el contenido del modal */
+.modal-content {
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+/* Ajustar el ancho del modal en pantallas pequeñas */
+@media (max-width: 576px) {
+  .modal-dialog {
+      width: 90%; /* Ancho del modal en pantallas pequeñas */
+      margin: 0; /* Eliminar márgenes */
+  }
+}
+
 
 input[type="radio"] {
   margin-right: 5px; 

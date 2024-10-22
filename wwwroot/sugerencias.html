@@ -130,28 +130,64 @@
         <div class="">
           <div class="row">
             <div class="col-md-9 mx-auto">
-              <form action="#">
+              <form action="#" id="sugerenciaForm">
                 <div class="contact_form-container">
                   <div>
                     <div class="">
-                      <input
-                        type="text"
-                        placeholder="Sugerencias"
-                        class="message_input"
-                      />
+                      <div class="row">
+                        <div class="col-md-9 mx-auto">
+                          <form action="#" id="sugerenciaForm">
+                            <div class="contact_form-container">
+                              <div>
+                                <div class="">
+                                  <input
+                                    type="text"
+                                    id="sugerenciaInput"
+                                    placeholder="Sugerencias"
+                                    class="message_input"
+                                  />
+                                </div>
+                                <div class="btn-box">
+                                  <button type="button" id="submitSugerencia">Enviar Sugerencia</button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                    <div class="btn-box">
-                      <button type="submit" id="submitSugerencia">Enviar Sugerencia</button>
+                    <div class="modal fade" id="correoModal" tabindex="-1" role="dialog" aria-labelledby="correoModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="correoModalLabel">Confirmar Correo Electrónico</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <input
+                              type="text"
+                              id="correoModalInput"
+                              placeholder="Correo Electrónico"
+                              class="form-control"
+                            />
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" id="modalAceptar" class="btn btn-primary">Aceptar</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    
                   </div>
-                </div>
-
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
+        
       <div class="container">
         <div class="heading_container heading_center">
           <h2>Votos</h2>

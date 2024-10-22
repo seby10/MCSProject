@@ -1,48 +1,44 @@
 import {
-  selectUsers,
-  deleteUser,
-  updateUserDB,
   GetUserbyEmail,
-  getEmailnotId,
+  insertUser,
 } from "../database/usersDB.js";
 
-export const getAllUsers = async (req, res) => {
+export const findByEmail = async (req, res) => {
   try {
-    const result = await selectUsers();
-    const response= result.recordset;
-    res.json({ message: "Users Selected!", response });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error selecting users", error });
-  }
-};
+    const { email } = req.body;
+    let user = await GetUserbyEmail({ email });
 
-export const removeUser = async (req, res) => {
-  try {
-    const { id } = req.body;
-    const result = await deleteUser({ id });
-
-    if (result.recordset) {
-      res.json({ success: true});
+    if (user) {
+      res.json({ userId: user.ID_USU });
     } else {
-      res.json({ success: false});
+      // Si no existe el usuario, crearlo
+      const result = await insertUser({ email });
+      res.json({ userId: result.userId }); // Devuelve el nuevo ID de usuario creado
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error deleting user", error });
+    console.error("Error en findByEmail:", error);
+    res.status(500).json({ message: "Error al buscar o crear el usuario por correo", error });
   }
 };
 
-export const updateUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
-    const {id, fName, lName, email, password, role } = req.body;
-    const result = await updateUserDB({ id,fName, lName, email, password, role });
-    res.json({ message: "User Updated!", result });
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "El correo electrónico es obligatorio" });
+    }
+
+    const result = await insertUser({ email });
+    console.log('Usuario insertado con ID:', result.userId);
+
+    res.json({ userId: result.userId });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error updating user!", error });
+    console.error('Error en createUser:', error);
+    res.status(500).json({ message: "Error al crear el usuario", error: error.message });
   }
 };
+
 
 export const getEmail = async (req, res) => {
   try {
@@ -54,18 +50,6 @@ export const getEmail = async (req, res) => {
     } else {
       res.json(false);
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error getting email", error });
-  }
-};
-
-export const checkEmail = async (req, res) => {
-  try {
-    const { email,id } = req.body;
-    const emailExists = await getEmailnotId({ email, id });
-
-    res.json(emailExists);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error getting email", error });
