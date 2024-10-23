@@ -24,6 +24,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/eventos.css">
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
   <script src="/fullcalendar-6.1.15/dist/index.global.min.js"></script>
@@ -84,7 +85,7 @@
 
                 <li class="nav-item">
                   <a class="nav-link" href="eventos_noticias">
-                    Eventos-Noticias <span class="sr-only">(current)</span>
+                    Noticias/Eventos <span class="sr-only">(current)</span>
                   </a>
                 </li>
 
@@ -107,10 +108,10 @@
       <div class="row">
         <div class="col-md-6 px-0">
           <div class="heading_container">
-            <h2>Eventos y Noticias</h2>
+            <h2>Noticias y Eventos</h2>
           </div>
           <!-- Selector de fecha -->
-          <input type="date" id="fecha" />
+          <input type="date" id="fecha" pattern="dd/MM/yyyy" />
           <!-- Contenedor de eventos -->
           <div id="eventsContainer"></div>
         </div>
