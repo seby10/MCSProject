@@ -18,6 +18,14 @@ wwwrouter.use("/propuestas", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_candidatos.html"));
 });
 
+wwwrouter.use("/propuestas/mary-cruz", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_mary.html"));
+});
+
+wwwrouter.use("/propuestas/sara-camacho", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "propuestas_sara.html"));
+});
+
 wwwrouter.use("/informacion", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "informacion_candidatos.html"));
 });
