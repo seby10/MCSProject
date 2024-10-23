@@ -45,7 +45,7 @@ modalAceptarButton.addEventListener('click', async function () {
 
       const currentDate = new Date().toISOString().split('T')[0];
       const suggestionResponse = await $.ajax({
-        url: `${URL}/sugerencias/addSugerencias`,
+        url: `${URL}/sugerenciaVoto/addSugerencias`,
         type: "POST",
         data: {
           fecha: currentDate,
@@ -100,7 +100,7 @@ submitButtonVoto.addEventListener('click', async function () {
       const currentDate = new Date().toISOString().split('T')[0]; 
       
       const response = await $.ajax({
-        url: `${URL}/votos/addVotos`, 
+        url: `${URL}/sugerenciaVoto/addVotos`, 
         type: "POST",
         data: {
           canVoto: selectedId, 
