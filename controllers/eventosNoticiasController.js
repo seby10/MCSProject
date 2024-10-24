@@ -18,7 +18,7 @@ export const getRecentEventos = async (req, res) => {
   try {
     const limit = req.query.limit || 5;
     const result = await getRecentEventosNoticias(limit);
-    console.log('Resultados:', result);
+    //console.log('Resultados:', result);
     res.json(result);
   } catch (error) {
     console.error(error);

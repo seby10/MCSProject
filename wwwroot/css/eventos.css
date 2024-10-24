@@ -47,6 +47,7 @@
   color: #555;
   margin: 0 0 15px 0;
   line-height: 1.5;
+  font-size: 1.05rem;
 }
 
 .event-location {
@@ -169,7 +170,7 @@
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  padding: 40px;
   position: relative;
 }
 
@@ -180,6 +181,10 @@
 
 .slider-event-card {
   text-align: left;
+  padding: 20px; /* Añadir padding interno a la tarjeta del evento */
+  border-radius: 10px; /* Redondear las esquinas de la tarjeta */
+  background: #f2f0ef; /* Color de fondo para la tarjeta */
+  margin-bottom: 20px;
 }
 
 .slider-event-card h3 {

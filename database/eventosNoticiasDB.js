@@ -4,10 +4,10 @@ export const getEventosNoticiasByDateFromDB = async (date) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "SELECT NOM_EVE_NOT, INF_EVE_NOT, FEC_EVE_NOT, UBI_EVE_NOT FROM eventos_noticias WHERE DATE(FEC_EVE_NOT) = DATE(?)",
+      "CALL sp_GetEventosNoticiasByDate(?)", 
       [date]
     );
-    return result;
+    return result[0];
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener eventos y noticias");
@@ -16,18 +16,12 @@ export const getEventosNoticiasByDateFromDB = async (date) => {
 
 export const getRecentEventosNoticias = async (limit = 5) => {
   try {
-    console.log('Consultando eventos recientes, límite:', limit);
     const connection = await getConnection();
     const [result] = await connection.query(
-      `SELECT NOM_EVE_NOT, INF_EVE_NOT, FEC_EVE_NOT, UBI_EVE_NOT 
-       FROM eventos_noticias 
-       WHERE FEC_EVE_NOT >= CURDATE() 
-       ORDER BY FEC_EVE_NOT ASC 
-       LIMIT ?`,
+      "CALL sp_GetRecentEventosNoticias(?)", 
       [limit]
     );
-    console.log('Resultados de la consulta:', result);
-    return result;
+    return result[0];  // Recuerda acceder al primer array que contiene los resultados.
   } catch (error) {
     console.error("Error en getRecentEventosNoticias:", error);
     throw error;
