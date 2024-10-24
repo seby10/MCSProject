@@ -1,78 +1,37 @@
-import mssql from "mssql";
-import { getConnection, sql } from "../helpers/connection.js";
-
-export const selectUsers = async () => {
-  try {
-    const pool = await getConnection();
-    const result = await pool.request().execute("spSelectUsers");
-
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error selecting users: " + error.message);
-  }
-};
-
-export const deleteUser = async ({ id }) => {
-  try {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("id", sql.Int, id)
-      .execute("spDeleteUser");
-
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error deleting: " + error.message);
-  }
-};
-
-export const updateUserDB = async ({ fName, lName, email, password, id , role }) => {
-  try {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("id", sql.Int, id)
-      .input("first_name", sql.VarChar, fName)
-      .input("last_name", sql.VarChar, lName)
-      .input("email", sql.VarChar, email)
-      .input("password", sql.VarChar, password)
-      .input("role", sql.Int, role)
-      .execute("spUpdateUser");
-
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error deleting: " + error.message);
-  }
-};
-
+import { getConnection } from "../helpers/connection.js"; 
 export const GetUserbyEmail = async ({ email }) => {
   try {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("email", sql.VarChar, email)
-      .execute("spGetUserbyEmail");
-    return result;
+    const connection = await getConnection();
+    const query = 'CALL spGetUserbyEmail(?)';
+    const [result] = await connection.execute(query, [email]);
+    
+    if (result[0].length > 0) {
+      return result[0][0]; 
+    } else {
+      return null; 
+    }
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting email");
+    console.error("Error obteniendo el usuario por correo:", error);
+    throw new Error("Error obteniendo el usuario por correo: " + error.message);
   }
 };
 
-export const getEmailnotId = async ({ email, id }) => {
+
+export const insertUser = async ({ email }) => {
   try {
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("email", sql.VarChar, email)
-      .input("id", sql.Int, id)
-      .execute("spGetEmailnotId");
-    return result.recordset[0].count > 0;
+    const connection = await getConnection();
+    const query = 'CALL spInsertUser(?)';
+    const [result] = await connection.execute(query, [email]);
+    
+    console.log('Resultado del procedimiento almacenado:', result);
+
+    if (result && result[0] && result[0][0]) {
+      return { userId: result[0][0].userId }; 
+    } else {
+      throw new Error('No se pudo obtener el ID del usuario insertado');
+    }
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting user");
+    console.error("Error insertando el usuario:", error);
+    throw new Error("Error insertando el usuario: " + error.message);
   }
 };
