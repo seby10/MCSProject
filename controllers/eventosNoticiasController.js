@@ -1,4 +1,4 @@
-import { getEventosNoticiasByDateFromDB } from "../database/eventosNoticiasDB.js";
+import { getEventosNoticiasByDateFromDB, getRecentEventosNoticias } from "../database/eventosNoticiasDB.js";
 
 export const getEventosNoticiasByDate = async (req, res) => {
   try {
@@ -10,5 +10,18 @@ export const getEventosNoticiasByDate = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener eventos y noticias", error });
+  }
+};
+
+
+export const getRecentEventos = async (req, res) => {
+  try {
+    const limit = req.query.limit || 5;
+    const result = await getRecentEventosNoticias(limit);
+    console.log('Resultados:', result);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener eventos recientes", error });
   }
 };
