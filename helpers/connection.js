@@ -1,22 +1,11 @@
-import sql from "mssql";
+import mysql from 'mysql2/promise';
 
-const connectionSettings = {
-  server: "localhost",
-  database: "darliDB",
-  user: "sa",
-  password: "15abril2004",
-  options: {
-    encrypt: true,
-    trustServerCertificate: true,
-  },
+export const getConnection = async () => {
+  return await mysql.createConnection({
+    host: 'localhost',        
+    user: 'root',       
+    password: '', 
+    database: 'elecciones2024',
+    //port: 3307; Dayle y Jhanina descomentar
+  });
 };
-
-export async function getConnection() {
-  try {
-    return await sql.connect(connectionSettings);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export { sql };
