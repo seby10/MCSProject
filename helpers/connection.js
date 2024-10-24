@@ -6,6 +6,6 @@ export const getConnection = async () => {
     user: 'root',       
     password: '', 
     database: 'elecciones2024', 
-    port:3307,
+    //port:3307,
   });
 };
