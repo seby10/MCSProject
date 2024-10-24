@@ -9,49 +9,81 @@ const getPropuestaByID = async (id) => {
   console.log(response);
   return response[0];
 };
-const displayPropuestas = (propuestaSeguridad, propuestaEconomia) => {
-  // Mostrar la información de la propuesta de seguridad
-  $("#informacion_seguridad h2").text("Propuesta de Seguridad");
-  $("#informacion_seguridad p").html(
-    `<strong>Nombre:</strong> ${propuestaSeguridad.NOM_PRO}<br>
-     <strong>Grupo Dirigido:</strong> ${propuestaSeguridad.GRUP_DIR_PRO}<br>
-     <strong>Información:</strong> ${propuestaSeguridad.INF_PRO}<br>
-     <strong>ID del Candidato:</strong> ${propuestaSeguridad.ID_CAN}`
+
+
+const displayPropuestas = (propuestaDocentes, propuestaEstudiantes, propuestaAdministrativo, propuestaFacultades) => {
+
+  $("#propuestas_estudiantes h2").text("Propuesta para los estudiantes");
+  $("#propuestas_estudiantes p").html(
+    `<strong>Nombre:</strong> ${propuestaEstudiantes.NOM_PRO}<br>
+     <strong>Grupo Dirigido:</strong> ${propuestaEstudiantes.GRUP_DIR_PRO}<br>
+     <strong>Información:</strong> ${propuestaEstudiantes.INF_PRO}<br>
+     <strong>ID del Candidato:</strong> ${propuestaEstudiantes.ID_CAN}`
   );
 
-  // Mostrar la información de la propuesta de economía
-  $("#informacion_economia h2").text("Propuesta de Economía");
-  $("#informacion_economia p").html(
-    `<strong>Nombre:</strong> ${propuestaEconomia.NOM_PRO}<br>
-     <strong>Grupo Dirigido:</strong> ${propuestaEconomia.GRUP_DIR_PRO}<br>
-     <strong>Información:</strong> ${propuestaEconomia.INF_PRO}<br>
-     <strong>ID del Candidato:</strong> ${propuestaEconomia.ID_CAN}`
+  $("#propuestas_docentes h2").text("Propuesta para los docentes");
+  $("#propuestas_docentes p").html(
+    `<strong>Nombre:</strong> ${propuestaDocentes.NOM_PRO}<br>
+     <strong>Grupo Dirigido:</strong> ${propuestaDocentes.GRUP_DIR_PRO}<br>
+     <strong>Información:</strong> ${propuestaDocentes.INF_PRO}<br>
+     <strong>ID del Candidato:</strong> ${propuestaDocentes.ID_CAN}`
   );
+
+  $("#propuestas_administrativo h2").text("Propuesta para administrativo");
+  $("#propuestas_administrativo p").html(
+    `<strong>Nombre:</strong> ${propuestaAdministrativo.NOM_PRO}<br>
+     <strong>Grupo Dirigido:</strong> ${propuestaAdministrativo.GRUP_DIR_PRO}<br>
+     <strong>Información:</strong> ${propuestaAdministrativo.INF_PRO}<br>
+     <strong>ID del Candidato:</strong> ${propuestaAdministrativo.ID_CAN}`
+  );
+  $("#propuestas_facultades h2").text("Propuesta para las facultades");
+  $("#propuestas_facultades p").html(
+    `<strong>Nombre:</strong> ${propuestaFacultades.NOM_PRO}<br>
+     <strong>Grupo Dirigido:</strong> ${propuestaFacultades.GRUP_DIR_PRO}<br>
+     <strong>Información:</strong> ${propuestaFacultades.INF_PRO}<br>
+     <strong>ID del Candidato:</strong> ${propuestaFacultades.ID_CAN}`
+  );
+  
 };
 
 $(document).ready(async () => {
-  const propuestaSeguridad = await getPropuestaByID(1);
-  const propuestaEconomia = await getPropuestaByID(2);
-  displayPropuestas(propuestaEconomia, propuestaSeguridad);
+  const propuestaEstudiantes = await getPropuestaByID(1);
+  const propuestaDocentes = await getPropuestaByID(2);
+  const propuestaAdministrativo = await getPropuestaByID(2);
+  const propuestaFacultades = await getPropuestaByID(2);
+  displayPropuestas(propuestaDocentes, propuestaEstudiantes, propuestaAdministrativo, propuestaFacultades);
 });
 
+// Función para mostrar la sección correcta y activar el botón correspondiente
+function showSection(sectionId, buttonId) {
+  // Ocultar todas las secciones
+  const allSections = document.querySelectorAll(".tab-content");
+  allSections.forEach(section => section.style.display = "none");
 
-  // Asignar eventos desde JavaScript
-  document.getElementById("btn-seguridad").addEventListener("click", function() {
-    showSection('seguridad');
-  });
+  // Mostrar la sección seleccionada
+  document.getElementById(sectionId).style.display = "block";
 
-  document.getElementById("btn-economia").addEventListener("click", function() {
-    showSection('economia');
-  });
+  // Quitar la clase "active" de todos los botones
+  const buttons = document.querySelectorAll(".tab-button");
+  buttons.forEach(button => button.classList.remove("active"));
 
-  function showSection(section) {
-    document.getElementById("seguridad").style.display = "none";
-    document.getElementById("economia").style.display = "none";
-    document.getElementById(section).style.display = "block";
-  }
+  // Agregar la clase "active" al botón seleccionado
+  document.getElementById(buttonId).classList.add("active");
+}
 
-  // Mostrar la sección de "Seguridad" por defecto
-  document.addEventListener("DOMContentLoaded", function () {
-    showSection("seguridad");
-  });
+// Asignar eventos a los botones
+document.getElementById("btn-estudiantes").addEventListener("click", function() {
+  showSection('propuestas_estudiantes', 'btn-estudiantes');
+});
+
+document.getElementById("btn-docentes").addEventListener("click", function() {
+  showSection('propuestas_docentes', 'btn-docentes');
+});
+
+document.getElementById("btn-administrativo").addEventListener("click", function() {
+  showSection('propuestas_administrativo', 'btn-administrativo');
+});
+
+document.getElementById("btn-facultades").addEventListener("click", function() {
+  showSection('propuestas_facultades', 'btn-facultades');
+});

@@ -225,48 +225,57 @@
       </div>
     </div>
 
-    <section class="team_section layout_padding">
-      <div class="container">
-        <div class="heading_container heading_center">
-          <h2>Conoce las propuestas de las candidaturas</h2>
-        </div>
-        <div class="row">
-          <!-- Candidato 1 -->
-          <div class="col-md-4 col-sm-6 mx-auto">
-            <div class="box">
-              <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 1 -->
-                <a href="propuestas_mary.html">
-                  <img src="images/t1.jpg" alt="Candidato 1" />
-                </a>
-              </div>
-              <div class="detail-box">
-                <h5>Mary Cruz</h5>
-                <h6 class="">Ver propuestas</h6>
-              </div>
-            </div>
-          </div>
-
-          <!-- Candidato 2 -->
-          <div class="col-md-4 col-sm-6 mx-auto">
-            <div class="box">
-              <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 2 -->
-                <a href="propuestas_sara.html">
-                  <img src="images/t2.jpg" alt="Candidato 2" />
-                </a>
-              </div>
-              <div class="detail-box">
-                <h5>Sara Camacho</h5>
-                <h6 class="">Ver propuestas</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section class="image-container" style="position: relative;">
+      <img
+        src="images/mary.jpg"
+        alt="Propuestas"
+        class="imagen_centrada_sin_filtro"
+      />
+      <h1 class="image-title2">Mary Cruz</h1>
+      <h2 class="image-title3">La universidad del futuro es donde soñamos creamos e innovamos</h2>
     </section>
 
-    <!-- end about section -->
+    <div class="tab-menu">
+      <button class="tab-button active" id="btn-estudiantes">Estudiantes</button>
+      <button class="tab-button" id="btn-docentes">Docentes</button>
+      <button class="tab-button" id="btn-administrativo">Administrativo</button>
+      <button class="tab-button" id="btn-facultades">Facultades</button>
+    </div>
+    
+    <section id="propuestas_estudiantes" class="tab-content">
+      <h2>Total de propuestas y promesas en seguridad</h2>
+      <div class="propuestas">
+        <p>15 Propuestas</p>
+        <p>4 Promesas</p>
+      </div>
+    </section>
+    
+    <section id="propuestas_docentes" class="tab-content" style="display: none">
+      <h2>Total de propuestas y promesas en economía</h2>
+      <div class="propuestas">
+        <p>69 Propuestas</p>
+        <p>17 Promesas</p>
+      </div>
+    </section>
+    
+    <section id="propuestas_administrativo" class="tab-content" style="display: none">
+      <h2>Total de propuestas y promesas en economía</h2>
+      <div class="propuestas">
+        <p>69 Propuestas</p>
+        <p>17 Promesas</p>
+      </div>
+    </section>
+    
+    <section id="propuestas_facultades" class="tab-content" style="display: none">
+      <h2>Total de propuestas y promesas en economía</h2>
+      <div class="propuestas">
+        <p>69 Propuestas</p>
+        <p>17 Promesas</p>
+      </div>
+    </section>
+    
+
+    
 
     <!-- info section -->
     <section class="info_section">
@@ -349,6 +358,7 @@
     </section>
 
     <!-- end info_section -->
+     
 
     <!-- footer section -->
     <footer class="container-fluid footer_section">
@@ -362,5 +372,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/propuestas.js"></script>
   </body>
 </html>
