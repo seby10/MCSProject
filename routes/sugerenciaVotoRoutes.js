@@ -9,5 +9,4 @@ const router = express.Router();
 router.post("/addSugerencias", addSugerencias);
 router.post("/addVotos", addVotos);
 
-
 export default router;
