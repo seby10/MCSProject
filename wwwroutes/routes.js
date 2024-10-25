@@ -6,8 +6,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const wwwrouter = express.Router();
 
-wwwrouter.use("/contact", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "contact.html"));
+wwwrouter.use("/sugerencias", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "sugerencias.html"));
 });
 
 wwwrouter.use("/index", function (req, res) {

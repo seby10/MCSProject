@@ -5,6 +5,8 @@ export const getConnection = async () => {
     host: 'localhost',        
     user: 'root',       
     password: '', 
-    database: 'elecciones2024',
+    database: 'elecciones2024', 
+    port:3307,
   });
 };
+
