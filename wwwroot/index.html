@@ -15,7 +15,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
-    <title>Elecciones-2024</title>
+    <title>Elecciones 2024</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -28,6 +28,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/eventos.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
   </head>
@@ -64,7 +65,7 @@
           <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
               <a class="navbar-brand" href="index.html">
-                <span> Elecciones-2024 </span>
+                <span> Elecciones 2024 </span>
               </a>
               <button
                 class="navbar-toggler"
@@ -98,9 +99,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="eventos_noticias">
-                      Eventos-Noticias
-                    </a>
+                    <a class="nav-link" href="eventos_noticias">Noticias/Eventos</a>
                   </li>
 
                   <li class="nav-item">
@@ -286,6 +285,32 @@
       </div>
     </section>
 
+    <!-- Eventos y Noticias Slider Section -->
+    <section class="eventos-slider-section">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Eventos y Noticias</h2>
+          <p>Mantente informado sobre los últimos eventos</p>
+        </div>
+
+        <div class="eventos-slider-container">
+          <div class="eventos-slider">
+            <div class="eventos-slider-content"></div>
+
+            <div class="slider-controls">
+              <button class="slider-btn prev-btn">
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              <button class="slider-btn next-btn">
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="slider-indicators"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- end team section -->
 
     <!-- info section -->
@@ -382,6 +407,7 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/eventos-slider.js"></script>
     <script src="js/candidatos.js"></script>
   </body>
 </html>
