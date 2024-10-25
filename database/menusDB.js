@@ -1,5 +1,5 @@
 import mssql from "mssql";
-import { getConnection, sql } from "../helpers/connection.js";
+import { getConnection} from "../helpers/connection.js";
 
 export const selectMenus = async () => {
   try {
