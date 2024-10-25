@@ -1,8 +1,8 @@
 import express from "express";
-import { getPropuestaByID } from "../controllers/propuestasControllers.js";
+import { getPropuestaByGrupDir } from "../controllers/propuestasControllers.js";
 
 const router = express.Router();
 
-router.get("/getPropuestas/:id", getPropuestaByID);
+router.get("/getPropuestas/:grup", getPropuestaByGrupDir);
 
 export default router;

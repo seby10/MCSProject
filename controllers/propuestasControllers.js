@@ -1,9 +1,11 @@
-import { getPropuestaByIDFromDB } from "../database/propuestasDB.js";
+import { getPropuestaByGrupDirDB } from "../database/propuestasDB.js";
 
-export const getPropuestaByID = async (req, res) => {
+export const getPropuestaByGrupDir = async (req, res) => {
   try {
-    const { id } = req.params; 
-    const result = await getPropuestaByIDFromDB(id); 
+    const { grup } = req.params; 
+    console.log('Grupo recibido:', grup);
+    const result = await getPropuestaByGrupDirDB(grup); 
+    console.log('Resultados:', result);
     res.json(result); 
   } catch (error) {
     console.error(error);

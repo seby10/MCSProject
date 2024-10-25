@@ -1,11 +1,13 @@
 import { getConnection } from "../helpers/connection.js";
 
-export const getPropuestaByIDFromDB = async (id) => {
+export const getPropuestaByGrupDirDB = async (grup) => {
   try {
     const connection = await getConnection();
-    const [result] = await connection.query("CALL sp_GetPropuestaByID(?)", [id]);
-
-    return result[0]; // Retorna los resultados del procedimiento almacenado
+    const [result] = await connection.query(
+      "SELECT NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CAN FROM propuestas WHERE GRUP_DIR_PRO = ?",
+      [grup]
+    );
+    return result;
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener la propuesta");
