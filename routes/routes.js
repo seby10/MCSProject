@@ -1,10 +1,7 @@
 import express from "express";
-<<<<<<< routes/routes.js
-import propuestasRoutes from './propuestasRoutes.js'
-=======
->>>>>>> routes/routes.js
 
 import candidatosRoutes from './candidatosRoutes.js'
+import propuestasRoutes from './propuestasRoutes.js'
 import sugerenciaVotoRoutes from './sugerenciaVotoRoutes.js';
 import usersRoutes from './usersRoutes.js';
 import eventosNoticiasRoutes from './eventosNoticiasRoutes.js'
