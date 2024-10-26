@@ -4,6 +4,40 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
 }
+.radio-group {
+  display: flex;
+  gap: 10px; 
+  align-items: center; 
+}
+#correoContainer {
+  display: none;
+}
+/* Centrar el modal verticalmente */
+.modal-dialog {
+  display: flex;
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Hacer que el contenedor del modal ocupe toda la altura de la pantalla */
+}
+
+/* Estilo opcional para el contenido del modal */
+.modal-content {
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+/* Ajustar el ancho del modal en pantallas pequeñas */
+@media (max-width: 576px) {
+  .modal-dialog {
+      width: 90%; /* Ancho del modal en pantallas pequeñas */
+      margin: 0; /* Eliminar márgenes */
+  }
+}
+
+
+input[type="radio"] {
+  margin-right: 5px; 
+}
+
 
 .layout_padding {
   padding-top: 90px;
@@ -60,6 +94,7 @@ body {
 }
 
 .heading_container.heading_center {
+  margin-top: 50px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -98,8 +133,30 @@ body {
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: cente50
 }
+.custom-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; 
+  transition: background-color 0.3s ease;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+}
+
+.option-image {
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+
 
 .hero_bg_box .img-box {
   width: 100%;
