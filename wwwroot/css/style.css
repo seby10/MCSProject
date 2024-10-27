@@ -4,6 +4,10 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
 }
+.footer_thankyou {
+	text-align: right;
+	margin-left: 20px; 
+  }
 .radio-group {
   display: flex;
   gap: 10px; 
@@ -356,18 +360,26 @@ input[type="radio"] {
 }
 
 
-
 .header_section {
   padding: 0;
+  background-color: #ffffff;
 }
 
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }
 
 .header_section .nav_container {
   margin: 0 auto;
+}
+
+.header_section img {
+  max-height: 50px; 
+  width: auto;
 }
 
 .header_top {
@@ -1029,16 +1041,16 @@ a:focus {
 .info_section {
   background-color: #101010;
   color: #ffffff;
-  padding: 75px 0 10px 0;
+  padding: 30px 0 5px 0; 
 }
 
 .info_section .row > div {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .info_section h5 {
-  margin-bottom: 25px;
-  font-size: 24px;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 
 .info_section .info_logo {
@@ -1057,6 +1069,7 @@ a:focus {
 .info_section .info_logo .navbar-brand {
   padding: 0;
   margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .info_section .info_logo .navbar-brand span {
@@ -1084,11 +1097,13 @@ a:focus {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  margin-bottom: 5px;
 }
 
 .info_section .info_contact a {
   color: #ffffff;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .info_section .info_contact a i {
@@ -1105,7 +1120,7 @@ a:focus {
 }
 
 .info_section .info_form form button {
-  padding: 8px 35px;
+  padding: 8px 25px;
   outline: none;
   border: none;
   color: #ffffff;
@@ -1113,6 +1128,7 @@ a:focus {
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;
+  font-size: 12px; 
 }
 
 .info_section .info_form .social_box {
@@ -1138,8 +1154,9 @@ a:focus {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 20px;
-  background-color: #101010;
+  padding: 10px;
+  background-color: #c06f9f;
+  font-size: 12px; 
 }
 
 .footer_section p {
