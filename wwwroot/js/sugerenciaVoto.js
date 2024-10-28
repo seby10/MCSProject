@@ -1,25 +1,24 @@
 const URL = "http://localhost:4000/MCSPROJECT";
-const submitButtonSugerencia = document.getElementById('submitSugerencia');
-const submitButtonVoto = document.getElementById('submitVoto');
-const modalAceptarButton = document.getElementById('modalAceptar');
+const submitButtonSugerencia = document.getElementById("submitSugerencia");
+const submitButtonVoto = document.getElementById("submitVoto");
+const modalAceptarButton = document.getElementById("modalAceptar");
 const radios = document.querySelectorAll('input[name="voto"]');
-let sugerenciaInputValue = ''; 
+let sugerenciaInputValue = "";
 
-submitButtonSugerencia.addEventListener('click', function (e) {
-  e.preventDefault(); 
+submitButtonSugerencia.addEventListener("click", function (e) {
+  e.preventDefault();
 
-  sugerenciaInputValue = document.getElementById('sugerenciaInput').value;
-
+  sugerenciaInputValue = document.getElementById("sugerenciaInput").value;
 
   if (sugerenciaInputValue) {
-    $('#correoModal').modal('show'); 
+    $("#correoModal").modal("show");
   } else {
-    alert('Por favor, ingresa una sugerencia.'); 
+    showErrorAlert("Por favor, ingresa una sugerencia.");
   }
 });
 
-modalAceptarButton.addEventListener('click', async function () {
-  const correoModalInput = document.getElementById('correoModalInput').value;
+modalAceptarButton.addEventListener("click", async function () {
+  const correoModalInput = document.getElementById("correoModalInput").value;
 
   if (correoModalInput) {
     try {
@@ -43,7 +42,7 @@ modalAceptarButton.addEventListener('click', async function () {
         userId = createUserResponse.userId;
       }
 
-      const currentDate = new Date().toISOString().split('T')[0];
+      const currentDate = new Date().toISOString().split("T")[0];
       const suggestionResponse = await $.ajax({
         url: `${URL}/sugerenciaVoto/addSugerencias`,
         type: "POST",
@@ -57,69 +56,72 @@ modalAceptarButton.addEventListener('click', async function () {
       });
 
       console.log(suggestionResponse);
-      alert("Sugerencia enviada correctamente.");
-      document.getElementById('sugerenciaInput').value = '';
-      document.getElementById('correoModalInput').value = '';
-      $('#correoModal').modal('hide'); 
+      showSuccessAlert("Gracias por compartir su sugerencia con nosotros, la valoramos mucho.");
+      document.getElementById("sugerenciaInput").value = "";
+      document.getElementById("correoModalInput").value = "";
+      $("#correoModal").modal("hide");
     } catch (error) {
       console.error("Error al enviar la sugerencia:", error);
-      alert("Error al enviar la sugerencia: " + error.message);
+      showErrorAlert("Error al enviar la sugerencia: " + error.message);
     }
   } else {
-    alert('Por favor, ingresa tu correo.');
+    showErrorAlert("Por favor, ingresa tu correo.");
   }
 });
 
-radios.forEach(radio => {
-  radio.addEventListener('click', function() {
+radios.forEach((radio) => {
+  radio.addEventListener("click", function () {
     if (this.checked) {
-        this.checked=true;
+      this.checked = true;
     } else {
-        radios.forEach(r => r.checked = false)
-        this.checked = true;
-
-
+      radios.forEach((r) => (r.checked = false));
+      this.checked = true;
     }
   });
 });
 
-
-
-submitButtonVoto.addEventListener('click', async function () {
-  const radios = document.querySelectorAll('input[name="voto"]');
-  let selectedId = null;
-
-  radios.forEach(radio => {
-    if (radio.checked) {
-      selectedId = radio.value; 
-    }
-  });
+submitButtonVoto.addEventListener("click", async function () {
+  let selectedId = "1";
 
   if (selectedId) {
     try {
-      const currentDate = new Date().toISOString().split('T')[0]; 
-      
+      const currentDate = new Date().toISOString().split("T")[0];
+
       const response = await $.ajax({
-        url: `${URL}/sugerenciaVoto/addVotos`, 
+        url: `${URL}/sugerenciaVoto/addVotos`,
         type: "POST",
         data: {
-          canVoto: selectedId, 
-          date: currentDate
+          canVoto: selectedId,
+          date: currentDate,
         },
         dataType: "json",
       });
 
-      console.log(response); 
+      console.log(response);
       submitButtonVoto.disabled = true;
-      radios.forEach(radio => {
-        radio.disabled = true;
-      });
-      
-      alert("Voto enviado correctamente.");
+
+      showSuccessAlert("¡Gracias por su voto!");
     } catch (error) {
       console.error("Error al enviar el voto:", error);
+      showErrorAlert("Error al enviar el voto.");
     }
   } else {
-    alert('Por favor, selecciona una opción antes de enviar.');
+    showErrorAlert("Por favor, selecciona una opción antes de enviar.");
   }
 });
+
+function showErrorAlert(message) {
+  iziToast.error({
+    title: "Error",
+    message: message,
+    position: "topRight",
+  });
+}
+
+function showSuccessAlert(message) {
+  iziToast.success({
+    title: "Success",
+    message: message,
+    position: "topRight",
+  });
+}

@@ -90,7 +90,7 @@ input[type="radio"] {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: #f12525;
+  background-color: #e62081;
   border-radius: 10px;
   position: absolute;
   bottom: 0;
@@ -218,7 +218,7 @@ input[type="radio"] {
 
 .imagen_centrada {
   width: 100%;           
-  height: 60dvh;          
+  height: 50dvh;          
   object-fit: cover;
   filter: blur(5px) brightness(60%);
 }
@@ -292,7 +292,7 @@ input[type="radio"] {
   content: "";
     width: 40px;
     height: 7px;
-    background-color: #f12525;
+    background-color: #e62081;
     border-radius: 10px;
     position: absolute;
     bottom: -10px; 
@@ -335,7 +335,7 @@ input[type="radio"] {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #f12525;
+  border-top: 10px solid #e62081;
   position: absolute;
   bottom: -10px; 
   left: 50%;
@@ -348,12 +348,12 @@ input[type="radio"] {
 }
 
 .tab-button:hover {
-  background-color: #f12525; /* Fondo rojo al hacer hover */
+  background-color: #e62081; /* Fondo rojo al hacer hover */
   color: #ffffff; /* Texto blanco al hacer hover */
 }
 
 .tab-button.active {
-  background-color: #f12525; /* Fondo rojo cuando está activo */
+  background-color: #e62081; /* Fondo rojo cuando está activo */
   color: #ffffff; /* Texto blanco cuando está activo */
   border: none; /* Eliminado el borde negro cuando está activo */
   outline: none;
@@ -409,7 +409,7 @@ input[type="radio"] {
 
 .header_top .contact_link-container a i {
   font-size: 20px;
-  color: #f12525;
+  color: #e62081;
   margin-right: 5px;
 }
 
@@ -440,7 +440,7 @@ input[type="radio"] {
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link,
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  background-color: #1c1c1c;
+  background-color: #e71e83;
 }
 
 a,
@@ -578,7 +578,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #f12525;
+  color: #e62081;
 }
 
 .slider_section .detail-box p {
@@ -617,7 +617,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn-2 {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f12525;
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -626,8 +626,8 @@ a:focus {
 
 .slider_section .detail-box .btn-box .btn-2:hover {
   background-color: transparent;
-  border-color: #f12525;
-  color: #f12525;
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .slider_section .img-box {
@@ -657,7 +657,7 @@ a:focus {
   height: 20px;
   border-radius: 100%;
   text-align: center;
-  background-color: #f12525;
+  background-color: #e62081;
   opacity: 1;
   border: none;
   margin: 0 4px;
@@ -693,7 +693,7 @@ a:focus {
 .about_section .detail-box a {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f12525;
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -703,8 +703,8 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  border-color: #f12525;
-  color: #f12525;
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .service_section {
@@ -744,7 +744,7 @@ a:focus {
 .service_section .box .detail-box a {
   display: inline-block;
   padding: 8px 35px;
-  background-color: #f12525;
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -754,8 +754,8 @@ a:focus {
 
 .service_section .box .detail-box a:hover {
   background-color: transparent;
-  border-color: #f12525;
-  color: #f12525;
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .client_section {
@@ -840,7 +840,7 @@ a:focus {
 
 .client_section .carousel-control-prev:hover,
 .client_section .carousel-control-next:hover {
-  background-color: #f12525;
+  background-color: #e62081;
 }
 
 .client_section .carousel-control-prev {
@@ -916,7 +916,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: #f12525;
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -927,8 +927,8 @@ a:focus {
 
 .contact_section .contact_form-container button:hover {
   background-color: transparent;
-  border-color: #f12525;
-  color: #f12525;
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .contact_bg_box {
@@ -1025,7 +1025,7 @@ a:focus {
 .team_section .btn-box a {
   display: inline-block;
   padding: 10px 45px;
-  background-color: #f12525;
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1034,8 +1034,8 @@ a:focus {
 
 .team_section .btn-box a:hover {
   background-color: transparent;
-  border-color: #f12525;
-  color: #f12525;
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .info_section {
@@ -1124,7 +1124,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: #f12525;
+  background: #e62081;
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;
@@ -1175,6 +1175,51 @@ a:focus {
 
 .img-box:hover img {
   transform: scale(1.1);
+}
+
+.toast {
+  flex-basis: 350px;
+  max-width: 350px;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  border-radius: 0.25rem;
+}
+
+.toast:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.toast.showing {
+  opacity: 1;
+}
+
+.toast.show {
+  display: block;
+  opacity: 1;
+}
+
+.toast.hide {
+  display: none;
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  color: #858796;
+  background-color: rgba(255, 255, 255, 0.85);
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.toast-body {
+  padding: 0.75rem;
 }
 
 /* end footer section*/

@@ -1,8 +1,8 @@
-const URL = "http://localhost:4000/MCSPROJECT";
+
 let currentSlide = 0;
 let eventos = [];
 
-const formatDate = (dateString) => {
+const formatDateEvents = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -38,7 +38,7 @@ const updateSlider = () => {
     sliderContent.innerHTML = `
       <div class="slider-event-card">
         <h3>${evento.NOM_EVE_NOT}</h3>
-        <div class="event-date">${formatDate(evento.FEC_EVE_NOT)}</div>
+        <div class="event-date">${formatDateEvents(evento.FEC_EVE_NOT)}</div>
         <p>${evento.INF_EVE_NOT}</p>
         ${evento.UBI_EVE_NOT ? `<div class="location"><i class="fa fa-map-marker"></i> ${evento.UBI_EVE_NOT}</div>` : ''}
       </div>
