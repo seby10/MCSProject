@@ -1,0 +1,265 @@
+/* Actualizar los estilos en eventos.css */
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.event-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.event-header {
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.event-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.event-date {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.event-content {
+  padding: 20px;
+}
+
+.event-info {
+  color: #555;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+
+.event-location {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.event-location i {
+  margin-right: 8px;
+  color: #007bff;
+}
+
+.date-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  background: white;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.nav-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.today-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.today-btn:hover {
+  background-color: #0056b3;
+}
+
+#fecha {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#fecha:hover {
+  border-color: #aaa;
+}
+
+#fecha:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Animaciones para las cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ajuste responsivo */
+@media (max-width: 480px) {
+  .date-navigation {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #fecha {
+    width: auto;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilos para el slider de eventos */
+.eventos-slider-section {
+  padding: 60px 0;
+  background: #f8f9fa;
+}
+
+.eventos-slider-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.eventos-slider {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  position: relative;
+}
+
+.eventos-slider-content {
+  min-height: 200px;
+  transition: opacity 0.3s ease;
+}
+
+.slider-event-card {
+  text-align: left;
+  padding: 20px; /* Añadir padding interno a la tarjeta del evento */
+  border-radius: 10px; /* Redondear las esquinas de la tarjeta */
+  background: #f2f0ef; /* Color de fondo para la tarjeta */
+  margin-bottom: 20px;
+}
+
+.slider-event-card h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.slider-event-card .event-date {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.slider-event-card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.slider-event-card .location {
+  color: #666;
+  margin-top: 15px;
+}
+
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  /* Modificar estas propiedades */
+  left: -20px;  /* Mover los controles más hacia afuera */
+  right: -20px; /* Mover los controles más hacia afuera */
+  width: calc(100% + 40px); /* Ajustar el ancho para compensar */
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  /* Eliminar el padding que teníamos antes */
+  padding: 0;
+}
+
+/* Opcional: si quieres que los botones sean un poco más grandes */
+.slider-btn {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  /* Añadir estas propiedades para mejorar la visibilidad */
+  z-index: 10;
+}
+
+.slider-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.slider-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  padding: 0;
+}
+
+.indicator.active {
+  background: #007bff;
+}

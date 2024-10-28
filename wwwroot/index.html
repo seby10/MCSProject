@@ -15,9 +15,11 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
-    <title>Elecciones-2024</title>
+    <title>Elecciones 2024</title>
 
     <!-- bootstrap core css -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
     <!-- fonts style -->
@@ -28,6 +30,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/eventos.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
   </head>
@@ -37,34 +40,23 @@
       <!-- header section strats -->
       <div class="hero_bg_box">
         <div class="img-box">
-          <img src="images/hero-bg.jpg" alt="" />
+          <img src="images/MaryCruzHome.png" alt="" />
         </div>
       </div>
 
       <header class="header_section">
-        <div class="header_top">
-          <div class="container-fluid">
-            <div class="contact_link-container">
-              <a href="" class="contact_link1">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span> Lorem ipsum dolor sit amet, </span>
-              </a>
-              <a href="" class="contact_link2">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span> Call : +01 1234567890 </span>
-              </a>
-              <a href="" class="contact_link3">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span> demo@gmail.com </span>
-              </a>
-            </div>
-          </div>
+        <div class="container-fluid">
+          <a href="index.html">
+            <img src="./images/logomaricruz.png" alt="MaryCruz Logo" draggable="false">
+          </a>
         </div>
+      </header>
+      
         <div class="header_bottom">
           <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
               <a class="navbar-brand" href="index.html">
-                <span> Elecciones-2024 </span>
+                <span> Elecciones 2024 </span>
               </a>
               <button
                 class="navbar-toggler"
@@ -98,11 +90,11 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="eventos_noticias"> Eventos-Noticias </a>
+                    <a class="nav-link" href="eventos_noticias">Noticias/Eventos</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="contact">Sugerencias</a>
+                    <a class="nav-link" href="sugerencias">Sugerencias</a>
                   </li>
                 </ul>
               </div>
@@ -125,13 +117,15 @@
                   <div class="col-md-7">
                     <div class="detail-box">
                       <h1>
-                        Universidad Técnica de Ambato <br />
-                        <span> UTA </span>
+                        Unión y Futuro Universitario <br />
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
-                      <p>Educarse es aprender a ser libres.</p>
+                      
                       <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
+                        <a href="#candidatos" class="btn-1">Candidatos </a>
+                        <a href="eventos_noticias.html" class="btn-2"
+                          >Eventos-Noticias
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -144,13 +138,15 @@
                   <div class="col-md-7">
                     <div class="detail-box">
                       <h1>
-                        Elecciones-2024 <br />
-                        <span> UTA </span>
+                        Unidos lo haremos posible <br />
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
-                      <p>Educarse es aprender a ser libres.</p>
+                      
                       <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
+                        <a href="#candidatos" class="btn-1">Candidatos </a>
+                        <a href="eventos_noticias.html" class="btn-2"
+                          >Eventos-Noticias
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -163,16 +159,15 @@
                   <div class="col-md-7">
                     <div class="detail-box">
                       <h1>
-                        Your Saftey <br />
-                        <span> Our Responsibility </span>
+                        Sueña, crea e innova. <br />
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod magna aliqua. Ut enim ad minim veniam
-                      </p>
+                      
                       <div class="btn-box">
-                        <a href="" class="btn-1"> Read more </a>
-                        <a href="" class="btn-2">Get A Quote</a>
+                        <a href="candidatos" class="btn-1"> Ver Candidatos </a>
+                        <a href="eventos_noticias.html" class="btn-2"
+                          >Eventos-Noticias
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -204,150 +199,204 @@
 
     <!-- team section -->
 
-    <section class="team_section layout_padding">
+    <section class="team_section layout_padding" id="candidatos">
       <div class="container">
         <div class="heading_container heading_center">
           <h2>Candidatos</h2>
           <p>
-            Lorem ipsum dolor sit amet, non odio tincidunt ut ante, lorem a
-            euismod suspendisse vel, sed quam nulla mauris iaculis. Erat eget
-            vitae malesuada, tortor tincidunt porta lorem lectus.
+            Es un honor presentar el proyecto político para la elección de las
+            principales autoridades de nuestra universidad, que busca fortalecer
+            el desarrollo académico, la innovación y la gestión institucional. A
+            continuación, se presentan los candidatos para los cargos de Rector
+            y Vicerrectores: Académico, de Investigación, Innovación y
+            Vinculación con la Sociedad, y Administrativo. Cada uno de ellos
+            cuenta con una trayectoria profesional destacada y un firme
+            compromiso con la excelencia de nuestra universidad. Los invitamos a
+            conocer más sobre sus perfiles y propuestas, que serán fundamentales
+            para el futuro de nuestra institución.
           </p>
         </div>
         <div class="row">
-          <!-- Candidato 1 -->
           <div class="col-md-4 col-sm-6 mx-auto">
             <div class="box">
               <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 1 -->
                 <a href="informacion_candidatos.html#informacion_candidato1">
-                  <img src="images/t1.jpg" alt="Candidato 1" />
+                  <img src="images/t1.png" alt="Candidato 1" />
                 </a>
               </div>
               <div class="detail-box">
-                <h5>Candidato 1</h5>
-                <h6 class="">Cargo</h6>
+                <h5>...</h5>
+                <h6 class="">...</h6>
               </div>
             </div>
           </div>
 
-          <!-- Candidato 2 -->
           <div class="col-md-4 col-sm-6 mx-auto">
             <div class="box">
               <div class="img-box">
-                <!-- Enlace que lleva a la página de propuestas del candidato 2 -->
                 <a href="informacion_candidatos.html#informacion_candidato2">
-                  <img src="images/t2.jpg" alt="Candidato 2" />
+                  <img src="images/t2.png" alt="Candidato 2" />
                 </a>
               </div>
               <div class="detail-box">
-                <h5>Candidato 2</h5>
-                <h6 class="">Cargo</h6>
+                <h5>...</h5>
+                <h6 class="">...</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-6 mx-auto">
+            <div class="box">
+              <div class="img-box">
+                <a href="informacion_candidatos.html#informacion_candidato3">
+                  <img src="images/t3.png" alt="Candidato 2" />
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>...</h5>
+                <h6 class="">...</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-6 mx-auto">
+            <div class="box">
+              <div class="img-box">
+                <a href="informacion_candidatos.html#informacion_candidato4">
+                  <img src="images/t4.png" alt="Candidato 2" />
+                </a>
+              </div>
+              <div class="detail-box">
+                <h5>...</h5>
+                <h6 class="">...</h6>
               </div>
             </div>
           </div>
         </div>
         <div class="btn-box">
-          <a href=""> View All </a>
+          <a href="informacion_candidatos.html"> Mostrar más </a>
         </div>
       </div>
     </section>
 
-    <!-- end team section -->
+    <!-- Eventos y Noticias Slider Section -->
+    <section class="eventos-slider-section">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Eventos y Noticias</h2>
+          <p>Mantente informado sobre los últimos eventos</p>
+        </div>
 
+        <div class="eventos-slider-container">
+          <div class="eventos-slider">
+            <div class="eventos-slider-content"></div>
+
+            <div class="slider-controls">
+              <button class="slider-btn prev-btn">
+                <i class="fa fa-chevron-left"></i>
+              </button>
+              <button class="slider-btn next-btn">
+                <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="slider-indicators"></div>
+        </div>
+      </div>
+    </section>
     <!-- info section -->
     <section class="info_section">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
-            <div class="info_logo">
-              <a class="navbar-brand" href="index.html">
-                <span> Guarder </span>
+          <div class="col-12 col-md-3 text-center">
+            <div class="footer_logo">
+              <a href="index.html">
+                <span> Elecciones Universitarias 2024 </span>
               </a>
               <p>
-                dolor sit amet, consectetur magna aliqua. Ut enim ad minim
-                veniam, quisdotempor incididunt r
+                <i class="fa fa-gitlab" aria-hidden="true"></i>
+                <a href="https://gitlab.com/mcs8233642/MCSPROJECT"> Proyecto en GitLab</a>
               </p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-12 col-md-3 text-center">
             <div class="info_links">
-              <h5>Useful Link</h5>
+              <h5>Developers</h5>
               <ul>
                 <li>
-                  <a href=""> dolor sit amet, consectetur </a>
+                  <i class="fa fa-leaf" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/garciadayle2004"> Dayle García </a>
                 </li>
                 <li>
-                  <a href=""> magna aliqua. Ut enim ad </a>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/Jhanina03"> Jhanina Conterón </a>
                 </li>
                 <li>
-                  <a href=""> minim veniam, </a>
+                  <i class="fa fa-smile-o" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/PabloAML1"> Pablo Montero </a>
                 </li>
                 <li>
-                  <a href=""> quisdotempor incididunt r </a>
+                  <i class="fa fa-fire" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/seby10"> Sebastián Constante </a>
                 </li>
               </ul>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-12 col-md-3 text-center">
             <div class="info_info">
               <h5>Contact Us</h5>
             </div>
             <div class="info_contact">
-              <a href="" class="">
+              <a href="">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span> Lorem ipsum dolor sit amet, </span>
+                <span> Ambato, Ecuador </span>
               </a>
-              <a href="" class="">
+              <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
-                <span> Call : +01 1234567890 </span>
+                <span> Call : +593 99 596 5167 </span>
               </a>
-              <a href="" class="">
+              <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span> demo@gmail.com </span>
+                <span> dgarcia7531@uta.edu.ec </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> bconteron3403@uta.edu.ec </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> pmontero4909@uta.edu.ec </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> fconstante4965@uta.edu.ec </span>
               </a>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="info_form">
-              <h5>Newsletter</h5>
-              <form action="#">
-                <input type="email" placeholder="Enter your email" />
-                <button>Subscribe</button>
-              </form>
-              <div class="social_box">
-                <a href="">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-youtube" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </div>
+          <div class="col-12 col-md-3 text-center">
+            <div class="footer_thankyou">
+              <p>Gracias por participar en este proceso electoral universitario. Juntos, construimos el futuro de nuestra comunidad académica.</p>
+              <p>&copy; 2024 Universidad Técnica de Ambato. Todos los derechos reservados.</p>
             </div>
-          </div>
+          </div>        
         </div>
       </div>
     </section>
 
-    <!-- end info_section -->
-
     <!-- footer section -->
     <footer class="container-fluid footer_section">
-      <p>
+      <!-- <p>
         &copy; <span id="currentYear"></span> All Rights Reserved. Design by
         <a href="https://html.design/">Free Html Templates</a>
-      </p>
+      </p> -->
     </footer>
     <!-- footer section -->
+
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/eventos-slider.js"></script>
+    <script src="js/candidatos.js"></script>
   </body>
 </html>
