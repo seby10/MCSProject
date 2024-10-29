@@ -18,26 +18,26 @@ const encabezadosSeccionEstudiantes = document.querySelectorAll(
   "#propuestas_estudiantes h2"
 );
 encabezadosSeccionEstudiantes.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocada a los estudiantes";
+  encabezado.textContent = "Propuestas enfocadas a los estudiantes";
 });
 
 const encabezadosSeccionDocentes = document.querySelectorAll(
   "#propuestas_docentes h2"
 );
 encabezadosSeccionDocentes.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocada a los docentes";
+  encabezado.textContent = "Propuestas enfocadas a los docentes";
 });
 const encabezadosSeccionAdministrativo = document.querySelectorAll(
   "#propuestas_administrativo h2"
 );
 encabezadosSeccionAdministrativo.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocada al área de Administrativo";
+  encabezado.textContent = "Propuestas enfocadas al personal Administrativo";
 });
 const encabezadosSeccionFacultades = document.querySelectorAll(
   "#propuestas_facultades h2"
 );
 encabezadosSeccionFacultades.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocada a los Facultades";
+  encabezado.textContent = "Propuestas enfocadas a las Facultades";
 });
 
 const displayPropuestas = (propuestas, sectionId) => {
