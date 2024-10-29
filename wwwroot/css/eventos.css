@@ -263,3 +263,28 @@
 .indicator.active {
   background: #007bff;
 }
+
+.boton-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.boton-box a {
+  display: inline-block;
+  width: 195px;
+  padding: 10px 45px;
+  text-align: center;
+  color: #fff;
+  background-color: #e62081;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.boton-box a:hover {
+  background-color: transparent;
+  border-color:#e62081;
+  color: #e62081;
+}
+
