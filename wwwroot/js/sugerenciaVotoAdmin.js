@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
   cargarUsuario();
   cargarMenus();
 });
+
+
+async function showSugerencias() {
+  try {
+    const response = await $.ajax({
+      url: `${URL}/sugerenciaVoto/getSugerencias`,
+      type: "GET",
+      dataType: "json",
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    return null;
+  }
+}
 function showConfirmationQuestion(message, callback) {
   iziToast.question({
     title: "Confirmation",
@@ -39,7 +55,7 @@ if (!usuario) {
   document.addEventListener("DOMContentLoaded", function () {
     cargarUsuario(usuario);
     cargarMenus();
-    loadcandidatos();
+    loadSugerencias();
   });
 }
 function cargarUsuario() {
@@ -119,3 +135,79 @@ document.getElementById("logoutButton").addEventListener("click", function () {
     }
   );
 });
+
+async function loadSugerencias() {
+  try {
+    const datos = await showSugerencias();
+    console.log(datos);
+    let tableBody = document.getElementById("tbodysug");
+    let rows = "";
+
+    // Generar filas para cada sugerencia
+    for (const sugerencia of datos.response) {
+      let fecha = new Date(sugerencia.FEC_SUG);
+      let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
+      let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
+      let fnac = `<td>${fechaFormateada}</td>`;
+      let id = `<td>${sugerencia.ID_SUG}</td>`;
+      let desc = `<td>${sugerencia.DES_SUG}</td>`;
+      let est = `
+        <td>
+          <select class="form-control" id="estado-${sugerencia.ID_SUG}" ${sugerencia.EST_SUG === 'REVISADO' ? 'disabled' : ''}>
+            <option value="REVISADO" ${sugerencia.EST_SUG === 'REVISADO' ? 'selected' : ''}>REVISADO</option>
+            <option value="POR REVISAR" ${sugerencia.EST_SUG === 'POR REVISAR' ? 'selected' : ''}>POR REVISAR</option>
+          </select>
+        </td>
+      `;
+      let saveButton = `
+        <td>
+          <button class="btn btn-success save-btn" data-id="${sugerencia.ID_SUG}" ${sugerencia.EST_SUG === 'REVISADO' ? 'disabled' : ''}>
+            Guardar
+          </button>
+        </td>
+      `;
+      let correo = `<td>${sugerencia.COR_USU}</td>`;
+
+      rows += `<tr id="row-${sugerencia.ID_SUG}">${id + fnac + desc + correo + est + saveButton}</tr>`;
+    }
+
+    tableBody.innerHTML = rows;
+
+    document.querySelectorAll(".save-btn").forEach((button) => {
+      button.addEventListener("click", function () {
+        const id = this.getAttribute("data-id");
+        const estado = document.getElementById(`estado-${id}`).value;
+        actualizarEstadoSugerencia(id, estado, button); 
+      });
+    });
+
+  } catch (error) {
+    console.error("Error al cargar sugerencias:", error);
+  }
+}
+async function actualizarEstadoSugerencia(id, estado, button) {
+  try {
+    const response = await $.ajax({
+      url: `${URL}/sugerenciaVoto/updateEstadoSugerencia`,
+      type: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify({ id, estado }),
+      dataType: 'json',
+    });
+
+    if (response.message === 'Estado de la sugerencia actualizado') {
+      const row = document.getElementById(`row-${id}`);
+      const select = row.querySelector(`#estado-${id}`);
+      const saveBtn = row.querySelector(".save-btn");
+
+      if (estado === 'REVISADO') {
+        select.disabled = true;
+        saveBtn.disabled = true;
+      }
+
+      select.value = estado;
+    }
+  } catch (error) {
+    console.error("Error al actualizar el estado:", error);
+  }
+}
