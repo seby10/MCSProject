@@ -40,7 +40,6 @@ if (!usuario) {
     cargarUsuario(usuario);
     cargarMenus();
     loadcandidatos();
-
   });
 }
 function cargarUsuario() {
@@ -52,12 +51,12 @@ function cargarUsuario() {
   } else {
     const loginButton = document.createElement("a");
     loginButton.href = "login";
-    loginButton.classList.add("btn", "btn-primary", "btn-sm"); 
+    loginButton.classList.add("btn", "btn-primary", "btn-sm");
     loginButton.textContent = "Iniciar sesión";
 
     const container = document.querySelector(".text-gray-600.small");
     container.textContent = "";
-    container.appendChild(loginButton); 
+    container.appendChild(loginButton);
   }
 }
 function cargarMenus() {
@@ -107,7 +106,6 @@ function cargarMenus() {
     console.log("No hay menús disponibles o rol no válido");
   }
 }
-
 
 document.getElementById("logoutButton").addEventListener("click", function () {
   showConfirmationQuestion(

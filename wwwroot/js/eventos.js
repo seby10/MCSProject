@@ -28,12 +28,20 @@ const navigateDate = (direction) => {
   updateContent(currentDate);
 };
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
+const formatDate = (dateTimeString) => {
+  let abreviation;
+  const date = new Date(dateTimeString);
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  if (hours>12) {
+    abreviation = "PM";
+  }else{
+    abreviation = "AM";
+  }
+  return `${day}/${month}/${year} ${hours}:${minutes} ${abreviation}`;
 };
 
 // Función para actualizar el título según la fecha
@@ -73,6 +81,11 @@ const displayEventosNoticias = (eventosNoticias) => {
             .map(
               (item) => `
             <div class="event-card">
+              ${item.IMG_EVE_NOT ? `
+                <div class="event-image">
+                  <img src="/images/${item.IMG_EVE_NOT}" alt="${item.NOM_EVE_NOT}" onerror="this.style.display='none';">
+                </div>
+              ` : ''}
               <div class="event-header">
                 <h3>${item.NOM_EVE_NOT}</h3>
                 <div class="event-date">${formatDate(item.FEC_EVE_NOT)}</div>

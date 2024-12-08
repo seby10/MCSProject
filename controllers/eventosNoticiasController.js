@@ -3,9 +3,9 @@ import { getEventosNoticiasByDateFromDB, getRecentEventosNoticias } from "../dat
 export const getEventosNoticiasByDate = async (req, res) => {
   try {
     const { date } = req.params;
-    //console.log('Fecha recibida:', date);
+    console.log('Fecha recibida:', date);
     const result = await getEventosNoticiasByDateFromDB(date);
-    //console.log('Resultados:', result);
+    console.log('Resultados:', result);
     res.json(result);
   } catch (error) {
     console.error(error);
