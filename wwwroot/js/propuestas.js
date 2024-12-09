@@ -1,5 +1,6 @@
 const URL = "http://localhost:4000/MCSPROJECT";
 
+// Función para obtener las propuestas de una categoría
 const getPropuestaByGrupDir = async (grup) => {
   try {
     const response = await $.ajax({
@@ -7,144 +8,189 @@ const getPropuestaByGrupDir = async (grup) => {
       type: "GET",
       dataType: "json",
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error al obtener las propuestas:", error);
   }
 };
 
-const encabezadosSeccionEstudiantes = document.querySelectorAll(
-  "#propuestas_estudiantes h2"
-);
-encabezadosSeccionEstudiantes.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocadas a los estudiantes";
-});
+// Función para obtener las categorías disponibles
+const getCategorias = async () => {
+  try {
+    const response = await $.ajax({
+      url: `${URL}/propuestas/categorias`,
+      type: "GET",
+      dataType: "json",
+    });
+    return response[0];
+  } catch (error) {
+    console.error("Error al obtener las categorías:", error);
+    return [];
+  }
+};
 
-const encabezadosSeccionDocentes = document.querySelectorAll(
-  "#propuestas_docentes h2"
-);
-encabezadosSeccionDocentes.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocadas a los docentes";
-});
-const encabezadosSeccionAdministrativo = document.querySelectorAll(
-  "#propuestas_administrativo h2"
-);
-encabezadosSeccionAdministrativo.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocadas al personal Administrativo";
-});
-const encabezadosSeccionFacultades = document.querySelectorAll(
-  "#propuestas_facultades h2"
-);
-encabezadosSeccionFacultades.forEach((encabezado) => {
-  encabezado.textContent = "Propuestas enfocadas a las Facultades";
-});
+const generarSecciones = async () => {
+  const categorias = await getCategorias();
+  if (!categorias || categorias.length === 0) return;
 
-const displayPropuestas = (propuestas, sectionId) => {
+  const mainContainer = document.querySelector("main"); // Contenedor principal de las secciones
+  if (!mainContainer) {
+    console.error("No se encontró el contenedor principal <main> en el DOM.");
+    return;
+  }
+
+  categorias.forEach((categoria) => {
+    const groupName = categoria.categoria;
+    const sectionId = `propuestas_${groupName.toUpperCase()}`;
+
+    // Verificar si la sección ya existe para evitar duplicados
+    if (!document.getElementById(sectionId)) {
+      const section = document.createElement("section");
+      section.id = sectionId;
+      section.classList.add("tab-content");
+      section.style.display = "none"; // Ocultar por defecto
+
+      // Agregar un contenedor interno para las propuestas
+      section.innerHTML = `
+        <div class="propuestas">
+          <p>No hay propuestas disponibles para esta categoría aún.</p>
+        </div>
+      `;
+
+      mainContainer.appendChild(section); // Agregar la nueva sección al contenedor principal
+    }
+  });
+};
+
+generarSecciones();
+
+
+
+// Almacén de grupos seleccionados (para permitir múltiples selecciones)
+const selectedGroups = new Set();
+
+// Función para generar los botones dinámicamente
+const generarBotones = async () => {
+  const categorias = await getCategorias();
+  if (!categorias || categorias.length === 0) return;
+
+  const tabMenu = document.querySelector(".tab-menu");
+  if (!tabMenu) return;
+
+  tabMenu.innerHTML = ""; // Limpiar botones previos
+
+  categorias.forEach((categoria) => {
+    const groupName = categoria.categoria;
+    if (!groupName) return;
+
+    const button = document.createElement("button");
+    button.classList.add("tab-button");
+    button.setAttribute("data-group", groupName);
+    button.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1).toLowerCase();
+
+    button.addEventListener("click", async () => {
+      if (selectedGroups.has(groupName)) {
+        selectedGroups.delete(groupName);  // Si ya está seleccionado, desmarcar
+        button.classList.remove("active");
+      } else {
+        selectedGroups.add(groupName);  // Si no está seleccionado, marcar
+        button.classList.add("active");
+      }
+      // Actualizar las propuestas mostradas según las categorías seleccionadas
+      await updateDisplayedPropuestas();
+      actualizarEncabezado();
+    });
+
+    tabMenu.appendChild(button);
+  });
+};
+
+// Función para actualizar el encabezado general
+function actualizarEncabezado() {
+  const encabezado = document.querySelector("#encabezado h2");
+  if (selectedGroups.size === 0) {
+    encabezado.textContent = "Selecciona una o más categorías para ver las propuestas";
+  } else {
+    encabezado.textContent = `Mostrando propuestas para: ${Array.from(selectedGroups)
+      .map((group) => group.charAt(0).toUpperCase() + group.slice(1).toLowerCase())
+      .join(", ")}`;
+  }
+}
+
+// Función para mostrar las propuestas de las categorías seleccionadas
+const displayPropuestas = (propuestas, group) => {
+  const sectionId = `propuestas_${group.toUpperCase()}`;
   const section = document.getElementById(sectionId);
-  const propuestasContainer = section.querySelector(".propuestas");
-  let contador = 1;
 
-  // Limpiar el contenido previo
+  if (!section) {
+    console.error(`No se encontró la sección con ID ${sectionId}.`);
+    return;
+  }
+
+  // Limpiar el contenido previo de la sección
+  const propuestasContainer = section.querySelector(".propuestas");
   propuestasContainer.innerHTML = "";
 
-  // Iterar sobre el array de propuestas y mostrar cada una
+  let contador = 1;
+
+  // Añadir las propuestas correspondientes
   propuestas.forEach((propuesta) => {
     const propuestaHTML = `
-    <section class="about_section layout_padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 px-0">
-            <div class="img_container">
-              <div class="img-box">
-                <img src="images/${
-                  propuesta.GRUP_DIR_PRO
-                }${contador}.jpg" alt="" />
+      <section class="about_section layout_padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 px-0">
+              <div class="img_container">
+                <div class="img-box">
+                  <img src="images/${propuesta.GRUP_DIR_PRO}${contador}.jpg" alt="Propuesta ${contador}" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 px-0">
+              <div class="detail-box">
+                <div class="heading_container">
+                  <h2>Propuesta ${contador}</h2>
+                  <div class="propuesta">
+                    <p><strong>Nombre:</strong> ${propuesta.NOM_PRO || "No disponible"}</p>
+                    <p><strong>Información:</strong> ${propuesta.INF_PRO || "No disponible"}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-              <div class="col-md-6 px-0">
-                <div class="detail-box">
-                 <div class="heading_container">
-                    <h2>Propuesta ${contador}</h2>
-                    <div class="propuesta">
-                      <p><strong>Nombre:</strong> ${
-                        propuesta.NOM_PRO || "No disponible"
-                      }</p>
-                      <p><strong>Información:</strong> ${
-                        propuesta.INF_PRO || "No disponible"
-                      }</p>
-                    </div>
-                 </div>
-                </div>
-              </div>
-          </div>
         </div>
-      </div>
-    </section>
-      
+      </section>
     `;
-    propuestasContainer.innerHTML += propuestaHTML; // Agregar cada propuesta a la sección
+    propuestasContainer.innerHTML += propuestaHTML;
     contador++;
   });
+
+  // Mostrar la sección
+  section.style.display = "block";
 };
 
-// Asignar eventos a los botones para mostrar las propuestas según el grupo
-document
-  .getElementById("btn-estudiantes")
-  .addEventListener("click", async function () {
-    const propuestasEstudiantes = await getPropuestaByGrupDir("ESTUDIANTE");
-    displayPropuestas(propuestasEstudiantes, "propuestas_estudiantes");
-    showSection("propuestas_estudiantes", "btn-estudiantes");
-  });
 
-document
-  .getElementById("btn-docentes")
-  .addEventListener("click", async function () {
-    const propuestasDocentes = await getPropuestaByGrupDir("DOCENTE");
-    displayPropuestas(propuestasDocentes, "propuestas_docentes");
-    showSection("propuestas_docentes", "btn-docentes");
-  });
+// Función para actualizar las propuestas mostradas
+async function updateDisplayedPropuestas() {
+  for (const group of selectedGroups) {
+    const propuestas = await getPropuestaByGrupDir(group);
+    if (propuestas) {
+      displayPropuestas(propuestas, group);
+    }
+  }
 
-document
-  .getElementById("btn-administrativo")
-  .addEventListener("click", async function () {
-    const propuestasAdministrativo = await getPropuestaByGrupDir(
-      "ADMINISTRATIVO"
-    );
-    displayPropuestas(propuestasAdministrativo, "propuestas_administrativo");
-    showSection("propuestas_administrativo", "btn-administrativo");
-  });
-
-document
-  .getElementById("btn-facultades")
-  .addEventListener("click", async function () {
-    const propuestasFacultades = await getPropuestaByGrupDir("FACULTADES");
-    displayPropuestas(propuestasFacultades, "propuestas_facultades");
-    showSection("propuestas_facultades", "btn-facultades");
-  });
-
-// Función para mostrar la sección correcta y activar el botón correspondiente
-function showSection(sectionId, buttonId) {
-  // Ocultar todas las secciones
+  // Ocultar secciones que no están seleccionadas
   const allSections = document.querySelectorAll(".tab-content");
-  allSections.forEach((section) => (section.style.display = "none"));
-
-  // Mostrar la sección seleccionada
-  document.getElementById(sectionId).style.display = "block";
-
-  // Quitar la clase "active" de todos los botones
-  const buttons = document.querySelectorAll(".tab-button");
-  buttons.forEach((button) => button.classList.remove("active"));
-
-  // Agregar la clase "active" al botón seleccionado
-  document.getElementById(buttonId).classList.add("active");
+  allSections.forEach((section) => {
+    const group = section.id.replace("propuestas_", "");
+    if (!selectedGroups.has(group)) {
+      section.style.display = "none";
+    }
+  });
 }
+// Iniciar generando los botones
+(async () => {
+  await generarSecciones(); // Crear las secciones dinámicas según las categorías
+  await generarBotones();   // Crear los botones dinámicos
+})();
 
-const loadInitialPropuestas = async () => {
-  const propuestasEstudiantes = await getPropuestaByGrupDir("ESTUDIANTE");
-  displayPropuestas(propuestasEstudiantes, "propuestas_estudiantes");
-  showSection("propuestas_estudiantes", "btn-estudiantes"); // Mostrar la sección de estudiantes
-};
-
-loadInitialPropuestas();

@@ -269,6 +269,54 @@ input[type="radio"] {
 }
 
 
+.image-title3 {
+  position: absolute;               
+  top: calc(50% + 40px);         
+  left: 64%;                     
+  transform: translateX(-50%);   
+  font-size: 2em;                
+  color: #f0f0f0;                
+  text-align: center;            
+  margin: 0;                     
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+  font-weight: 300;              
+  letter-spacing: 1px;           
+  padding: 0 10px;
+  margin-bottom: 1.5rem;              
+}
+.text-overlay {
+  position: absolute;
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajustar para centrar exacto */
+  text-align: center;
+  color: white;
+  width: 80%; /* Controla el ancho del texto */
+}
+
+@media (max-width: 768px) {
+  .image-title2 {
+    font-size: 2rem; /* Reduce tamaño del texto */
+  }
+  .image-title3 {
+    font-size: 1rem; /* Reduce tamaño del texto */
+  }
+  .text-overlay {
+    width: 90%; /* Más ancho en pantallas pequeñas */
+  }
+}
+
+/* Ajustes para pantallas muy grandes */
+@media (min-width: 1200px) {
+  .image-title2 {
+    font-size: 4rem; /* Agranda texto en pantallas grandes */
+  }
+  .image-title3 {
+    font-size: 2rem;
+  }
+}
+
+
 .heading_container2 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -348,7 +396,7 @@ input[type="radio"] {
 }
 
 .tab-button:hover {
-  background-color: #e62081; /* Fondo rojo al hacer hover */
+  background-color: #cccccc; /* Color más oscuro para el hover */
   color: #ffffff; /* Texto blanco al hacer hover */
 }
 
@@ -358,6 +406,31 @@ input[type="radio"] {
   border: none; /* Eliminado el borde negro cuando está activo */
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .tab-button {
+    font-size: 0.9rem; /* Reduce el tamaño del texto */
+    padding: 8px 15px; /* Reduce el espaciado */
+  }
+
+  .tab-menu {
+    gap: 5px; /* Reduce el espacio entre botones */
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-menu {
+    flex-direction: column; /* Cambia la alineación a vertical */
+    align-items: center; /* Centra los botones en la columna */
+    gap: 10px; /* Espacio más uniforme en pantallas pequeñas */
+  }
+
+  .tab-button {
+    width: 100%; /* Los botones ocupan el ancho completo */
+    text-align: center; /* Texto centrado */
+  }
+}
+
 
 
 .header_section {
