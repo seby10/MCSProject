@@ -36,7 +36,7 @@ const formatDate = (dateTimeString) => {
   const year = date.getFullYear();
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
-  if (hours>12) {
+  if (hours>11) {
     abreviation = "PM";
   }else{
     abreviation = "AM";
