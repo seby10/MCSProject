@@ -432,6 +432,7 @@
                         <th>Cargo</th>
                         <th>Información</th>
                         <th>Partido</th>
+                        <th>Imagen</th>
                         <th>Activo</th>
                         <th>Acciones</th>
                       </tr>
@@ -445,6 +446,7 @@
                         <th>Cargo</th>
                         <th>Información</th>
                         <th>Partido</th>
+                        <th>Imagen</th>
                         <th>Activo</th>
                         <th>Acciones</th>
                       </tr>
@@ -553,7 +555,11 @@
                 <label for="editParty" class="form-label">Partido</label>
                 <input type="text" class="form-control" id="editParty" />
               </div>
-
+              <!-- Campo para Imagen -->
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="imagen" name="imagen">
+              </div>
               <!-- Estado Activo -->
               <div class="form-check">
                 <input
@@ -605,7 +611,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="addCandidateForm">
+            <form id="addCandidateForm" enctype="multipart/form-data">
               <!-- Nombres y Apellidos -->
               <div class="d-flex align-items-center mb-3">
                 <div class="me-3" style="flex: 1">
@@ -665,7 +671,10 @@
                 <label for="party" class="form-label">Partido</label>
                 <input type="text" class="form-control" id="party" />
               </div>
-
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="image" name="imagen">
+              </div>
               <!-- Estado Activo -->
               <div class="form-check">
                 <input

@@ -1,46 +1,57 @@
 const URL = "http://localhost:4000/MCSPROJECT";
 
-const addCandidato = async (
-  firstName,
-  lastName,
-  birthDate,
-  position,
-  information,
-  party,
-  isActive
-) => {
-  const response = await $.ajax({
-    url: `${URL}/candidatos/addCandidato`,
-    type: "POST",
-    data: {
-      firstName,
-      lastName,
-      birthDate,
-      position,
-      information,
-      party,
-      isActive,
-    },
-    dataType: "json",
-  });
-  return response;
+const addCandidato = async (candidate, imageFile) => {
+  try {
+    const formData = new FormData();
+    formData.append("nombre", candidate.nombre);
+    formData.append("apellido", candidate.apellido);
+    formData.append("fechaNacimiento", candidate.fechaNacimiento);
+    formData.append("cargo", candidate.cargo);
+    formData.append("informacion", candidate.informacion);
+    formData.append("partido", candidate.partido);
+    formData.append("activo", candidate.activo ? 1 : 0);
+    
+    if (imageFile) {
+      formData.append("imagen", imageFile);
+    }
+
+    const response = await $.ajax({
+      url: `${URL}/candidatos/addCandidato`,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error al insertar el candidato:", error);
+    showErrorAlert("Hubo un error al insertar el candidato");
+  }
 };
 
-async function saveCandidate(candidate) {
+async function saveCandidate(candidate, imageFile) {
   try {
+    const formData = new FormData();
+    formData.append("id", candidate.id);
+    formData.append("nombre", candidate.nombre);
+    formData.append("apellido", candidate.apellido);
+    formData.append("fechaNacimiento", candidate.fechaNacimiento);
+    formData.append("cargo", candidate.cargo);
+    formData.append("informacion", candidate.informacion);
+    formData.append("partido", candidate.partido);
+    formData.append("activo", candidate.activo ? 1 : 0);
+    if (imageFile) {
+      formData.append("imagen", imageFile);
+    }
+
     const response = await $.ajax({
       url: `${URL}/candidatos/updateCandidato`,
       type: "POST",
-      data: {
-        id: candidate.id,
-        nombre: candidate.nombre,
-        apellido: candidate.apellido,
-        fechaNacimiento: candidate.fechaNacimiento,
-        cargo: candidate.cargo,
-        informacion: candidate.informacion,
-        partido: candidate.partido,
-        activo: candidate.activo ? 1 : 0,
-      },
+      data: formData,
+      contentType: false,
+      processData: false,
       dataType: "json",
     });
 
@@ -199,13 +210,13 @@ async function loadcandidatos() {
       let fecha = new Date(candidato.FEC_NAC_CAN);
       let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
       let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
-
+  
       let maxLength = 30;
       let infoText =
-        candidato.INF_CAN.length > maxLength
-          ? candidato.INF_CAN.substring(0, maxLength) + "..."
-          : candidato.INF_CAN;
-
+          candidato.INF_CAN.length > maxLength
+              ? candidato.INF_CAN.substring(0, maxLength) + "..."
+              : candidato.INF_CAN;
+  
       let id = `<td>${candidato.ID_CAN}</td>`;
       let name = `<td>${candidato.NOM_CAN}</td>`;
       let lname = `<td>${candidato.APE_CAN}</td>`;
@@ -213,25 +224,26 @@ async function loadcandidatos() {
       let cargo = `<td>${candidato.CAR_CAN}</td>`;
       let info = `<td>${infoText}</td>`;
       let part = `<td>${candidato.PAR_CAN}</td>`;
+  
+      let imagenDisplay = candidato.IMG_CAN
+          ? `<td><img src="${candidato.IMG_CAN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
+          : `<td>Sin imagen</td>`;
+  
       let activo = `
-        <td>
-          <input type="checkbox" class="activo-checkbox" data-id="${
-            candidato.ID_CAN
-          }" 
-          ${candidato.activo ? "checked" : ""} disabled>
-        </td>`;
-
+          <td>
+              <input type="checkbox" class="activo-checkbox" data-id="${candidato.ID_CAN}" 
+              ${candidato.activo ? "checked" : ""} disabled>
+          </td>`;
+  
       let actionButtons = `
-        <td>
-          <button class="btn btn-primary edit-btn mr-2" data-id="${candidato.ID_CAN}">
-            <i class="fas fa-edit"></i>
-          </button>
-        </td>`;
-
-      rows += `<tr>${
-        id + name + lname + fnac + cargo + info + part + activo + actionButtons
-      }</tr>`;
-    }
+          <td>
+              <button class="btn btn-primary edit-btn mr-2" data-id="${candidato.ID_CAN}">
+                  <i class="fas fa-edit"></i>
+              </button>
+          </td>`;
+  
+      rows += `<tr>${id + name + lname + fnac + cargo + info + part + imagenDisplay + activo + actionButtons}</tr>`;
+  }
 
     tableBody.innerHTML = rows;
 
@@ -273,8 +285,10 @@ async function handleSaveChanges() {
     activo: document.getElementById("activeStatus").checked ? 1 : 0,
   };
 
+  const imageFile = document.getElementById("imagen").files[0];
+
   try {
-    let response = await saveCandidate(updatedCandidate);
+    let response = await saveCandidate(updatedCandidate, imageFile);
 
     if (response.success) {
       showSuccessAlert("Candidato actualizado exitosamente");
@@ -303,40 +317,41 @@ document
     $("#addCandidateModal").modal("show");
   });
 
-document
+  document
   .getElementById("addCandidateForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const cNom = document.getElementById("candidateName").value.trim();
-    const cApe = document.getElementById("candidateLastName").value.trim();
-    const cFnac = document.getElementById("birthDate").value.trim();
-    const cCar = document.getElementById("position").value.trim();
-    const cInfo = document.getElementById("info").value.trim();
-    const cPar = document.getElementById("party").value.trim();
-    const isActive = document.getElementById("activeStatus").checked ? 1 : 0;
+    const Candidate = {
+      nombre: document.getElementById("candidateName").value,
+      apellido: document.getElementById("candidateLastName").value,
+      fechaNacimiento: formatDate(
+        document.getElementById("birthDate").value
+      ),
+      cargo: document.getElementById("position").value,
+      informacion: document.getElementById("info").value,
+      partido: document.getElementById("party").value,
+      activo: document.getElementById("activeStatus").checked ? 1 : 0,
+    };
 
-    try {
-      const response = await addCandidato(
-        cNom,
-        cApe,
-        cFnac,
-        cCar,
-        cInfo,
-        cPar,
-        isActive
-      );
+    const imageFile = document.getElementById("image").files[0];
 
-      console.log("Candidato registrado exitosamente:", response);
-      showSuccessAlert("Candidato registrado exitosamente");
+    if (imageFile) {
+      try {
+        let response = await addCandidato(Candidate, imageFile);
+        console.log("Candidato registrado exitosamente:", response);
+        showSuccessAlert("Candidato registrado exitosamente");
 
-      $("#addCandidateModal").modal("hide");
-      document.getElementById("addCandidateForm").reset();
+        $("#addCandidateModal").modal("hide");
+        document.getElementById("addCandidateForm").reset();
 
-      loadcandidatos();
-    } catch (error) {
-      console.error("Error durante el registro:", error);
-      showErrorAlert("Ocurrió un error durante el registro");
+        loadcandidatos();
+      } catch (error) {
+        console.error("Error durante el registro:", error);
+        showErrorAlert("Ocurrió un error durante el registro");
+      }
+    } else {
+      showErrorAlert("Por favor, seleccione una imagen para el candidato");
     }
   });
 

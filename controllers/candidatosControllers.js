@@ -5,6 +5,9 @@ import {
   insertCandidatoDB,
 } from "../database/candidatosDB.js";
 
+import path from "path";
+import fs from "fs";
+
 export const getCandidatoByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,17 +42,36 @@ export const putCandidato = async (req, res) => {
       partido,
       activo,
     } = req.body;
+    const currentCandidato = await getCandidatoByIDFromDB(id);
 
-    const result = await updateCandidatoDB(
-      id,
-      nombre,
-      apellido,
-      fechaNacimiento,
-      cargo,
-      informacion,
-      partido,
-      activo
-    );
+    let imagenPath = currentCandidato.IMG_CAN;
+
+    if (req.file) {
+      if (currentCandidato.IMG_CAN) {
+        const oldImagePath = path.join(
+          __dirname,
+          "../public",
+          currentCandidato.IMG_CAN
+        );
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+
+      imagenPath = `/images/candidatos/${req.file.filename}`;
+    }
+
+    const result = await updateCandidatoDB({
+      id:id,
+      nombre: nombre,
+      apellido: apellido, 
+      fechaNacimiento: fechaNacimiento, 
+      cargo: cargo, 
+      informacion: informacion, 
+      partido: partido, 
+      activo: activo, 
+      imagen: imagenPath,
+    });
 
     res.json({
       success: true,
@@ -58,37 +80,41 @@ export const putCandidato = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al actualizar el candidato",
-        error,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al actualizar el candidato",
+      error,
+    });
   }
 };
 
 export const postCandidato = async (req, res) => {
   try {
     const {
-      firstName,
-      lastName,
-      birthDate,
-      position,
-      information,
-      party,
-      isActive,
+      nombre,
+      apellido,
+      fechaNacimiento,
+      cargo,
+      informacion,
+      partido,
+      activo,
     } = req.body;
+    
+    let imagenPath = null;
+    if (req.file) {
+      imagenPath = `/images/candidatos/${req.file.filename}`;
+    }
 
-    const result = await insertCandidatoDB(
-      firstName,
-      lastName,
-      birthDate,
-      position,
-      information,
-      party,
-      isActive
-    );
+    const result = await insertCandidatoDB({
+      nombre: nombre,
+      apellido: apellido, 
+      fechaNacimiento: fechaNacimiento, 
+      cargo: cargo, 
+      informacion: informacion, 
+      partido: partido, 
+      activo: activo, 
+      imagen: imagenPath,
+    });
 
     res.json({
       success: true,
@@ -97,12 +123,12 @@ export const postCandidato = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error al insertar el candidato",
-        error,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error al insertar el candidato",
+      error,
+    });
   }
 };
+
+

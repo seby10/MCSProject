@@ -30,29 +30,21 @@ export const getCandidatosDB = async () => {
   }
 };
 
-export const updateCandidatoDB = async (
-  id,
-  nombre,
-  apellido,
-  fechaNacimiento,
-  cargo,
-  informacion,
-  partido,
-  activo
-) => {
+export const updateCandidatoDB = async (candidatoData)=> {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_updateCandidato(?, ?, ?, ?, ?, ?, ?, ?)",
+      "CALL sp_updateCandidato(?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
-        id,
-        nombre,
-        apellido,
-        fechaNacimiento,
-        cargo,
-        informacion,
-        partido,
-        activo,
+        candidatoData.id,
+        candidatoData.nombre, 
+        candidatoData.apellido,
+        candidatoData.fechaNacimiento,
+        candidatoData.cargo,
+        candidatoData.informacion,
+        candidatoData.partido,
+        candidatoData.activo,
+        candidatoData.imagen
       ]
     );
     return result[0];
@@ -61,25 +53,26 @@ export const updateCandidatoDB = async (
     throw new Error("Error al actualizar el candidato: " + error.message);
   }
 };
-
-export const insertCandidatoDB = async (
-  firstName,
-  lastName,
-  birthDate,
-  position,
-  information,
-  party,
-  isActive
-) => {
+export const insertCandidatoDB = async (candidatoData) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_insertCandidato(?, ?, ?, ?, ?, ?, ?)",
-      [firstName, lastName, birthDate, position, information, party, isActive]
+      "CALL sp_insertCandidato(?, ?, ?, ?, ?, ?, ?, ?)",
+      [
+        candidatoData.nombre, 
+        candidatoData.apellido,
+        candidatoData.fechaNacimiento,
+        candidatoData.cargo,
+        candidatoData.informacion,
+        candidatoData.partido,
+        candidatoData.activo,
+        candidatoData.imagen
+      ]
     );
-    return result[0];
+    return result;
   } catch (error) {
     console.error(error);
     throw new Error("Error al insertar el candidato: " + error.message);
   }
 };
+
