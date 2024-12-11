@@ -35,20 +35,15 @@ export const updateAdminDB = async (admin)=> {
     throw new Error("Error al actualizar el candidato: " + error.message);
   }
 };
-export const insertAdminDB = async (candidatoData) => {
+export const insertAdminDB = async (admin) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_insertCandidato(?, ?, ?, ?, ?, ?, ?, ?)",
+      "CALL sp_insertAdmin(?, ?, ?)",
       [
-        candidatoData.nombre, 
-        candidatoData.apellido,
-        candidatoData.fechaNacimiento,
-        candidatoData.cargo,
-        candidatoData.informacion,
-        candidatoData.partido,
-        candidatoData.activo,
-        candidatoData.imagen
+        admin.nombre, 
+        admin.contraseña,
+        admin.rol,
       ]
     );
     return result;

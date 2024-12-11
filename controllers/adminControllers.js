@@ -1,4 +1,3 @@
-
 import {
   getAdminsDB,
   updateAdminDB,
@@ -44,25 +43,12 @@ export const putAdmin = async (req, res) => {
 
 export const postAdmin = async (req, res) => {
   try {
-    const {
-      nombre,
-      apellido,
-      fechaNacimiento,
-      cargo,
-      informacion,
-      partido,
-      activo,
-    } = req.body;
-
+    const { nombre, contrasenia, rol } = req.body;
+    console.log(nombre, contrasenia, rol);
     const result = await insertAdminDB({
       nombre: nombre,
-      apellido: apellido,
-      fechaNacimiento: fechaNacimiento,
-      cargo: cargo,
-      informacion: informacion,
-      partido: partido,
-      activo: activo,
-      imagen: imagenPath,
+      contraseña: contrasenia,
+      rol: rol,
     });
 
     res.json({

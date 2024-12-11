@@ -108,19 +108,16 @@ document.getElementById("logoutButton").addEventListener("click", function () {
   );
 });
 
-const addAdmin = async (admin) => {
+const addAdmin = async (user, password, rol) => {
   try {
-    const formData = new FormData();
-    formData.append("nombre", admin.nombre);
-    formData.append("contraseña", admin.contraseña);
-    formData.append("rol", admin.rol);
-
     const response = await $.ajax({
       url: `${URL}/admins/addAdmin`,
       type: "POST",
-      data: formData,
-      contentType: false,
-      processData: false,
+      data: {
+        nombre: user,
+        contrasenia: password,
+        rol: rol,
+      },
       dataType: "json",
     });
 
@@ -302,52 +299,30 @@ async function handleSaveChanges() {
   }
 }
 
-function formatDate(date) {
-  const d = new Date(date);
-  const year = d.getFullYear();
-  const month = (d.getMonth() + 1).toString().padStart(2, "0");
-  const day = d.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+document.getElementById("addAdminBtn").addEventListener("click", async () => {
+  $("#addAdminModal").modal("show");
+});
 
 document
-  .getElementById("addCandidateBtn")
-  .addEventListener("click", async () => {
-    $("#addCandidateModal").modal("show");
-  });
-
-document
-  .getElementById("addCandidateForm")
+  .getElementById("addAdminForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const Candidate = {
-      nombre: document.getElementById("candidateName").value,
-      apellido: document.getElementById("candidateLastName").value,
-      fechaNacimiento: formatDate(document.getElementById("birthDate").value),
-      cargo: document.getElementById("position").value,
-      informacion: document.getElementById("info").value,
-      partido: document.getElementById("party").value,
-      activo: document.getElementById("activeStatus").checked ? 1 : 0,
-    };
+    const nombre = document.getElementById("user").value;
+    const contraseña = document.getElementById("password").value;
+    const rol = document.getElementById("Rol").value;
 
-    const imageFile = document.getElementById("image").files[0];
+    try {
+      let response = await addAdmin(nombre, contraseña, rol);
+      console.log("Candidato registrado exitosamente:", response);
+      showSuccessAlert("Candidato registrado exitosamente");
 
-    if (imageFile) {
-      try {
-        let response = await addCandidato(Candidate, imageFile);
-        console.log("Candidato registrado exitosamente:", response);
-        showSuccessAlert("Candidato registrado exitosamente");
+      $("#addAdminModal").modal("hide");
+      document.getElementById("addAdminForm").reset();
 
-        $("#addCandidateModal").modal("hide");
-        document.getElementById("addCandidateForm").reset();
-
-        loadcandidatos();
-      } catch (error) {
-        console.error("Error durante el registro:", error);
-        showErrorAlert("Ocurrió un error durante el registro");
-      }
-    } else {
-      showErrorAlert("Por favor, seleccione una imagen para el candidato");
+      loadAdmins();
+    } catch (error) {
+      console.error("Error durante el registro:", error);
+      showErrorAlert("Ocurrió un error durante el registro");
     }
   });
