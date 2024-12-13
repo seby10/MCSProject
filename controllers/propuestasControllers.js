@@ -1,26 +1,29 @@
-import { getPropuestaByGrupDirDB } from "../database/propuestasDB.js";
-import { getCategoriasDB } from "../database/propuestasDB.js";
-import { getPropuestasDB, insertPropuestaDB, updatePropuestaDB, deletePropuestaDB } from "../database/propuestasDB.js";
-
+import { 
+  getPropuestaByGrupDirDB, 
+  getCategoriasDB, 
+  getPropuestasDB, 
+  insertPropuestaDB, 
+  updatePropuestaDB, 
+  deletePropuestaDB 
+} from "../database/propuestasDB.js";
 
 export const getPropuestaByGrupDir = async (req, res) => {
   try {
-    const { grup } = req.params; 
+    const { grup } = req.params;
     console.log('Grupo recibido:', grup);
-    const result = await getPropuestaByGrupDirDB(grup); 
+    const result = await getPropuestaByGrupDirDB(grup);
     console.log('Resultados:', result);
-    res.json(result); 
+    res.json(result);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener las propuestas", error });
   }
 };
 
-
 export const getCategorias = async (req, res) => {
   try {
-    const categorias = await getCategoriasDB(); // Llama a la función de la capa de datos
-    res.json(categorias); // Devuelve las categorías como JSON
+    const categorias = await getCategoriasDB();
+    res.json(categorias);
     console.log(categorias);
   } catch (error) {
     console.error(error);
@@ -28,22 +31,21 @@ export const getCategorias = async (req, res) => {
   }
 };
 
-
 export const getPropuestas = async (req, res) => {
   try {
     const result = await getPropuestasDB();
     const response = result;
-    res.json({ message: "Menus Selected!", response });
+    res.json({ message: "Propuestas obtenidas con éxito", response });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error selecting menus", error });
+    res.status(500).json({ message: "Error al obtener las propuestas", error });
   }
 };
 
 export const insertPropuesta = async (req, res) => {
   try {
-    const { NOM_PRO, GRUP_DIR_PRO, INF_PRO} = req.body;
-    await insertPropuestaDB(NOM_PRO, GRUP_DIR_PRO, INF_PRO);
+    const { NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN } = req.body; // Nuevos parámetros
+    await insertPropuestaDB(NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN);
     res.status(201).json({ message: "Propuesta creada con éxito" });
   } catch (error) {
     console.error(error);
@@ -53,8 +55,8 @@ export const insertPropuesta = async (req, res) => {
 
 export const updatePropuesta = async (req, res) => {
   try {
-    const { ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO } = req.body;
-    await updatePropuestaDB(ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO);
+    const { ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN } = req.body; // Nuevos parámetros
+    await updatePropuestaDB(ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN);
     res.status(200).json({ message: "Propuesta actualizada con éxito" });
   } catch (error) {
     console.error(error);
@@ -72,5 +74,3 @@ export const deletePropuesta = async (req, res) => {
     res.status(500).json({ error: "Error al eliminar la propuesta" });
   }
 };
-
-

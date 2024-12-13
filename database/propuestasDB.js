@@ -42,12 +42,12 @@ export const getPropuestasDB = async () => {
 };
 
 
-export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO) => {
+export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL InsertarPropuesta(?, ?, ?)",
-      [NOM_PRO, GRUP_DIR_PRO, INF_PRO,]
+      "CALL InsertarPropuesta(?, ?, ?, ?, ?)",
+      [NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN]
     );
     return result;
   } catch (error) {
@@ -57,12 +57,13 @@ export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO) => {
 };
 
 
-export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO) => {
+
+export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL ActualizarPropuesta(?, ?, ?, ?)",
-      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO]
+      "CALL ActualizarPropuesta(?, ?, ?, ?, ?, ?, ?)",
+      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN]
     );
     return result;
   } catch (error) {
@@ -70,6 +71,7 @@ export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO) 
     throw new Error("Error al actualizar la propuesta");
   }
 };
+
 
 
 export const deletePropuestaDB = async (ID_PRO) => {

@@ -397,16 +397,18 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">Propuestas</h1>
 
+            <!-- Botón para abrir el modal -->
             <div class="mb-3">
               <button
                 class="btn btn-success"
                 id="addRoleBtn"
-                data-toggle="modal"
-                data-target="#addRoleModal"
+                data-bs-toggle="modal"
+                data-bs-target="#addRoleModal"
               >
                 <i class="fas fa-user-plus"></i> Add New Role
               </button>
             </div>
+
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3"></div>
@@ -504,6 +506,7 @@
         </div>
       </div>
     </div>
+    <!-- Modal para editar propuesta -->
     <div
       class="modal fade"
       id="editModal"
@@ -511,13 +514,6 @@
       aria-labelledby="editModalLabel"
       aria-hidden="true"
     >
-      <div
-        class="modal fade"
-        id="editModal"
-        tabindex="-1"
-        aria-labelledby="editModalLabel"
-        aria-hidden="true"
-      ></div>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -566,12 +562,26 @@
                 required
               ></textarea>
             </div>
+            <div class="form-group">
+              <label for="candidateSelect">Candidato</label>
+              <select id="candidateSelect" class="form-control">
+                <!-- Opciones dinámicas -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editEstado" style="display: inline;">Estado: </label><a>---
+              <input type="checkbox" id="editEstado" class="form-check-input" style="vertical-align: middle;" />
+            </div>
+            <div class="form-group">
+              <label for="editUrlImagen">Imagen</label>
+              <input type="file" id="editUrlImagen" class="form-control" accept="image/*" />
+            </div>            
           </div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
             >
               Cancelar
             </button>
@@ -583,6 +593,7 @@
       </div>
     </div>
 
+    <!-- Modal para agregar propuesta -->
     <div
       class="modal fade"
       id="addRoleModal"
@@ -613,6 +624,15 @@
                 />
               </div>
               <div class="mb-3">
+                <label for="roleGroup" class="form-label">Group</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="roleGroup"
+                  required
+                />
+              </div>
+              <div class="mb-3">
                 <label for="rDescription" class="form-label">Description</label>
                 <input
                   type="text"
@@ -621,6 +641,16 @@
                   required
                 />
               </div>
+              <div class="form-group">
+                <label for="rCandidateSelect">Candidato</label>
+                <select id="rCandidateSelect" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="editUrlImagen">Imagen</label>
+                <input type="file" id="editUrlImagen" class="form-control" accept="image/*" />
+              </div>
+              
               <button type="submit" class="btn btn-primary">Save</button>
             </form>
           </div>

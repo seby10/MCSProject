@@ -132,6 +132,7 @@ const displayPropuestas = (propuestas, group) => {
   propuestasContainer.innerHTML = "";
 
   let contador = 1;
+  
 
   // Añadir las propuestas correspondientes
   propuestas.forEach((propuesta) => {
