@@ -1,58 +1,64 @@
 const URL = "http://localhost:4000/MCSPROJECT";
 
-const addCandidato = async (mName, isActive) => {
-  const response = await $.ajax({
-    url: `${URL}/candidatos/addCandidato`,
-    type: "POST",
-    data: {
-      mName,
-      isActive,
-    },
-    dataType: "json",
-  });
-  return response;
-};
-
-const deleteMenu = async (menuId) => {
+const addCandidato = async (candidate, imageFile) => {
   try {
+    const formData = new FormData();
+    formData.append("nombre", candidate.nombre);
+    formData.append("apellido", candidate.apellido);
+    formData.append("fechaNacimiento", candidate.fechaNacimiento);
+    formData.append("cargo", candidate.cargo);
+    formData.append("informacion", candidate.informacion);
+    formData.append("partido", candidate.partido);
+    formData.append("activo", candidate.activo ? 1 : 0);
+    
+    if (imageFile) {
+      formData.append("imagen", imageFile);
+    }
+
     const response = await $.ajax({
-      url: `${URL}/candidatos/deleteMenu`,
+      url: `${URL}/candidatos/addCandidato`,
       type: "POST",
-      data: {
-        menuId,
-      },
+      data: formData,
+      contentType: false,
+      processData: false,
       dataType: "json",
     });
 
-    console.log(response);
-
-    if (response.success) {
-      deleteMenuRole(menuId);
-      loadcandidatos();
-    }
     return response;
   } catch (error) {
-    console.error("Error deleting menu:", error);
-    throw error;
+    console.error("Error al insertar el candidato:", error);
+    showErrorAlert("Hubo un error al insertar el candidato");
   }
 };
 
-async function saveMenu(menu) {
+async function saveCandidate(candidate, imageFile) {
   try {
+    const formData = new FormData();
+    formData.append("id", candidate.id);
+    formData.append("nombre", candidate.nombre);
+    formData.append("apellido", candidate.apellido);
+    formData.append("fechaNacimiento", candidate.fechaNacimiento);
+    formData.append("cargo", candidate.cargo);
+    formData.append("informacion", candidate.informacion);
+    formData.append("partido", candidate.partido);
+    formData.append("activo", candidate.activo ? 1 : 0);
+    if (imageFile) {
+      formData.append("imagen", imageFile);
+    }
+
     const response = await $.ajax({
-      url: `${URL}/menus/updateMenu`,
+      url: `${URL}/candidatos/updateCandidato`,
       type: "POST",
-      data: {
-        id: menu.id,
-        nombre: menu.nombre,
-      },
+      data: formData,
+      contentType: false,
+      processData: false,
       dataType: "json",
     });
 
     return response;
   } catch (error) {
-    console.error("Error updating user:", error);
-    showErrorAlert("Failed to update user data");
+    console.error("Error al actualizar el candidato:", error);
+    showErrorAlert("Hubo un error al actualizar el candidato");
   }
 }
 
@@ -109,16 +115,6 @@ function showConfirmationQuestion(message, callback) {
   });
 }
 
-function confirmDeleteMenu(menuId) {
-  showConfirmationQuestion(
-    "Are you sure you want to delete this menu?",
-    function (confirmed) {
-      if (confirmed) {
-        deleteMenu(menuId);
-      }
-    }
-  );
-}
 function exito() {
   showSuccessAlert("Exito");
 }
@@ -214,13 +210,13 @@ async function loadcandidatos() {
       let fecha = new Date(candidato.FEC_NAC_CAN);
       let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
       let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
-
+  
       let maxLength = 30;
       let infoText =
-        candidato.INF_CAN.length > maxLength
-          ? candidato.INF_CAN.substring(0, maxLength) + "..."
-          : candidato.INF_CAN;
-
+          candidato.INF_CAN.length > maxLength
+              ? candidato.INF_CAN.substring(0, maxLength) + "..."
+              : candidato.INF_CAN;
+  
       let id = `<td>${candidato.ID_CAN}</td>`;
       let name = `<td>${candidato.NOM_CAN}</td>`;
       let lname = `<td>${candidato.APE_CAN}</td>`;
@@ -228,45 +224,42 @@ async function loadcandidatos() {
       let cargo = `<td>${candidato.CAR_CAN}</td>`;
       let info = `<td>${infoText}</td>`;
       let part = `<td>${candidato.PAR_CAN}</td>`;
+  
+      let imagenDisplay = candidato.IMG_CAN
+          ? `<td><img src="${candidato.IMG_CAN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
+          : `<td>Sin imagen</td>`;
+  
       let activo = `
-        <td>
-          <input type="checkbox" class="activo-checkbox" data-id="${
-            candidato.ID_CAN
-          }" 
-          ${candidato.activo ? "checked" : ""} disabled>
-        </td>`;
-
+          <td>
+              <input type="checkbox" class="activo-checkbox" data-id="${candidato.ID_CAN}" 
+              ${candidato.activo ? "checked" : ""} disabled>
+          </td>`;
+  
       let actionButtons = `
-        <td>
-          <button class="btn btn-primary edit-btn mr-2" data-id="${candidato.ID_CAN}">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-danger delete-btn" data-id="${candidato.ID_CAN}">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </td>`;
-
-      rows += `<tr>${
-        id + name + lname + fnac + cargo + info + part + activo + actionButtons
-      }</tr>`;
-    }
+          <td>
+              <button class="btn btn-primary edit-btn mr-2" data-id="${candidato.ID_CAN}">
+                  <i class="fas fa-edit"></i>
+              </button>
+          </td>`;
+  
+      rows += `<tr>${id + name + lname + fnac + cargo + info + part + imagenDisplay + activo + actionButtons}</tr>`;
+  }
 
     tableBody.innerHTML = rows;
-
-    document.querySelectorAll(".delete-btn").forEach((button) => {
-      button.addEventListener("click", function () {
-        const menuId = this.getAttribute("data-id");
-        confirmDeleteMenu(menuId);
-      });
-    });
 
     document.querySelectorAll(".edit-btn").forEach((button) => {
       button.addEventListener("click", async function () {
         const candidatoId = this.getAttribute("data-id");
         const candidato = datos.response.find((u) => u.ID_CAN == candidatoId);
-        document.getElementById("editMenuId").value = candidato.ID_CAN;
-        document.getElementById("editMenuName").value = candidato.NOM_CAN;
-        document.getElementById("editMenulName").value = candidato.APE_CAN;
+        document.getElementById("editCandidateId").value = candidato.ID_CAN;
+        document.getElementById("editCandidateName").value = candidato.NOM_CAN;
+        document.getElementById("editCandidatelName").value = candidato.APE_CAN;
+        let fechaNacimiento = new Date(candidato.FEC_NAC_CAN);
+        let fechaFormatoDate = fechaNacimiento.toISOString().split("T")[0];
+        document.getElementById("editBirthDate").value = fechaFormatoDate;
+        document.getElementById("editCargo").value = candidato.CAR_CAN;
+        document.getElementById("editInfo").value = candidato.INF_CAN;
+        document.getElementById("editParty").value = candidato.PAR_CAN;
         document.getElementById("activeStatus").checked = candidato.activo;
         $("#editModal").modal("show");
       });
@@ -281,41 +274,84 @@ async function loadcandidatos() {
 }
 
 async function handleSaveChanges() {
-  const updatedMenu = {
-    id: document.getElementById("editMenuId").value,
-    nombre: document.getElementById("editMenuName").value,
+  const updatedCandidate = {
+    id: document.getElementById("editCandidateId").value,
+    nombre: document.getElementById("editCandidateName").value,
+    apellido: document.getElementById("editCandidatelName").value,
+    fechaNacimiento: formatDate(document.getElementById("editBirthDate").value),
+    cargo: document.getElementById("editCargo").value,
+    informacion: document.getElementById("editInfo").value,
+    partido: document.getElementById("editParty").value,
+    activo: document.getElementById("activeStatus").checked ? 1 : 0,
   };
 
-  await saveMenu(updatedMenu);
+  const imageFile = document.getElementById("imagen").files[0];
 
-  showSuccessAlert("Successful");
-  $("#editModal").modal("hide");
-  loadMenus();
+  try {
+    let response = await saveCandidate(updatedCandidate, imageFile);
+
+    if (response.success) {
+      showSuccessAlert("Candidato actualizado exitosamente");
+      $("#editModal").modal("hide");
+      loadcandidatos();
+    } else {
+      showErrorAlert("Error al actualizar el candidato");
+    }
+  } catch (error) {
+    console.error("Error al guardar los cambios:", error);
+    showErrorAlert("Hubo un error al intentar guardar los cambios");
+  }
 }
 
-document.getElementById("addMenuBtn").addEventListener("click", async () => {
-  $("#addMenuModal").modal("show");
-});
+function formatDate(date) {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = (d.getMonth() + 1).toString().padStart(2, "0");
+  const day = d.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 document
-  .getElementById("addMenuForm")
+  .getElementById("addCandidateBtn")
+  .addEventListener("click", async () => {
+    $("#addCandidateModal").modal("show");
+  });
+
+  document
+  .getElementById("addCandidateForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const mName = document.getElementById("menuName").value.trim();
-    const isActive = document.getElementById("activeStatus").checked ? 1 : 0;
+    const Candidate = {
+      nombre: document.getElementById("candidateName").value,
+      apellido: document.getElementById("candidateLastName").value,
+      fechaNacimiento: formatDate(
+        document.getElementById("birthDate").value
+      ),
+      cargo: document.getElementById("position").value,
+      informacion: document.getElementById("info").value,
+      partido: document.getElementById("party").value,
+      activo: document.getElementById("activeStatus").checked ? 1 : 0,
+    };
 
-    try {
-      const response = await addMenu(mName, isActive);
-      const menuId = response.response.MenuID;
-      console.log(menuId);
-      showSuccessAlert("Successful registration");
-      loadMenus();
-      $("#addMenuModal").modal("hide");
-      document.getElementById("addMenuForm").reset();
-    } catch (error) {
-      console.error("Error during registration:", error);
-      showErrorAlert("Error occurred during registration");
+    const imageFile = document.getElementById("image").files[0];
+
+    if (imageFile) {
+      try {
+        let response = await addCandidato(Candidate, imageFile);
+        console.log("Candidato registrado exitosamente:", response);
+        showSuccessAlert("Candidato registrado exitosamente");
+
+        $("#addCandidateModal").modal("hide");
+        document.getElementById("addCandidateForm").reset();
+
+        loadcandidatos();
+      } catch (error) {
+        console.error("Error durante el registro:", error);
+        showErrorAlert("Ocurrió un error durante el registro");
+      }
+    } else {
+      showErrorAlert("Por favor, seleccione una imagen para el candidato");
     }
   });
 
