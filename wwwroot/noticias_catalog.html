@@ -190,7 +190,7 @@
                 <h6 class="dropdown-header">Message Center</h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="..." />
+                    <img class="rounded-circle" src="" alt="..." />
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -203,7 +203,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="..." />
+                    <img class="rounded-circle" src="" alt="..." />
                     <div class="status-indicator"></div>
                   </div>
                   <div>
@@ -216,7 +216,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="..." />
+                    <img class="rounded-circle" src="" alt="..." />
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -254,7 +254,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
+                <img class="img-profile rounded-circle" src="" />
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -294,8 +294,8 @@
           <h1 class="h3 mb-2 text-gray-800">Noticias/Eventos</h1>
 
           <div class="mb-3">
-            <button class="btn btn-success" id="addModuleBtn" data-toggle="modal" data-target="#addUserModal">
-              <i class="fas fa-user-plus"></i> Add New Module
+            <button class="btn btn-success" id="addNoticiaBtn" data-toggle="modal" data-target="#addModal">
+              <i class="fas fa-user-plus"></i> Agregar Noticia/Evento
             </button>
           </div>
           <!-- DataTales Example -->
@@ -379,68 +379,8 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Edit Module</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="editForm">
-            <div class="d-flex align-items-center mb-3">
-              <input type="hidden" id="editModuleId" />
-              <div class="mb-3" style="flex: 1">
-                <label for="editModuleName" class="form-label">Module Name</label>
-                <input type="text" class="form-control" id="editModuleName" required style="max-width: 300px" />
-              </div>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="activeStatus" />
-                <label class="form-check-label" for="activeStatus">Active</label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary" id="saveChanges">
-            Save changes
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="addModuleModal" tabindex="-1" aria-labelledby="addModuleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addModuleModalLabel">Add New Module</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="addModuleForm">
-            <div class="d-flex align-items-center mb-3">
-              <div class="mb-3" style="flex: 1">
-                <label for="roleName" class="form-label">Module Name</label>
-                <input type="text" class="form-control" id="moduleName" required style="max-width: 300px" />
-              </div>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="activeStatus" />
-                <label class="form-check-label" for="activeStatus">Active</label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add Noticia Modal -->
-  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addNoticiaModal" tabindex="-1" aria-labelledby="addNoticiaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -454,8 +394,8 @@
               <input type="text" class="form-control" id="nombre" name="nombre" required>
             </div>
             <div class="mb-3">
-              <label for="fecha" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="fecha" name="fecha" required>
+              <label for="fecha" class="form-label">Fecha y Hora</label>
+              <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
             </div>
             <div class="mb-3">
               <label for="informacion" class="form-label">Información</label>
@@ -480,29 +420,51 @@
     </div>
   </div>
 
-  <!-- Edit Noticia Modal -->
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <!-- Modal para Editar Noticia -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Editar Noticia/Evento</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="editModalLabel">Editar Noticia</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
-          <form id="editNoticiaForm">
-            <input type="hidden" id="editNoticiaId" name="id">
-            <!-- Similar fields to add modal, but pre-populated -->
-            <div class="mb-3">
-              <label for="editNombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="editNombre" name="nombre" required>
+          <form id="editForm">
+            <input type="hidden" id="editNewsId" />
+            <div class="form-group">
+              <label for="editNewsTitle">Título</label>
+              <input type="text" class="form-control" id="editNewsTitle" />
             </div>
-            <!-- Add other fields similarly -->
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <div class="form-group">
+              <label for="editNewsDate">Fecha</label>
+              <input type="datetime-local" class="form-control" id="editNewsDate" />
+            </div>
+            <div class="form-group">
+              <label for="editNewsContent">Contenido</label>
+              <textarea class="form-control" id="editNewsContent"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editNewsLocation">Ubicación</label>
+              <input type="text" class="form-control" id="editNewsLocation" />
+            </div>
+            <div class="form-group">
+              <label for="editNewsImage">Imagen</label>
+              <input type="file" class="form-control" id="editNewsImage" />
+            </div>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="saveChanges">Guardar Cambios</button>
         </div>
       </div>
     </div>
   </div>
+
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -512,7 +474,7 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <!-- <script src="js/sb-admin-2.min.js"></script> -->
 
   <!-- Page level plugins -->
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>

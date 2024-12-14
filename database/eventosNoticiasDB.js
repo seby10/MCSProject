@@ -32,24 +32,14 @@ export const getAllEventosNoticias = async () => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query("CALL sp_GetAllEventosNoticias()");
+    //console.log(result[0]);
+    if (result.length === 0 || result[0].length === 0) {
+      return [];
+    }
     return result[0];
   } catch (error) {
     console.error(error);
-    throw new Error("Error al obtener eventos y noticias");
-  }
-};
-
-export const getEventosNoticiasById = async (id) => {
-  try {
-    const connection = await getConnection();
-    const [result] = await connection.query(
-      "CALL sp_GetEventoNoticiaById(?)",
-      [id]
-    );
-    return result[0];
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error al obtener eventos y noticias");
+    throw new Error("Error al obtener eventos y noticias" + error.message);
   }
 };
 
@@ -57,7 +47,7 @@ export const addEventoNoticia = async (eventoNoticiaData) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_AddEventoNoticia(?, ?, ?, ?, ?, ?)",
+      "CALL sp_AddEventoNoticia(?, ?, ?, ?, ?)",
       [
         eventoNoticiaData.nombre,
         eventoNoticiaData.fecha,
@@ -66,6 +56,7 @@ export const addEventoNoticia = async (eventoNoticiaData) => {
         eventoNoticiaData.imagen,
       ]
     );
+    console.log(result[0]);
     return result;
   } catch (error) {
     console.error(error);
@@ -77,7 +68,7 @@ export const updateEventoNoticia = async (eventoNoticiaData) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_UpdateEventoNoticia(?, ?, ?, ?, ?, ?, ?)",
+      "CALL sp_UpdateEventoNoticia(?, ?, ?, ?, ?, ?)",
       [
         eventoNoticiaData.id,
         eventoNoticiaData.nombre,
@@ -91,6 +82,22 @@ export const updateEventoNoticia = async (eventoNoticiaData) => {
   } catch (error) {
     console.error(error);
     throw new Error("Error al actualizar evento/noticia");
+  }
+};
+
+
+
+export const getEventoNoticiaByIdFromDB = async (id) => {
+  try {
+    const connection = await getConnection();
+    const [result] = await connection.query(
+      "CALL sp_GetEventoNoticiaById(?)",
+      [id]
+    );
+    return result[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener eventos y noticias");
   }
 };
 

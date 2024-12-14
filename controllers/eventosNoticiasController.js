@@ -2,21 +2,21 @@ import {
   getEventosNoticiasByDateFromDB,
   getRecentEventosNoticias,
   getAllEventosNoticias,
-  getEventoNoticiaById,
-  addEventoNoticia, 
+  addEventoNoticia,
   updateEventoNoticia,
-  changeEventoNoticiaStatus
+  changeEventoNoticiaStatus,
+  getEventoNoticiaByIdFromDB,
 } from "../database/eventosNoticiasDB.js";
 
-import path from 'path';
-import fs from 'fs';
+import path from "path";
+import fs from "fs";
 
 export const getEventosNoticiasByDate = async (req, res) => {
   try {
     const { date } = req.params;
     console.log("Fecha recibida:", date);
     const result = await getEventosNoticiasByDateFromDB(date);
-    console.log("Resultados:", result);
+    //console.log("Resultados:", result);
     res.json(result);
   } catch (error) {
     console.error(error);
@@ -45,14 +45,15 @@ export const getEventosNoticias = async (req, res) => {
     const eventosNoticias = await getAllEventosNoticias();
     res.json({ success: true, response: eventosNoticias });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
 export const createEventoNoticia = async (req, res) => {
   try {
-    const { nombre, fecha, informacion, ubicacion, estado } = req.body;
-    
+    const { nombre, fecha, informacion, ubicacion } = req.body;
+    console.log("Noticia:", req.body);
     // Manejar la imagen subida
     let imagenPath = null;
     if (req.file) {
@@ -67,8 +68,12 @@ export const createEventoNoticia = async (req, res) => {
       ubicacion,
       imagen: imagenPath,
     });
-
-    res.json({ success: true, response: result });
+    console.log("Noticia Details:", result);
+    res.json({
+      success: true,
+      message: "Noticia insertada con éxito",
+      response: result,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -76,24 +81,26 @@ export const createEventoNoticia = async (req, res) => {
 
 export const updateEventoNoticiaDetails = async (req, res) => {
   try {
-    const { id, nombre, fecha, informacion, ubicacion, estado } = req.body;
-    
-    // Primero, obtener la información actual de la noticia para manejar la imagen anterior
-    const currentNoticia = await getEventoNoticiaById(id);
-    
-    let imagenPath = currentNoticia.imagen; // Mantener la imagen actual por defecto
-    
-    // Si se sube una nueva imagen
+    const { id, nombre, fecha, informacion, ubicacion } = req.body;
+
+    console.log("Datos recibidos del cliente:", req.body);
     if (req.file) {
-      // Borrar la imagen anterior si existe
-      if (currentNoticia.imagen) {
-        const oldImagePath = path.join(__dirname, '../public', currentNoticia.imagen);
+      console.log("Imagen recibida:", req.file.filename);
+    }
+
+    const currentNoticia = await getEventoNoticiaByIdFromDB(id);
+
+    let imagenPath = currentNoticia.IMG_EVE_NOT;
+
+    if (req.file) {
+      if (currentNoticia.IMG_EVE_NOT) {
+        const oldImagePath = path(
+          currentNoticia.IMG_EVE_NOT
+        );
         if (fs.existsSync(oldImagePath)) {
           fs.unlinkSync(oldImagePath);
         }
       }
-      
-      // Guardar la nueva imagen
       imagenPath = `/images/noticias/${req.file.filename}`;
     }
 
@@ -104,23 +111,57 @@ export const updateEventoNoticiaDetails = async (req, res) => {
       informacion,
       ubicacion,
       imagen: imagenPath,
-      estado
     });
 
-    res.json({ success: true, response: result });
+    res.json({
+      success: true,
+      message: "Noticia actualizada con éxito",
+      response: result,
+    });
   } catch (error) {
+    console.error("Error en updateEventoNoticiaDetails:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
+// export const getEventoNoticiaById = async (req, res) => {
+//   try {
+//     const { id } = req.params || {}; // Asegúrate de que params no es undefined
+//     if (!id) {
+//       return res.status(400).json({ error: "ID is required" });
+//     }
+//     console.log("Id recibido:", id);
+//     const result = await getEventosNoticiasByIdFromDB(id);
+//     console.log("Resultados:", result);
+//     res.json(result);
+//   } catch (error) {
+//     console.error(error);
+//     res
+//       .status(500)
+//       .json({ message: "Error al obtener eventos y noticias", error });
+//   }
+// };
+
 export const toggleEventoNoticiaStatus = async (req, res) => {
+  console.log("Método de solicitud:", req.method);
+  console.log("Encabezados de la solicitud:", req.headers);
+  console.log("Cuerpo de la solicitud:", req.body);
+
   try {
     const { id, estado } = req.body;
+
+    if (!id || estado === undefined) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "ID y estado son obligatorios" 
+      });
+    }
 
     const result = await changeEventoNoticiaStatus(id, estado);
 
     res.json({ success: true, response: result });
   } catch (error) {
+    console.error("Error en toggleEventoNoticiaStatus:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

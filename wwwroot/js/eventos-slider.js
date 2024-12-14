@@ -46,7 +46,7 @@ const updateSlider = () => {
       <div class="slider-event-card">
         ${evento.IMG_EVE_NOT ? `
           <div class="slider-event-image">
-            <img src="/images/${evento.IMG_EVE_NOT}" alt="${evento.NOM_EVE_NOT}" onerror="this.style.display='none';">
+            <img src="${evento.IMG_EVE_NOT}" alt="${evento.NOM_EVE_NOT}" onerror="this.style.display='none';">
           </div>
         ` : ''}
         <h3>${evento.NOM_EVE_NOT}</h3>
@@ -99,11 +99,16 @@ const initSlider = async () => {
   eventos = await getRecentEvents();
   console.log("Eventos cargados:", eventos);
 
+  // Filtrar eventos para mostrar solo los visibles
+  eventos = eventos.filter(evento => evento.ESTADO === 1);
+
   if (eventos.length > 0) {
     updateSlider();
     setupEventListeners();
     // Auto-play
     setInterval(nextSlide, 5000);
+  } else {
+    console.log("No hay eventos visibles para mostrar.");
   }
 };
 

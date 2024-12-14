@@ -68,7 +68,9 @@ const displayEventosNoticias = (eventosNoticias) => {
   container.fadeOut(300, function() {
     container.empty();
 
-    if (!eventosNoticias || eventosNoticias.length === 0) {
+    const eventosVisibles = eventosNoticias.filter(item => item.ESTADO === 1);
+
+    if (!eventosVisibles || eventosVisibles.length === 0) {
       container.append(`
         <div class="alert alert-info" role="alert">
           No hay eventos o noticias para esta fecha
@@ -77,13 +79,13 @@ const displayEventosNoticias = (eventosNoticias) => {
     } else {
       container.append(`
         <div class="events-grid">
-          ${eventosNoticias
+          ${eventosVisibles
             .map(
               (item) => `
             <div class="event-card">
               ${item.IMG_EVE_NOT ? `
                 <div class="event-image">
-                  <img src="/images/${item.IMG_EVE_NOT}" alt="${item.NOM_EVE_NOT}" onerror="this.style.display='none';">
+                  <img src="${item.IMG_EVE_NOT}" alt="${item.NOM_EVE_NOT}" onerror="this.style.display='none';">
                 </div>
               ` : ''}
               <div class="event-header">
