@@ -19,9 +19,9 @@
       type="text/css"
     />
     <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet"
-  />
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
     <link href="iziToast-master/dist/css/iziToast.min.css" rel="stylesheet" />
@@ -258,7 +258,7 @@
                     <div class="dropdown-list-image mr-3">
                       <img
                         class="rounded-circle"
-                        src="img/undraw_profile_1.svg"
+                        src="images/s1.svg"
                         alt="..."
                       />
                       <div class="status-indicator bg-success"></div>
@@ -275,7 +275,7 @@
                     <div class="dropdown-list-image mr-3">
                       <img
                         class="rounded-circle"
-                        src="img/undraw_profile_2.svg"
+                        src="images/s1.svg"
                         alt="..."
                       />
                       <div class="status-indicator"></div>
@@ -292,7 +292,7 @@
                     <div class="dropdown-list-image mr-3">
                       <img
                         class="rounded-circle"
-                        src="img/undraw_profile_3.svg"
+                        src="images/s1.svg"
                         alt="..."
                       />
                       <div class="status-indicator bg-warning"></div>
@@ -307,7 +307,6 @@
                   </a>
                   <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                      
                       <div class="status-indicator bg-success"></div>
                     </div>
                     <div>
@@ -345,10 +344,7 @@
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
                     >Douglas McGee</span
                   >
-                  <img
-                    class="img-profile rounded-circle"
-                    src="img/undraw_profile.svg"
-                  />
+                  <img class="img-profile rounded-circle" src="images/s1.svg" />
                 </a>
                 <!-- Dropdown - User Information -->
                 <div
@@ -383,7 +379,11 @@
               </li>
               <li class="nav-item mx-1">
                 <!-- Logout Button -->
-                <a class="btn btn-primary btn-sm ml-2" href="#" id="logoutButton">
+                <a
+                  class="btn btn-primary btn-sm ml-2"
+                  href="#"
+                  id="logoutButton"
+                >
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-1"></i>
                   Logout
                 </a>
@@ -397,16 +397,18 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">Propuestas</h1>
 
+            <!-- Botón para abrir el modal -->
             <div class="mb-3">
               <button
                 class="btn btn-success"
                 id="addRoleBtn"
-                data-toggle="modal"
-                data-target="#addUserModal"
+                data-bs-toggle="modal"
+                data-bs-target="#addRoleModal"
               >
-                <i class="fas fa-user-plus"></i> Add New Role
+                <i class="fas fa-user-plus"></i> Agregar nueva propuesta
               </button>
             </div>
+
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3"></div>
@@ -422,17 +424,23 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Actions</th>
+                        <th>Nombre</th>
+                        <th>Grupo</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Actions</th>
+                        <th>Nombre</th>
+                        <th>Grupo</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
                       </tr>
                     </tfoot>
                     <tbody id="tbody"></tbody>
@@ -502,6 +510,7 @@
         </div>
       </div>
     </div>
+    <!-- Modal para editar propuesta -->
     <div
       class="modal fade"
       id="editModal"
@@ -521,19 +530,56 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="editForm">
-              <input type="hidden" id="editRoleId" />
-              <div class="mb-3">
-                <label for="editRoleName" class="form-label">Role Name</label>
-                <input type="text" class="form-control" id="editRoleName" />
-              </div>
-              <div class="mb-3">
-                <label for="editDescription" class="form-label"
-                  >Description</label
-                >
-                <input type="text" class="form-control" id="editDescription" />
-              </div>
-            </form>
+            <div class="form-group">
+              <label for="editRoleId">ID de la Propuesta</label>
+              <input
+                type="text"
+                id="editRoleId"
+                class="form-control"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label for="editRoleName">Nombre de la Propuesta</label>
+              <input
+                type="text"
+                id="editRoleName"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="editRoleGroup">Grupo</label>
+              <input
+                type="text"
+                id="editRoleGroup"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="editDescription">Descripción</label>
+              <textarea
+                id="editDescription"
+                class="form-control"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="candidateSelect">Candidato</label>
+              <select id="candidateSelect" class="form-control">
+                <!-- Opciones dinámicas -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editEstado" style="display: inline;">Estado: </label><a>---
+              <input type="checkbox" id="editEstado" class="form-check-input" style="vertical-align: middle;" />
+            </div>
+            <div class="form-group">
+              <label for="editUrlImagen">Imagen</label>
+              <input type="file" id="editUrlImagen" class="form-control" accept="image/*" />
+            </div>            
           </div>
           <div class="modal-footer">
             <button
@@ -541,16 +587,17 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Cancelar
             </button>
-            <button type="button" class="btn btn-primary" id="saveChanges">
-              Save changes
+            <button type="button" id="saveChanges" class="btn btn-primary">
+              Guardar Cambios
             </button>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Modal para agregar propuesta -->
     <div
       class="modal fade"
       id="addRoleModal"
@@ -581,6 +628,15 @@
                 />
               </div>
               <div class="mb-3">
+                <label for="roleGroup" class="form-label">Group</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="roleGroup"
+                  required
+                />
+              </div>
+              <div class="mb-3">
                 <label for="rDescription" class="form-label">Description</label>
                 <input
                   type="text"
@@ -589,6 +645,16 @@
                   required
                 />
               </div>
+              <div class="form-group">
+                <label for="rCandidateSelect">Candidato</label>
+                <select id="rCandidateSelect" class="form-control"></select>
+              </div>
+
+              <div class="form-group">
+                <label for="addUrlImagen">Imagen</label>
+                <input type="file" id="addUrlImagen" class="form-control" accept="image/*" />
+              </div>
+              
               <button type="submit" class="btn btn-primary">Save</button>
             </form>
           </div>
@@ -622,11 +688,7 @@
 
               <div class="mb-2">
                 <label for="menuCheckboxGroup" class="form-label">Menus</label>
-                <div
-                  class="checkbox-container"
-                  id="menuCheckboxGroup"
-                >
-                </div>
+                <div class="checkbox-container" id="menuCheckboxGroup"></div>
               </div>
             </form>
           </div>
@@ -655,7 +717,7 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <!-- <script src="js/sb-admin-2.min.js"></script> -->
 
     <!-- Page level plugins -->
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
@@ -665,7 +727,5 @@
     <script src="vendor/jquery/jquery.blockUI.js"></script>
     <script src="js/propuestasAdmin.js" type="text/javascript"></script>
     <script src="iziToast-master/dist/js/iziToast.min.js"></script>
-
-
   </body>
 </html>
