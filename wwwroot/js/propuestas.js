@@ -1,4 +1,4 @@
-const URL = "http://localhost:4000/MCSPROJECT";
+
 
 // Función para obtener la lista de candidatos
 const getCandidatos = async () => {

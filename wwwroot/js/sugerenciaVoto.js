@@ -1,4 +1,4 @@
-const URL = "http://localhost:4000/MCSPROJECT";
+
 const submitButtonSugerencia = document.getElementById('submitSugerencia');
 const submitButtonVoto = document.getElementById('submitVoto');
 const modalAceptarButton = document.getElementById('modalAceptar');
