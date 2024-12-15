@@ -21,8 +21,7 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: function (_req, file, cb) {
-    // Generar un nombre de archivo único
-    cb(null, `noticia-${Date.now}${path.extname(file.originalname)}`);
+    cb(null, `noticia-${Date.now()}${path.extname(file.originalname)}`);
   }
 });
 
@@ -42,7 +41,7 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024 // Límite de 5MB
+    fileSize: 5 * 1024 * 1024
   }
 });
 

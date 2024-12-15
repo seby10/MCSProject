@@ -6,9 +6,6 @@ const addNoticia = async (noticia, imageFile) => {
     formData.append("nombre", noticia.nombre);
     const fechaSeleccionada = noticia.fecha;
     const fechaFormateada = fechaSeleccionada.split(".")[0].replace("T", " ");
-
-    formData.append("fecha", fechaFormateada);
-
     formData.append("fecha", fechaFormateada);
     formData.append("informacion", noticia.informacion);
     formData.append("ubicacion", noticia.ubicacion);
@@ -77,11 +74,10 @@ async function showNoticias() {
 
 async function changeNoticiaStatus(noticiaId, currentStatus) {
   try {
-    const nuevoEstado = currentStatus === 1 ? 0 : 1;
-    
+    const nuevoEstado = Number(currentStatus) === 1 ? 0 : 1;
     console.log("Enviando datos:", {
       id: noticiaId,
-      estado: nuevoEstado
+      estado: nuevoEstado,
     });
 
     const response = await $.ajax({
@@ -89,20 +85,10 @@ async function changeNoticiaStatus(noticiaId, currentStatus) {
       type: "PUT",
       data: JSON.stringify({
         id: noticiaId,
-        estado: nuevoEstado
+        estado: nuevoEstado,
       }),
-      contentType: "application/json",
+      contentType: "application/json", // Asegúrate de que esto sea application/json
       dataType: "json",
-      
-      // Añade estos para más información de depuración
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error("Error AJAX:", {
-          status: jqXHR.status,
-          responseText: jqXHR.responseText,
-          textStatus: textStatus,
-          errorThrown: errorThrown
-        });
-      }
     });
 
     if (response.success) {
@@ -113,10 +99,18 @@ async function changeNoticiaStatus(noticiaId, currentStatus) {
     }
   } catch (error) {
     console.error("Error al cambiar el estado de la noticia:", error);
-    showErrorAlert("Hubo un error al cambiar el estado de la noticia");
+
+    // Manejo de errores más detallado
+    if (error.responseJSON) {
+      showErrorAlert(
+        error.responseJSON.message ||
+          "Hubo un error al cambiar el estado de la noticia"
+      );
+    } else {
+      showErrorAlert("Hubo un error al cambiar el estado de la noticia");
+    }
   }
 }
-
 
 function showErrorAlert(message) {
   iziToast.error({
@@ -293,25 +287,30 @@ async function loadNoticias() {
     }
 
     tableBody.innerHTML = rows;
-    // Añadir event listeners para los botones de eliminar
+
     document.querySelectorAll(".delete-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const noticiaID = this.getAttribute("data-id");
-        const currentStatus = this.getAttribute("data-estado") === 1;
+        const currentStatus = this.getAttribute("data-estado");
 
-        // Personalizar el mensaje según el estado actual
-        const confirmationMessage = currentStatus 
-          ? "¿Quieres cambiar el estado de la noticia a oculta?" 
-          : "¿Quieres cambiar el estado de la noticia a visible?";
+        // Diagnóstico detallado
+        console.log("Detalles de la noticia:");
+        console.log("ID:", noticiaID);
+        console.log("Estado actual (como string):", currentStatus);
+        console.log("Tipo de estado:", typeof currentStatus);
+        console.log("Comparación con '1':", currentStatus === "1");
+        console.log("Comparación con 1:", currentStatus == 1);
 
-        showConfirmationQuestion(
-          confirmationMessage,
-          function (confirmed) {
-            if (confirmed) {
-              changeNoticiaStatus(noticiaID, currentStatus);
-            }
+        const confirmationMessage =
+          currentStatus === "1"
+            ? "¿Quieres cambiar el estado de la noticia a oculta?"
+            : "¿Quieres cambiar el estado de la noticia a visible?";
+
+        showConfirmationQuestion(confirmationMessage, function (confirmed) {
+          if (confirmed) {
+            changeNoticiaStatus(noticiaID, currentStatus);
           }
-        );
+        });
       });
     });
 
@@ -375,14 +374,17 @@ function formatDate(dateString) {
     return null;
   }
 
+  // Obtener la hora y minutos del input
+  const inputTime = dateString.split("T")[1] || "00:00";
+  const [hours, minutes] = inputTime.split(":");
+
   const year = d.getFullYear();
   const month = (d.getMonth() + 1).toString().padStart(2, "0");
   const day = d.getDate().toString().padStart(2, "0");
-  const hours = d.getHours().toString().padStart(2, "0");
-  const minutes = d.getMinutes().toString().padStart(2, "0");
-  const seconds = d.getSeconds().toString().padStart(2, "0");
+  const formattedHours = hours.padStart(2, "0");
+  const formattedMinutes = minutes.padStart(2, "0");
 
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  return `${year}-${month}-${day} ${formattedHours}:${formattedMinutes}:00`;
 }
 
 document.getElementById("addNoticiaBtn").addEventListener("click", async () => {
