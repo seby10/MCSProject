@@ -404,11 +404,11 @@
             <div class="mb-3">
               <button
                 class="btn btn-success"
-                id="addMenuBtn"
+                id="addCandidateBtn"
                 data-toggle="modal"
                 data-target="#addUserModal"
               >
-                <i class="fas fa-user-plus"></i> Add New Menu
+                <i class="fas fa-user-plus"></i> Añadir Candidato
               </button>
             </div>
             <!-- DataTales Example -->
@@ -426,28 +426,29 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
                         <th>Fecha de Nacimiento</th>
                         <th>Cargo</th>
                         <th>Información</th>
                         <th>Partido</th>
-                        <th>Active</th>
-
-                        <th>Actions</th>
+                        <th>Imagen</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Fecha de Nacimiento</th>
                         <th>Cargo</th>
                         <th>Información</th>
                         <th>Partido</th>
-                        <th>Active</th>
-
-                        <th>Actions</th>
+                        <th>Imagen</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
                       </tr>
                     </tfoot>
                     <tbody id="tbody"></tbody>
@@ -479,44 +480,6 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div
-      class="modal fade"
-      id="logoutModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button
-              class="close"
-              type="button"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Select "Logout" below if you are ready to end your current session.
-          </div>
-          <div class="modal-footer">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              data-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
     <div
       class="modal fade"
       id="editModal"
@@ -537,28 +500,76 @@
           </div>
           <div class="modal-body">
             <form id="editForm">
-              <input type="hidden" id="editMenuId" />
+              <input type="hidden" id="editCandidateId" />
+
+              <!-- Nombres y Apellidos -->
               <div class="d-flex align-items-center mb-3">
                 <div class="me-3" style="flex: 1">
-                  <label for="editMenuName" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="editMenuName" />
+                  <label for="editCandidateName" class="form-label"
+                    >Nombres</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editCandidateName"
+                  />
                 </div>
                 <div class="me-3" style="flex: 1">
-                  <label for="editMenulName" class="form-label"
+                  <label for="editCandidatelName" class="form-label"
                     >Apellidos</label
                   >
-                  <input type="text" class="form-control" id="editMenulName" />
-                </div>
-                <div class="form-check">
                   <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="activeStatus"
+                    type="text"
+                    class="form-control"
+                    id="editCandidatelName"
                   />
-                  <label class="form-check-label" for="activeStatus"
-                    >Active</label
-                  >
                 </div>
+              </div>
+
+              <!-- Fecha de nacimiento -->
+              <div class="mb-3">
+                <label for="editBirthDate" class="form-label"
+                  >Fecha de Nacimiento</label
+                >
+                <input type="date" class="form-control" id="editBirthDate" />
+              </div>
+
+              <!-- Cargo -->
+              <div class="mb-3">
+                <label for="editCargo" class="form-label">Cargo</label>
+                <input type="text" class="form-control" id="editCargo" />
+              </div>
+
+              <!-- Información -->
+              <div class="mb-3">
+                <label for="editInfo" class="form-label">Información</label>
+                <textarea
+                  class="form-control"
+                  id="editInfo"
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <!-- Partido -->
+              <div class="mb-3">
+                <label for="editParty" class="form-label">Partido</label>
+                <input type="text" class="form-control" id="editParty" />
+              </div>
+              <!-- Campo para Imagen -->
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="imagen" name="imagen">
+              </div>
+              <!-- Estado Activo -->
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="activeStatus"
+                />
+                <label class="form-check-label" for="activeStatus"
+                  >Activo</label
+                >
               </div>
             </form>
           </div>
@@ -569,10 +580,10 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Cerrar
             </button>
             <button type="button" class="btn btn-primary" id="saveChanges">
-              Save changes
+              Guardar cambios
             </button>
           </div>
         </div>
@@ -581,15 +592,17 @@
 
     <div
       class="modal fade"
-      id="addMenuModal"
+      id="addCandidateModal"
       tabindex="-1"
-      aria-labelledby="addMenuModalLabel"
+      aria-labelledby="addCandidateModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addMenuModalLabel">Add New Menu</h5>
+            <h5 class="modal-title" id="addCandidateModalLabel">
+              Agregar Candidato
+            </h5>
             <button
               type="button"
               class="btn-close"
@@ -598,45 +611,92 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="addMenuForm">
+            <form id="addCandidateForm" enctype="multipart/form-data">
+              <!-- Nombres y Apellidos -->
               <div class="d-flex align-items-center mb-3">
                 <div class="me-3" style="flex: 1">
-                  <label for="menuName" class="form-label">Menu Name</label>
+                  <label for="candidateName" class="form-label">Nombres</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="menuName"
+                    id="candidateName"
                     required
-                    style="max-width: 300px"
                   />
                 </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="activeStatus"
-                  />
-                  <label class="form-check-label" for="activeStatus"
-                    >Active</label
+                <div class="me-3" style="flex: 1">
+                  <label for="candidateLastName" class="form-label"
+                    >Apellidos</label
                   >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="candidateLastName"
+                    required
+                  />
                 </div>
               </div>
 
-              <div class="mb-2">
-                <label for="miCheckboxList" class="form-label">Modules</label>
-                <div class="checkbox-container" id="miCheckboxList">
-                  <!-- Aquí van los checkboxes de módulos -->
-                </div>
+              <!-- Fecha de nacimiento -->
+              <div class="mb-3">
+                <label for="birthDate" class="form-label"
+                  >Fecha de Nacimiento</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="birthDate"
+                  required
+                />
               </div>
 
-              <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Save</button>
+              <!-- Cargo -->
+              <div class="mb-3">
+                <label for="position" class="form-label">Cargo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="position"
+                  required
+                />
+              </div>
+
+              <!-- Información -->
+              <div class="mb-3">
+                <label for="info" class="form-label">Información</label>
+                <textarea class="form-control" id="info" rows="3"></textarea>
+              </div>
+
+              <!-- Partido -->
+              <div class="mb-3">
+                <label for="party" class="form-label">Partido</label>
+                <input type="text" class="form-control" id="party" />
+              </div>
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="image" name="imagen">
+              </div>
+              <!-- Estado Activo -->
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="activeStatus"
+                />
+                <label class="form-check-label" for="activeStatus"
+                  >Activo</label
+                >
+              </div>
+
+              <!-- Botón Guardar -->
+              <div class="d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-primary">Guardar</button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
