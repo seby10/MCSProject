@@ -1,8 +1,34 @@
 import {
   insertSugerenciasDB,
   insertVotosDB,
+  getSugerenciasDB,
+  updateSugerenciaEstadoDB,
+  getVotosDB
 } from "../database/sugerenciaVotoDB.js";
 import { sendMail } from "../helpers/mailer.js";
+
+export const getSugerencias = async (req, res) => {
+  try {
+    const result = await getSugerenciasDB();
+    const response = result;
+    res.json({ message: "Menus Selected!", response });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error de cargar las sugerencias", error });
+  }
+};
+
+export const actualizarEstadoSugerencia = async (req, res) => {
+  const { id, estado } = req.body; 
+  try {
+    const result = await updateSugerenciaEstadoDB({ id, estado }); 
+    res.status(200).json({ message: "Estado de la sugerencia actualizado", result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al actualizar el estado de la sugerencia." });
+  }
+};
+
 
 export const addSugerencias = async (req, res) => {
   try {
@@ -44,5 +70,16 @@ export const addVotos = async (req, res) => {
   } catch (error) {
     console.error("Error adding voto:", error);
     res.status(500).json({ message: "Error adding voto", error });
+  }
+};
+
+export const getVotos = async (req, res) => {
+  try {
+    const result = await getVotosDB();
+    const response = result;
+    res.json({ message: "Menus Selected!", response });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error de cargar los votos", error });
   }
 };

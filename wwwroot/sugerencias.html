@@ -133,16 +133,15 @@
                             <div class="contact_form-container">
                               <div>
                                 <div class="">
-                                  <input
-                                    type="text"
+                                  <textarea
                                     id="sugerenciaInput"
                                     placeholder="Sugerencias"
                                     class="message_input"
-                                  />
+                                  ></textarea>
                                 </div>
                                 <div class="btn-box">
-                                  <button type="button" id="submitSugerencia">Enviar Sugerencia</button>
-                                </div>
+                                  <button type="button" id="submitSugerencia" class="custom-btn">Enviar Sugerencia</button>
+                                </div>                                
                               </div>
                             </div>
                           </form>
@@ -194,19 +193,18 @@
                       <div class="radio-group">
                         <label for="opcion1" class="radio-label">
                           <img src="images/t1.png" alt="Imagen Opción 1" class="option-image" />
+                          <input type="radio" name="voto" id="opcion1" value="Mary" />
                         </label>
-                        <input type="radio" name="voto" id="opcion1" value="1" /> 
-                  
+                      
                         <label for="opcion2" class="radio-label">
                           <img src="images/t5.png" alt="Imagen Opción 2" class="option-image" />
-                        </label>  
-                        <input type="radio" name="voto" id="opcion2" value="5" />
-                  
+                          <input type="radio" name="voto" id="opcion2" value="Sara" />
+                        </label>
+                      
                         <div class="btn-box">
                           <button type="button" id="submitVoto" class="custom-btn">Enviar Voto</button>
                         </div>
-  
-  
+                      </div>
                     </div>
   
                   </div>
