@@ -1,4 +1,5 @@
 /* Actualizar los estilos en eventos.css */
+
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -33,10 +34,9 @@
 }
 
 .event-date {
-  color: #007bff; /* Cambiar el color a azul */
-  font-size: 1rem; /* Aumentar el tamaño de la fuente */
+  color: #666;
+  font-size: 0.9rem;
   margin-top: 5px;
-  font-weight: bold;
 }
 
 .event-content {
@@ -154,41 +154,6 @@
   }
 }
 
-.event-image {
-  width: 100%;
-  height: 250px; /* Altura fija para consistencia */
-  overflow: hidden;
-  position: relative;
-  background-color: #f0f0f0; /* Fondo de respaldo si la imagen no carga */
-}
-
-.event-image img {
-  width: 100%;
-  height: 100%; /* Altura completa del contenedor */
-  object-fit: cover; /* Cubre todo el contenedor manteniendo la proporción */
-  object-position: center; /* Centra la imagen */
-  transition: transform 0.3s ease; /* Efecto suave al hacer hover */
-}
-
-.event-card:hover .event-image img {
-  transform: scale(1.05); /* Ligero zoom al hacer hover */
-}
-
-.event-header {
-  padding: 15px 20px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #eee;
-  position: relative;
-  z-index: 10; /* Asegura que el header esté sobre la imagen */
-}
-
-/* Ajuste responsivo para imágenes */
-@media (max-width: 768px) {
-  .event-image {
-    height: 200px; /* Altura ligeramente menor en dispositivos más pequeños */
-  }
-}
-
 /* Estilos para el slider de eventos */
 .eventos-slider-section {
   padding: 60px 0;
@@ -228,10 +193,9 @@
 }
 
 .slider-event-card .event-date {
-  color: #007bff; /* Cambiar el color a azul */
-  font-size: 1rem; /* Aumentar el tamaño de la fuente */
-  margin-top: 5px;
-  font-weight: bold;
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 15px;
 }
 
 .slider-event-card p {
@@ -324,25 +288,3 @@
   color: #e62081;
 }
 
-.slider-event-image {
-  width: 100%;
-  height: 200px; /* Altura fija para consistencia */
-  overflow: hidden;
-  position: relative;
-  background-color: #f0f0f0; /* Fondo de respaldo si la imagen no carga */
-  border-radius: 10px 10px 10px 10px; /* Redondear las esquinas superiores */
-  margin-bottom: 20px;
-}
-
-.slider-event-image img {
-  width: 100%;
-  height: 100%; /* Altura completa del contenedor */
-  object-fit: cover; /* Cubre todo el contenedor manteniendo la proporción */
-  object-position: center; /* Centra la imagen */
-  transition: transform 0.3s ease; /* Efecto suave al hacer hover */
-  border-radius: 10px 10px 10px 10px; /* Redondear las esquinas superiores */
-}
-
-.slider-event-card:hover .slider-event-image img {
-  transform: scale(1.05); /* Ligero zoom al hacer hover */
-}

@@ -9,8 +9,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import wwwrouter from "./wwwroutes/routes.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -43,7 +42,6 @@ app.use(cors());
 app.use(morgan("tiny"));
 
 app.use(express.static(path.join(__dirname, "wwwroot")));
-app.use('/images', express.static(path.join(__dirname, 'wwwroot/images')));
 
 app.use("/MCSPROJECT", router);
 app.use("/", wwwrouter);
