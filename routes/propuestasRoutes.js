@@ -1,21 +1,32 @@
 import express from "express";
-import { getPropuestaByGrupDir } from "../controllers/propuestasControllers.js";
-import { getCategorias } from "../controllers/propuestasControllers.js";
-import { getPropuestas, insertPropuesta, updatePropuesta, deletePropuesta } from "../controllers/propuestasControllers.js";
-
+import { 
+  getPropuestaByGrupDir, 
+  getCategorias, 
+  getPropuestas, 
+  insertPropuesta, 
+  updatePropuesta, 
+  deletePropuesta 
+} from "../controllers/propuestasControllers.js";
+import upload from '../middleware/uploadPropuestas.js';
 
 const router = express.Router();
 
+// Obtener propuestas por grupo
 router.get("/getPropuestas/:grup", getPropuestaByGrupDir);
+
+// Obtener categorías
 router.get("/categorias", getCategorias); 
+
+// Obtener todas las propuestas
 router.get("/getPropuestas", getPropuestas); 
 
-router.post("/insertPropuesta", insertPropuesta);
+// Insertar una nueva propuesta
+router.post("/insertPropuesta", upload.single("image"), insertPropuesta); 
 
-// Actualizar propuesta existente
-router.put("/updatePropuesta", updatePropuesta);
+// Actualizar una propuesta existente
+router.put("/updatePropuesta", upload.single("image"), updatePropuesta); 
 
 // Eliminar propuesta
 router.delete("/deletePropuesta/:id", deletePropuesta);
-export default router;
 
+export default router;

@@ -5,13 +5,13 @@ import { fileURLToPath } from 'url';
 
 // Obtener el directorio actual
 const __filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
+const __dirname = path.dirname(__filename);
 
 // Configurar el almacenamiento de Multer
 const storage = multer.diskStorage({
-  destination: function (_req, _file, cb) {
+  destination: function (req, file, cb) {
     // Directorio donde se guardarán las imágenes
-    const uploadDir = path.join(__dirname, '../wwwroot/images/noticias');
+    const uploadDir = path.join(__dirname, '../wwwroot/images/propuestas');
     
     // Crear el directorio si no existe
     if (!fs.existsSync(uploadDir)){
@@ -20,14 +20,14 @@ const storage = multer.diskStorage({
     
     cb(null, uploadDir);
   },
-  filename: function (_req, file, cb) {
+  filename: function (req, file, cb) {
     // Generar un nombre de archivo único
-    cb(null, noticia-${Date.now()}${path.extname(file.originalname)});
+    cb(null, `propuesta-${Date.now()}${path.extname(file.originalname)}`);
   }
 });
 
 // Configurar los filtros de archivo
-const fileFilter = (_req, file, cb) => {
+const fileFilter = (req, file, cb) => {
   // Aceptar solo ciertos tipos de archivos de imagen
   const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
   if (allowedTypes.includes(file.mimetype)) {

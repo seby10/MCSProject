@@ -347,6 +347,87 @@ input[type="radio"] {
     left: 50%; 
     transform: translateX(-50%);
 }
+.candidato-menu {
+  display: flex;
+  justify-content: center; 
+  margin-bottom: 20px;
+  margin-top: 30px;
+  width: 100%; 
+}
+
+.candidato-button {
+  padding: 10px;
+  cursor: pointer;
+  margin-right: 5px;
+  width: 200px; 
+  position: relative;
+  display: inline-block;
+
+  background-color: #cccccc; /* Fondo gris cuando no está activo */
+  color: #000000; /* Texto rojo cuando no está activo */
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: none; /* Eliminado el borde */
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px; 
+
+}
+
+.candidato-button::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #e62081;
+  position: absolute;
+  bottom: -10px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: none; 
+}
+
+.candidato-button.active::after {
+  display: block; 
+}
+
+.candidato-button:hover {
+  background-color: #cccccc; /* Color más oscuro para el hover */
+  color: #ffffff; /* Texto blanco al hacer hover */
+}
+
+.candidato-button.active {
+  background-color: #e62081; /* Fondo rojo cuando está activo */
+  color: #ffffff; /* Texto blanco cuando está activo */
+  border: none; /* Eliminado el borde negro cuando está activo */
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .candidato-button {
+    font-size: 0.9rem; /* Reduce el tamaño del texto */
+    padding: 8px 15px; /* Reduce el espaciado */
+  }
+
+  .candidato-menu {
+    gap: 5px; /* Reduce el espacio entre botones */
+  }
+}
+
+@media (max-width: 480px) {
+  .candidato-menu {
+    flex-direction: column; /* Cambia la alineación a vertical */
+    align-items: center; /* Centra los botones en la columna */
+    gap: 10px; /* Espacio más uniforme en pantallas pequeñas */
+  }
+
+  .candidato-button {
+    width: 100%; /* Los botones ocupan el ancho completo */
+    text-align: center; /* Texto centrado */
+  }
+}
 
 
 .tab-menu {

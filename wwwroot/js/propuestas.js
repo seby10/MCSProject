@@ -1,11 +1,65 @@
 const URL = "http://localhost:4000/MCSPROJECT";
 
+// Función para obtener la lista de candidatos
+const getCandidatos = async () => {
+  const response = await $.ajax({
+    url: `${URL}/candidatos/getCandidatos`,
+    type: "GET",
+    dataType: "json",
+  });
+  console.log(response.response);
+  return response.response;
+};
+
+// Almacén de candidatos seleccionados
+const selectedCandidates = new Set();
+
+const generarBotonesCandidatos = async () => {
+  const candidatos = await getCandidatos();
+  if (!Array.isArray(candidatos) || candidatos.length === 0) {
+    console.error("La lista de candidatos no es válida o está vacía.");
+    return;
+  }
+
+  const candidatoContainer = document.querySelector(".candidato-menu");
+  if (!candidatoContainer) return;
+
+  candidatoContainer.innerHTML = ""; // Limpiar botones previos
+
+  candidatos.forEach((candidato) => {
+    const button = document.createElement("button");
+    button.classList.add("tab-button"); // Usamos la misma clase para estilo
+    button.setAttribute("data-candidato-id", candidato.ID_CAN);
+    button.textContent = `${candidato.NOM_CAN}`;
+
+    button.addEventListener("click", async () => {
+      if (selectedCandidates.has(candidato.ID_CAN)) {
+        // Si el candidato ya está seleccionado, desmarcar
+        selectedCandidates.delete(candidato.ID_CAN);
+        button.classList.remove("active");
+      } else {
+        // Si no está seleccionado, marcar
+        selectedCandidates.add(candidato.ID_CAN);
+        button.classList.add("active");
+      }
+
+      // Actualizar las propuestas mostradas
+      await updateDisplayedPropuestas();
+      actualizarEncabezado();
+    });
+
+    candidatoContainer.appendChild(button);
+  });
+};
+
+
 // Función para obtener las propuestas de una categoría
-const getPropuestaByGrupDir = async (grup) => {
+const getPropuestaByGrupDir = async (grup, candidatoId = null) => {
   try {
     const response = await $.ajax({
       url: `${URL}/propuestas/getPropuestas/${grup}`,
       type: "GET",
+      data: { idCandidato: candidatoId }, // Se pasa el idCandidato como parámetro de la query
       dataType: "json",
     });
     return response;
@@ -13,6 +67,7 @@ const getPropuestaByGrupDir = async (grup) => {
     console.error("Error al obtener las propuestas:", error);
   }
 };
+
 
 // Función para obtener las categorías disponibles
 const getCategorias = async () => {
@@ -105,17 +160,21 @@ const generarBotones = async () => {
   });
 };
 
-// Función para actualizar el encabezado general
 function actualizarEncabezado() {
   const encabezado = document.querySelector("#encabezado h2");
+
   if (selectedGroups.size === 0) {
     encabezado.textContent = "Selecciona una o más categorías para ver las propuestas";
   } else {
-    encabezado.textContent = `Mostrando propuestas para: ${Array.from(selectedGroups)
+    const candidatosSeleccionados = Array.from(selectedCandidates).join(", ");
+    const categoriasSeleccionadas = Array.from(selectedGroups)
       .map((group) => group.charAt(0).toUpperCase() + group.slice(1).toLowerCase())
-      .join(", ")}`;
+      .join(", ");
+
+    encabezado.textContent = `Mostrando propuestas de ${candidatosSeleccionados || "todos los candidatos"} para: ${categoriasSeleccionadas}`;
   }
 }
+
 
 // Función para mostrar las propuestas de las categorías seleccionadas
 const displayPropuestas = (propuestas, group) => {
@@ -131,11 +190,8 @@ const displayPropuestas = (propuestas, group) => {
   const propuestasContainer = section.querySelector(".propuestas");
   propuestasContainer.innerHTML = "";
 
-  let contador = 1;
-  
-
   // Añadir las propuestas correspondientes
-  propuestas.forEach((propuesta) => {
+  propuestas.forEach((propuesta, index) => {
     const propuestaHTML = `
       <section class="about_section layout_padding">
         <div class="container">
@@ -143,14 +199,14 @@ const displayPropuestas = (propuestas, group) => {
             <div class="col-md-6 px-0">
               <div class="img_container">
                 <div class="img-box">
-                  <img src="images/${propuesta.GRUP_DIR_PRO}${contador}.jpg" alt="Propuesta ${contador}" />
+                  <img src="${propuesta.URL_IMAGEN || "images/estudiante1.jpg"}" alt="Propuesta ${index + 1}" />
                 </div>
               </div>
             </div>
             <div class="col-md-6 px-0">
               <div class="detail-box">
                 <div class="heading_container">
-                  <h2>Propuesta ${contador}</h2>
+                  <h2>Propuesta</h2>
                   <div class="propuesta">
                     <p><strong>Nombre:</strong> ${propuesta.NOM_PRO || "No disponible"}</p>
                     <p><strong>Información:</strong> ${propuesta.INF_PRO || "No disponible"}</p>
@@ -163,7 +219,6 @@ const displayPropuestas = (propuestas, group) => {
       </section>
     `;
     propuestasContainer.innerHTML += propuestaHTML;
-    contador++;
   });
 
   // Mostrar la sección
@@ -171,12 +226,25 @@ const displayPropuestas = (propuestas, group) => {
 };
 
 
-// Función para actualizar las propuestas mostradas
 async function updateDisplayedPropuestas() {
-  for (const group of selectedGroups) {
-    const propuestas = await getPropuestaByGrupDir(group);
-    if (propuestas) {
-      displayPropuestas(propuestas, group);
+  if (selectedCandidates.size > 0) {
+    // Si hay candidatos seleccionados, mostrar propuestas de esos candidatos
+    for (const group of selectedGroups) {
+      let allPropuestas = [];
+
+      for (const candidatoId of selectedCandidates) {
+        const propuestas = await getPropuestaByGrupDir(group, candidatoId);
+        if (propuestas) allPropuestas = allPropuestas.concat(propuestas);
+      }
+
+      // Mostrar todas las propuestas para el grupo
+      displayPropuestas(allPropuestas, group);
+    }
+  } else {
+    // Si no hay candidatos seleccionados, mostrar propuestas de todos los candidatos
+    for (const group of selectedGroups) {
+      const propuestas = await getPropuestaByGrupDir(group, null); // Pasar null para incluir todos los candidatos
+      if (propuestas) displayPropuestas(propuestas, group);
     }
   }
 
@@ -189,9 +257,12 @@ async function updateDisplayedPropuestas() {
     }
   });
 }
-// Iniciar generando los botones
+
+
+
 (async () => {
-  await generarSecciones(); // Crear las secciones dinámicas según las categorías
-  await generarBotones();   // Crear los botones dinámicos
+  await generarSecciones();
+  await generarBotones(); 
+  await generarBotonesCandidatos();  
 })();
 

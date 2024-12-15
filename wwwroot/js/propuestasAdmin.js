@@ -33,13 +33,23 @@ function confirmDeletePropuesta(propuestaId) {
   );
 }
 
-async function addPropuesta(propuesta) {
+async function addPropuesta(propuesta, imageFile) {
   try {
+    const formData = new FormData();
+    formData.append("NOM_PRO", propuesta.NOM_PRO);
+    formData.append("GRUP_DIR_PRO", propuesta.GRUP_DIR_PRO);
+    formData.append("INF_PRO", propuesta.INF_PRO);
+    formData.append("ID_CANT_PRO", propuesta.ID_CANT_PRO);
+    if (imageFile) {
+      formData.append("image", imageFile); // Añadir el archivo al FormData solo si existe
+    }
+
     const response = await $.ajax({
       url: `${URL}/propuestas/insertPropuesta`,
       type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(propuesta),
+      data: formData,
+      processData: false, // Evitar que jQuery convierta los datos
+      contentType: false, // Dejar que el navegador gestione el tipo de contenido
     });
 
     if (response.message == "Propuesta creada con éxito") {
@@ -54,19 +64,18 @@ async function addPropuesta(propuesta) {
   }
 }
 
-// Escuchar el clic del botón 'Add New Role'
 document
   .getElementById("addRoleForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    
 
     const name = document.getElementById("roleName").value.trim();
     const group = document.getElementById("roleGroup").value.trim();
     const description = document.getElementById("rDescription").value.trim();
     const candidateId = document.getElementById("rCandidateSelect").value;
-    
+    const imageFile = document.getElementById("addUrlImagen").files[0]; // Obtener el archivo de imagen
 
+    // Validación de campos
     if (!name || !group || !description || !candidateId) {
       showErrorAlert("Todos los campos son obligatorios");
       return;
@@ -79,24 +88,37 @@ document
       ID_CANT_PRO: candidateId, // Incluye el ID del candidato seleccionado
     };
 
-    addPropuesta(propuesta);
+    // Llamar a la función para agregar la propuesta, pasando también el archivo
+    addPropuesta(propuesta, imageFile);
     $("#addRoleModal").modal("hide");
   });
 
-async function updatePropuesta(propuesta) {
+async function updatePropuesta(propuesta, imageFile) {
   try {
-    const response = await $.ajax({
-      url: `${URL}/propuestas/updatePropuesta`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(propuesta),
-    });
+    const formData = new FormData();
+    formData.append("ID_PRO", propuesta.ID_PRO); // Agregar ID de la propuesta
+    formData.append("NOM_PRO", propuesta.NOM_PRO);
+    formData.append("GRUP_DIR_PRO", propuesta.GRUP_DIR_PRO);
+    formData.append("INF_PRO", propuesta.INF_PRO);
+    formData.append("ID_CANT_PRO", propuesta.ID_CANT_PRO);
+    formData.append("ESTADO", propuesta.ESTADO); // Asegúrate de incluir estado
 
-    console.log(response);
+    // Si se ha cargado una nueva imagen, añadirla al FormData
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    const response = await $.ajax({
+      url: `${URL}/propuestas/updatePropuesta`, // Endpoint para actualizar
+      type: "PUT", // O PATCH dependiendo de la implementación del backend
+      data: formData,
+      processData: false,
+      contentType: false,
+    });
 
     if (response.message === "Propuesta actualizada con éxito") {
       showSuccessAlert("Propuesta actualizada exitosamente");
-      loadPropuestas();
+      loadPropuestas(); // Recargar las propuestas
     } else {
       showErrorAlert("Error al actualizar la propuesta");
     }
@@ -111,49 +133,38 @@ document.getElementById("saveChanges").addEventListener("click", function () {
   const name = document.getElementById("editRoleName").value.trim();
   const group = document.getElementById("editRoleGroup").value.trim();
   const description = document.getElementById("editDescription").value.trim();
-  const estado = document.getElementById("editEstado").checked;
-  const urlImagen = document.getElementById("editUrlImagen").value.trim();
-  const candidateId = document.getElementById("candidateSelect").value; // Obtiene el ID del candidato seleccionado
+  const estado = document.getElementById("editEstado").checked ? 1 : 0;
+  const candidateId = document.getElementById("candidateSelect").value;
+  const file = document.getElementById("editUrlImagen").files[0]; // Obtener archivo de imagen
 
-  // Validación: Asegurarse de que todos los campos requeridos estén completos
+  // Validación de campos
   if (!id || !name || !group || !description || !candidateId) {
     showErrorAlert("Todos los campos son obligatorios");
     return;
   }
 
-  // Crear el objeto 'propuesta' con los datos actualizados
   const propuesta = {
     ID_PRO: id,
     NOM_PRO: name,
     GRUP_DIR_PRO: group,
     INF_PRO: description,
     ESTADO: estado,
-    URL_IMAGEN: urlImagen,
-    ID_CANT_PRO: candidateId, // Incluye el ID del candidato seleccionado
+    ID_CANT_PRO: candidateId,
   };
 
-  // Llamar a la función de actualización
-  updatePropuesta(propuesta);
-
-  // Cerrar el modal de edición
-  $("#editModal").modal("hide");
-  document
-    .querySelector(".btn-secondary")
-    .addEventListener("click", function () {
-      $("#editModal").modal("hide");
-    });
+  // Llamar a la función para actualizar la propuesta
+  updatePropuesta(propuesta, file);
+  $("#editModal").modal("hide"); // Cerrar el modal
 });
 
 async function loadCandidates() {
   try {
     // Realizamos la solicitud AJAX para obtener los candidatos
     const response = await $.ajax({
-      url: `${URL}/candidatos/getCandidatos`,  // Endpoint para obtener los candidatos
+      url: `${URL}/candidatos/getCandidatos`, // Endpoint para obtener los candidatos
       type: "GET",
       dataType: "json",
     });
-
-    console.log("Candidatos cargados:", response); // Depuración
 
     // Verificamos si la respuesta contiene un campo 'response' que es un arreglo
     if (response.response && Array.isArray(response.response)) {
@@ -163,15 +174,17 @@ async function loadCandidates() {
           (candidate) =>
             `<option value="${candidate.ID_CAN}">${candidate.NOM_CAN} ${candidate.APE_CAN}</option>`
         )
-        .join("");  // Unimos las opciones con un salto de línea entre ellas
+        .join(""); // Unimos las opciones con un salto de línea entre ellas
 
       // Insertamos las opciones dentro del select
       const candidateSelect = document.getElementById("candidateSelect");
       candidateSelect.innerHTML = options;
-      
     } else {
       // Si no se encuentra el campo 'response' o no es un arreglo, mostramos un error
-      console.error("Error: La estructura de la respuesta no contiene un arreglo de candidatos", response);
+      console.error(
+        "Error: La estructura de la respuesta no contiene un arreglo de candidatos",
+        response
+      );
       showErrorAlert("No se pudieron cargar los candidatos");
     }
   } catch (error) {
@@ -184,7 +197,7 @@ async function loadCandidatesPropuestas() {
   try {
     // Realizamos la solicitud AJAX para obtener los candidatos
     const response = await $.ajax({
-      url: `${URL}/candidatos/getCandidatos`,  // Endpoint para obtener los candidatos
+      url: `${URL}/candidatos/getCandidatos`, // Endpoint para obtener los candidatos
       type: "GET",
       dataType: "json",
     });
@@ -197,15 +210,17 @@ async function loadCandidatesPropuestas() {
           (candidate) =>
             `<option value="${candidate.ID_CAN}">${candidate.NOM_CAN} ${candidate.APE_CAN}</option>`
         )
-        .join("");  // Unimos las opciones con un salto de línea entre ellas
+        .join(""); // Unimos las opciones con un salto de línea entre ellas
 
       // Insertamos las opciones dentro del select
       const candidateSelect = document.getElementById("rCandidateSelect");
       candidateSelect.innerHTML = options;
-      
     } else {
       // Si no se encuentra el campo 'response' o no es un arreglo, mostramos un error
-      console.error("Error: La estructura de la respuesta no contiene un arreglo de candidatos", response);
+      console.error(
+        "Error: La estructura de la respuesta no contiene un arreglo de candidatos",
+        response
+      );
       showErrorAlert("No se pudieron cargar los candidatos");
     }
   } catch (error) {
@@ -221,7 +236,6 @@ async function showPropuestas() {
     type: "GET",
     dataType: "json",
   });
-  console.log(response);
   return response;
 }
 
@@ -313,7 +327,6 @@ function cargarUsuario() {
 function cargarMenus() {
   const usuario = JSON.parse(sessionStorage.getItem("user"));
   const menus = [];
-  console.log(usuario);
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
@@ -332,8 +345,6 @@ function cargarMenus() {
       );
     }
   }
-
-  console.log(menus);
 
   if (menus.length > 0) {
     const menuContainer = document.getElementById("dynamicMenuContainer");
@@ -361,7 +372,6 @@ function cargarMenus() {
 async function loadPropuestas() {
   try {
     const datos = await showPropuestas(); // Cambia esta función para obtener datos desde tu backend
-    console.log(datos);
     let tableBody = document.getElementById("tbody");
     let rows = "";
 
@@ -377,7 +387,9 @@ async function loadPropuestas() {
       let group = `<td>${propuesta.GRUP_DIR_PRO}</td>`;
       let info = `<td>${infoText}</td>`;
       let estado = `<td>${propuesta.ESTADO ? "Activo" : "Inactivo"}</td>`;
-      let urlImagen = `<td><a href="${propuesta.URL_IMAGEN}" target="_blank">Ver Imagen</a></td>`;
+      let imagenDisplay = propuesta.URL_IMAGEN
+        ? `<td><img src="${propuesta.URL_IMAGEN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
+        : `<td>Sin imagen</td>`;
 
       let actionButtons = `
         <td>
@@ -390,7 +402,7 @@ async function loadPropuestas() {
         </td>`;
 
       rows += `<tr>${
-        id + name + group + info + estado + urlImagen + actionButtons
+        id + name + group + info + estado + imagenDisplay + actionButtons
       }</tr>`;
     }
 
@@ -414,10 +426,13 @@ async function loadPropuestas() {
         document.getElementById("editRoleName").value = propuesta.NOM_PRO;
         document.getElementById("editRoleGroup").value = propuesta.GRUP_DIR_PRO;
         document.getElementById("editDescription").value = propuesta.INF_PRO;
+        const estadoCheckbox = document.getElementById("editEstado");
+        estadoCheckbox.checked = propuesta.ESTADO === 1;
 
         // Cargar candidatos y seleccionar el actual
         await loadCandidates(); // Asegúrate de que esta función se ejecute
-        document.getElementById("candidateSelect").value = propuesta.ID_CANT_PRO;
+        document.getElementById("candidateSelect").value =
+          propuesta.ID_CANT_PRO;
 
         $("#editModal").modal("show");
       });
