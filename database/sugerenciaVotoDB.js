@@ -16,6 +16,21 @@ export const getSugerenciasDB = async () => {
     throw new Error("Error al obtener las sugerencias: " + error.message);
   }
 };
+export const getVotosDB = async () => {
+  try {
+    const connection = await getConnection();
+    const [result] = await connection.query("CALL sp_GetVotos()");
+    console.log(result[0]);
+    if (result.length === 0 || result[0].length === 0) {
+      return [];
+    }
+
+    return result[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error al obtener los votos: " + error.message);
+  }
+};
 
 export const updateSugerenciaEstadoDB = async ({ id, estado }) => {
   try {

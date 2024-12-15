@@ -3,6 +3,7 @@ import {
   insertVotosDB,
   getSugerenciasDB,
   updateSugerenciaEstadoDB,
+  getVotosDB
 } from "../database/sugerenciaVotoDB.js";
 import { sendMail } from "../helpers/mailer.js";
 
@@ -69,5 +70,16 @@ export const addVotos = async (req, res) => {
   } catch (error) {
     console.error("Error adding voto:", error);
     res.status(500).json({ message: "Error adding voto", error });
+  }
+};
+
+export const getVotos = async (req, res) => {
+  try {
+    const result = await getVotosDB();
+    const response = result;
+    res.json({ message: "Menus Selected!", response });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error de cargar los votos", error });
   }
 };

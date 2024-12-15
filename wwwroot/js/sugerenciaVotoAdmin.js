@@ -2,7 +2,111 @@ const URL = "http://localhost:4000/MCSPROJECT";
 document.addEventListener("DOMContentLoaded", function () {
   cargarUsuario();
   cargarMenus();
+  loadVotos();
 });
+
+async function showVotos() {
+  try {
+    const response = await $.ajax({
+      url: `${URL}/sugerenciaVoto/getVotos`,
+      type: "GET",
+      dataType: "json",
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching votes:", error);
+    return null;
+  }
+}
+
+async function loadVotos() {
+  try {
+    const datos = await showVotos();
+
+    let tableBody = document.getElementById("tbodyvot");
+    let rows = "";
+
+    const votosPorCandidato = {};
+    let totalVotos = 0;
+
+    for (const voto of datos.response) {
+      let fecha = new Date(voto.FEC_VOT);
+      let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
+      let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
+
+      let id = `<td>${voto.ID_VOT}</td>`;
+      let fechaTd = `<td>${fechaFormateada}</td>`;
+      let candidatoCompleto = `${voto.NOM_CAN} ${voto.APE_CAN}`;
+      let candidato = `<td>${candidatoCompleto}</td>`;
+
+      if (votosPorCandidato[candidatoCompleto]) {
+        votosPorCandidato[candidatoCompleto]++;
+      } else {
+        votosPorCandidato[candidatoCompleto] = 1;
+      }
+      totalVotos++; 
+
+      rows += `<tr>${id + fechaTd + candidato}</tr>`;
+    }
+    tableBody.innerHTML = rows;
+    // console.log("Votos por Candidato: ", votosPorCandidato);
+    const porcentajesPorCandidato = {};
+    for (const candidato in votosPorCandidato) {
+      porcentajesPorCandidato[candidato] = ((votosPorCandidato[candidato] / totalVotos) * 100).toFixed(2);
+    }
+    // console.log("Porcentajes por Candidato: ", porcentajesPorCandidato);
+    createChart(porcentajesPorCandidato);
+  } catch (error) {
+    console.error("Error al cargar votos:", error);
+  }
+}
+
+
+function createChart(porcentajesPorCandidato) {
+  const ctx = document.getElementById('grafica');
+  if (!ctx) {
+    console.error("No se encontró el canvas con id 'grafica'.");
+    return;
+  }
+
+    console.log(porcentajesPorCandidato);
+
+    const $grafica = document.querySelector("#grafica");
+    const etiquetas = Object.keys(porcentajesPorCandidato); 
+    const porcentajes = Object.values(porcentajesPorCandidato);
+    
+
+    const colores = [
+      'rgba(242, 99, 255, 0.2)',
+      'rgba(150, 103, 198, 0.2)',
+      'rgba(255, 206, 86, 0.2)'
+    ];
+    const votos = {
+      label: "Votos por candidatos ",
+      data: porcentajes,
+      backgroundColor: colores.slice(0, porcentajes.length),
+      borderColor: colores.map(color => color.replace('0.2', '1')),
+      borderWidth: 1,
+    };
+    new Chart($grafica, {
+        type: 'bar',
+        data: {
+            labels: etiquetas,
+            datasets: [
+              votos,
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            },
+        }
+    });
+}
 
 
 async function showSugerencias() {
@@ -12,7 +116,6 @@ async function showSugerencias() {
       type: "GET",
       dataType: "json",
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error fetching suggestions:", error);
@@ -78,7 +181,6 @@ function cargarUsuario() {
 function cargarMenus() {
   const usuario = JSON.parse(sessionStorage.getItem("user"));
   const menus = [];
-  console.log(usuario);
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
@@ -98,7 +200,6 @@ function cargarMenus() {
     }
   }
 
-  console.log(menus);
 
   if (menus.length > 0) {
     const menuContainer = document.getElementById("dynamicMenuContainer");
@@ -139,7 +240,6 @@ document.getElementById("logoutButton").addEventListener("click", function () {
 async function loadSugerencias() {
   try {
     const datos = await showSugerencias();
-    console.log(datos);
     let tableBody = document.getElementById("tbodysug");
     let rows = "";
 

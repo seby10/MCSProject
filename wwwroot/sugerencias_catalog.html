@@ -9,9 +9,14 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>SB Admin 2 - Tables</title>
-
+    <link
+      href="css/style.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- Custom fonts for this template -->
     <link
       href="vendor/fontawesome-free/css/all.min.css"
@@ -399,18 +404,8 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Sugerencias/Votos</h1>
+            <h1 class="h3 mb-2 text-gray-800">Sugerencias</h1>
 
-            <div class="mb-3">
-              <button
-                class="btn btn-success"
-                id="addMenuBtn"
-                data-toggle="modal"
-                data-target="#addUserModal"
-              >
-                <i class="fas fa-user-plus"></i> Add New Menu
-              </button>
-            </div>
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3"></div>
@@ -444,6 +439,42 @@
                     <tbody id="tbodysug"></tbody>
                   </table>
                 </div>
+              </div>
+            </div>
+            <h1 class="h3 mb-2 text-gray-800">Votos</h1>
+            <div class="card shadow mb-4">
+              <div class="card-header py-3"></div>
+
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Candidato</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Candidato</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id="tbodyvot"></tbody>
+                  </table>
+                  <div id="grafica-wrapper">
+                    <h1>Gráfica de Votos Por Candidato</h1>
+                    <div id="grafica-container">
+                      <canvas id="grafica" ></canvas>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -627,7 +658,8 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
+    <script src="vendor/chart.js/Chart.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
