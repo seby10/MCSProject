@@ -1,4 +1,4 @@
-const URL = "http://localhost:4000/MCSPROJECT";
+
 
 const getPropuestaByGrupDir = async (grup) => {
   try {
