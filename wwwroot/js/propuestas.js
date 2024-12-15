@@ -1,7 +1,7 @@
 
 
 // Función para obtener la lista de candidatos
-const getCandidatos = async () => {
+const getCandidatosPropuestas = async () => {
   const response = await $.ajax({
     url: `${URL}/candidatos/getCandidatos`,
     type: "GET",
@@ -15,7 +15,7 @@ const getCandidatos = async () => {
 const selectedCandidates = new Set();
 
 const generarBotonesCandidatos = async () => {
-  const candidatos = await getCandidatos();
+  const candidatos = await getCandidatosPropuestas();
   if (!Array.isArray(candidatos) || candidatos.length === 0) {
     console.error("La lista de candidatos no es válida o está vacía.");
     return;
