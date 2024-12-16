@@ -263,7 +263,13 @@ async function loadSugerencias() {
       let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
       let fnac = `<td>${fechaFormateada}</td>`;
       let id = `<td>${sugerencia.ID_SUG}</td>`;
-      let desc = `<td>${sugerencia.DES_SUG}</td>`;
+      let desc = `
+      <td>
+        <div style="max-height: 100px; overflow-y: auto;">
+          ${sugerencia.DES_SUG}
+        </div>
+      </td>`;
+    
       let est = `
         <td>
           <select class="form-control" id="estado-${sugerencia.ID_SUG}" ${sugerencia.EST_SUG === 'REVISADO' ? 'disabled' : ''}>
