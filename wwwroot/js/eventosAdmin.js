@@ -241,9 +241,8 @@ async function loadNoticias() {
     let rows = "";
 
     for (const noticia of datos.response) {
-      let fechaFormateada = new Date(noticia.FEC_EVE_NOT).toLocaleString(
-        "es-ES"
-      );
+      //let fechaFormateada = new Date(noticia.FEC_EVE_NOT).toISOString().slice(0, 16).replace("T", " ");
+      let fechaFormateada = formatDateTime(noticia.FEC_EVE_NOT);
 
       let maxLength = 100;
       let infoText =
@@ -258,7 +257,7 @@ async function loadNoticias() {
       let ubicacion = `<td>${noticia.UBI_EVE_NOT}</td>`;
 
       let imagenDisplay = noticia.IMG_EVE_NOT
-        ? `<td><img src="${noticia.IMG_EVE_NOT}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
+        ? `<td><img src="/images/noticias/${noticia.IMG_EVE_NOT}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
         : `<td>Sin imagen</td>`;
 
       let activo = `
@@ -318,14 +317,33 @@ async function loadNoticias() {
       button.addEventListener("click", async function () {
         const noticiaID = this.getAttribute("data-id");
         const noticia = datos.response.find((u) => u.ID_EVE_NOT == noticiaID);
+
+        // Limpiar campos del modal
+        document.getElementById("editNewsId").value = "";
+        document.getElementById("editNewsTitle").value = "";
+        document.getElementById("editNewsDate").value = "";
+        document.getElementById("editNewsContent").value = "";
+        document.getElementById("editNewsLocation").value = "";
+        document.getElementById("editNewsImage").value = ""; // Limpia el input file
+        const currentImageNameElement =
+          document.getElementById("currentImageName");
+        currentImageNameElement.textContent = ""; // Limpia el texto del nombre de la imagen
+
+        // Asignar nuevos valores
         document.getElementById("editNewsId").value = noticia.ID_EVE_NOT;
         document.getElementById("editNewsTitle").value = noticia.NOM_EVE_NOT;
-        let fechaFormated = new Date(noticia.FEC_EVE_NOT)
-          .toISOString()
-          .slice(0, 16);
+        const fechaFormated = formatDateTime(noticia.FEC_EVE_NOT);
         document.getElementById("editNewsDate").value = fechaFormated;
         document.getElementById("editNewsContent").value = noticia.INF_EVE_NOT;
         document.getElementById("editNewsLocation").value = noticia.UBI_EVE_NOT;
+
+        if (noticia.IMG_EVE_NOT) {
+          currentImageNameElement.textContent = `Imagen actual: ${noticia.IMG_EVE_NOT}`;
+        } else {
+          currentImageNameElement.textContent = "No hay imagen asociada.";
+        }
+
+        // Mostrar el modal
         $("#editModal").modal("show");
       });
     });
@@ -342,7 +360,7 @@ async function handleSaveChanges() {
   const updatedNoticia = {
     id: document.getElementById("editNewsId").value,
     nombre: document.getElementById("editNewsTitle").value,
-    fecha: formatDate(document.getElementById("editNewsDate").value),
+    fecha: formatDateTime(document.getElementById("editNewsDate").value),
     informacion: document.getElementById("editNewsContent").value,
     ubicacion: document.getElementById("editNewsLocation").value,
     //activo: document.getElementById("newsActiveStatus").checked ? 1 : 0,
@@ -366,7 +384,7 @@ async function handleSaveChanges() {
   }
 }
 
-function formatDate(dateString) {
+function formatDateTime(dateString) {
   const d = new Date(dateString);
 
   if (isNaN(d.getTime())) {
@@ -374,17 +392,14 @@ function formatDate(dateString) {
     return null;
   }
 
-  // Obtener la hora y minutos del input
-  const inputTime = dateString.split("T")[1] || "00:00";
-  const [hours, minutes] = inputTime.split(":");
-
   const year = d.getFullYear();
   const month = (d.getMonth() + 1).toString().padStart(2, "0");
   const day = d.getDate().toString().padStart(2, "0");
-  const formattedHours = hours.padStart(2, "0");
-  const formattedMinutes = minutes.padStart(2, "0");
+  const hours = d.getHours().toString().padStart(2, "0");
+  const minutes = d.getMinutes().toString().padStart(2, "0");
+  const seconds = d.getSeconds().toString().padStart(2, "0");
 
-  return `${year}-${month}-${day} ${formattedHours}:${formattedMinutes}:00`;
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 document.getElementById("addNoticiaBtn").addEventListener("click", async () => {
@@ -398,7 +413,7 @@ document
 
     const Noticia = {
       nombre: document.getElementById("nombre").value,
-      fecha: formatDate(document.getElementById("fecha").value),
+      fecha: formatDateTime(document.getElementById("fecha").value),
       informacion: document.getElementById("informacion").value,
       ubicacion: document.getElementById("ubicacion").value,
       //activo: document.getElementById("activeStatus").checked ? 1 : 0,
@@ -426,13 +441,10 @@ document
   });
 
 document.getElementById("logoutButton").addEventListener("click", function () {
-  showConfirmationQuestion(
-    "Seguro que quiere salir?",
-    function (confirmed) {
-      if (confirmed) {
-        sessionStorage.removeItem("user");
-        window.location.href = "login";
-      }
+  showConfirmationQuestion("Seguro que quiere salir?", function (confirmed) {
+    if (confirmed) {
+      sessionStorage.removeItem("user");
+      window.location.href = "login";
     }
-  );
+  });
 });

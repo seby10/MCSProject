@@ -46,7 +46,7 @@ const updateSlider = () => {
       <div class="slider-event-card">
         ${evento.IMG_EVE_NOT ? `
           <div class="slider-event-image">
-            <img src="${evento.IMG_EVE_NOT}" alt="${evento.NOM_EVE_NOT}" onerror="this.style.display='none';">
+            <img src="/images/noticias/${evento.IMG_EVE_NOT}" alt="${evento.NOM_EVE_NOT}" onerror="this.style.display='none';">
           </div>
         ` : ''}
         <h3>${evento.NOM_EVE_NOT}</h3>
