@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     // Generar un nombre de archivo único
-    cb(null, `noticia-${Date.now()}${path.extname(file.originalname)}`);
+    cb(null, `candidatos-${Date.now()}${path.extname(file.originalname)}`);
   }
 });
 
