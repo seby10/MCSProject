@@ -49,6 +49,7 @@ Este proyecto es una plataforma web diseñada para gestionar y visualizar inform
   - Haz clic en un candidato para ver sus propuestas detalladas.
   - Revisa los eventos disponibles relacionados con los candidatos.
   - Utiliza la ventana de sugerencias para enviar tu opinión o participar en una votación.
+
 **Administradores**:
   - Accede al panel de administración con tus credenciales.
   - Edita la información de candidatos, propuestas y eventos desde las secciones correspondientes.
