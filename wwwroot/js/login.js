@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.location.replace("/candidatos_catalog");
       } else {
-        showErrorAlert("Invalid credentials");
+        showErrorAlert("Credenciales invalidas");
       }
     });
   });
@@ -63,11 +63,11 @@ const loginUser = async (name, password) => {
 
 function validateFields(name, password) {
   if (name === "") {
-    showErrorAlert("Name is required");
+    showErrorAlert("El usuario es requerido");
     return false;
   }
   if (password === "") {
-    showErrorAlert("Password is required");
+    showErrorAlert("La contraseña es requerida");
     return false;
   }
   return true;

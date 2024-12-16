@@ -89,22 +89,35 @@ function createChart(porcentajesPorCandidato) {
       borderWidth: 1,
     };
     new Chart($grafica, {
-        type: 'bar',
-        data: {
-            labels: etiquetas,
-            datasets: [
-              votos,
-            ]
+      type: 'bar',
+      data: {
+        labels: etiquetas,
+        datasets: [votos],
+      },
+      options: {
+        legend: {
+          display: false, 
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }],
-            },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              max: 100, 
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }],
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              const value = tooltipItem.yLabel;
+              return value + '%';
+            }
+          }
         }
+      }
     });
 }
 
@@ -227,7 +240,7 @@ function cargarMenus() {
 
 document.getElementById("logoutButton").addEventListener("click", function () {
   showConfirmationQuestion(
-    "Are you sure you want to logout?",
+    "Seguro que quiere salir?",
     function (confirmed) {
       if (confirmed) {
         sessionStorage.removeItem("user");

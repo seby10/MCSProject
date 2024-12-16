@@ -98,7 +98,7 @@ function cargarMenus() {
 
 document.getElementById("logoutButton").addEventListener("click", function () {
   showConfirmationQuestion(
-    "Are you sure you want to logout?",
+    "Seguro que quiere salir?",
     function (confirmed) {
       if (confirmed) {
         sessionStorage.removeItem("user");
