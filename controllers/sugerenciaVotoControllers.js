@@ -45,7 +45,7 @@ Nuestro equipo revisará tu comentario detalladamente y, en caso de ser necesari
 Apreciamos tu apoyo y compromiso con nuestro proyecto. ¡Gracias por ayudarnos a crecer!
 
 Saludos cordiales,
-Equipo 4, 
+Equipo 3, 
 
 Sugerencia: ${descripcion}.`
     );
