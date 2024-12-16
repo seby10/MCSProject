@@ -33,10 +33,10 @@ Este proyecto es una plataforma web diseñada para gestionar y visualizar inform
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   git clone https://github.com/seby10/MCSProject.git
 2. Instala las dependencias del backend:
     ```bash
-    cd tu_repositorio
+    cd MCSProject
     npm install
 3. Inicia el servidor:
     ```bash
