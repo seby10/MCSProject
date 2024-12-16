@@ -82,7 +82,7 @@ function createChart(porcentajesPorCandidato) {
       'rgba(255, 206, 86, 0.2)'
     ];
     const votos = {
-      label: "Votos por candidatos ",
+      label: "Porcentajes de votos por candidatos ",
       data: porcentajes,
       backgroundColor: colores.slice(0, porcentajes.length),
       borderColor: colores.map(color => color.replace('0.2', '1')),
