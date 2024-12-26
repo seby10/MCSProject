@@ -7,7 +7,7 @@
     <!-- Mobile Metas -->
     <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://me.kis.v2.scr.kaspersky-labs.com https://leostop.com https://ww99.leostop.com https://code.jquery.com;"> -->
 
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -101,7 +101,7 @@
                     <a class="nav-link" href="sugerencias">Sugerencias <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item active">
-                    <a class="nav-link" href="votos">Gestión</a>
+                    <a class="nav-link" href="votos">Votos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="login">Gestión</a>
@@ -127,35 +127,43 @@
         <div class="heading_container heading_center">
           <h2>Votos</h2>
         </div>
-          <div class="">
-            <div class="row">
-              <div class="col-md-9 mx-auto">
-                <form action="#">
-                  <div class="contact_form-container">
-                    <div>
-                      <div class="radio-group">
-                        <label for="opcion1" class="radio-label">
-                          <img src="images/t1.png" alt="Imagen Opción 1" class="option-image" />
-                          <input type="radio" name="voto" id="opcion1" value="Mary" />
-                        </label>
-                      
-                        <label for="opcion2" class="radio-label">
-                          <img src="images/t5.png" alt="Imagen Opción 2" class="option-image" />
-                          <input type="radio" name="voto" id="opcion2" value="Sara" />
-                        </label>
-                      
-                        <div class="btn-box">
-                          <button type="button" id="submitVoto" class="custom-btn">Enviar Voto</button>
-                        </div>                        
-                      </div>
+        <div id="votoContainer" class="">
+          <div class="row">
+            <div class="col-md-9 mx-auto">
+              <form action="#">
+                <div class="contact_form-container">
+                  <div>
+                    <div class="radio-group">
+                      <label for="opcion1" class="radio-label">
+                        <img src="images/t1.png" alt="Imagen Opción 1" class="option-image" />
+                        <input type="radio" name="voto" id="opcion1" value="Mary" />
+                      </label>
+                    
+                      <label for="opcion2" class="radio-label">
+                        <img src="images/t5.png" alt="Imagen Opción 2" class="option-image" />
+                        <input type="radio" name="voto" id="opcion2" value="Sara" />
+                      </label>
+                    
+                      <div class="btn-box">
+                        <button type="button" id="submitVoto" class="custom-btn">Enviar Voto</button>
+                      </div>                        
                     </div>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
+        </div>    
   
+      </div>
+      <div id="grafica-wrapper" class="container my-4"> 
+        <h3 class="text-center">Gráfica de Votos Por Candidato</h3> 
+        <div id="grafica-container" class="grafica-container">
+           <canvas id="grafica"></canvas>
+           </div>
+      </div>
+    </div>  
+      
         
     </section>
 
@@ -237,14 +245,13 @@
         &copy; <span id="currentYear"></span> Universidad Técnica de Ambato. Todos los derechos reservados.</a>
       </p>
     </footer>
-<!-- footer section -->
-<script src="vendor/chart.js/Chart.js"></script>
-<script src="js/jquery-3.4.1.min.js"></script>
-<!-- Eliminado el CDN de jQuery 3.6.0 -->
-<script src="js/bootstrap.js"></script>
-<script src="js/custom.js"></script>
-<script src="iziToast-master/dist/js/iziToast.min.js"></script>
-<script src="js/votos.js"></script>
+    <script src="vendor/chart.js/Chart.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Eliminado el CDN de jQuery 3.6.0 -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="iziToast-master/dist/js/iziToast.min.js"></script>
+    <script src="js/votos.js"></script>
 
   </body>
 </html>
