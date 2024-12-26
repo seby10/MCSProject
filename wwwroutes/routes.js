@@ -10,6 +10,10 @@ wwwrouter.use("/sugerencias", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "sugerencias.html"));
 });
 
+wwwrouter.use("/votos", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "votos.html"));
+});
+
 wwwrouter.use("/index", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "index.html"));
 });
