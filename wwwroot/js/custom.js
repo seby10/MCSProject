@@ -1,12 +1,12 @@
 // get current year
 (function () {
-    var year = new Date().getFullYear();
-    var currentYearElement = document.querySelector("#currentYear");
+  var year = new Date().getFullYear();
+  var currentYearElement = document.querySelector("#currentYear");
 
-    // Verificar si el elemento existe
-    if (currentYearElement) {
-        currentYearElement.innerHTML = year; // Solo se ejecuta si el elemento existe
-    }
+  // Verificar si el elemento existe
+  if (currentYearElement) {
+    currentYearElement.innerHTML = year;
+  }
 })();
 
 const URL = "http://localhost:4000/MCSPROJECT";
@@ -29,13 +29,15 @@ const getCandidatosActivos = async () => {
 };
 
 // Crear el HTML para un resumen de candidato
-const createCandidatoResumenHTML = (candidato, index) => {
+const createCandidatoResumenHTML = (candidato) => {
   return `
     <div class="col-md-4 col-sm-6 mx-auto">
       <div class="box">
         <div class="img-box">
-          <a href="informacion#informacion_candidato${index + 1}">
-            <img src="${candidato.IMG_CAN || 'images/default.png'}" alt="${candidato.NOM_CAN} ${candidato.APE_CAN}" />
+          <a href="informacion_candidatos.html">
+            <img src="${candidato.IMG_CAN || "images/default.png"}" alt="${
+            candidato.NOM_CAN
+          } ${candidato.APE_CAN}"/>
           </a>
         </div>
         <div class="detail-box">
@@ -54,8 +56,8 @@ $(document).ready(async () => {
 
     if (candidatos.length > 0) {
       const container = $("#candidatos_container");
-      candidatos.slice(0, 4).forEach((candidato, index) => {
-        const candidatoHTML = createCandidatoResumenHTML(candidato, index);
+      candidatos.slice(0, 3).forEach((candidato) => {
+        const candidatoHTML = createCandidatoResumenHTML(candidato);
         container.append(candidatoHTML);
       });
     } else {
@@ -67,4 +69,3 @@ $(document).ready(async () => {
     console.error("Error al cargar los candidatos:", error);
   }
 });
-
