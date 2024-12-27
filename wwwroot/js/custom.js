@@ -36,8 +36,8 @@ const createCandidatoResumenHTML = (candidato) => {
         <div class="img-box">
           <a href="informacion_candidatos.html">
             <img src="${candidato.IMG_CAN || "images/default.png"}" alt="${
-            candidato.NOM_CAN
-          } ${candidato.APE_CAN}"/>
+    candidato.NOM_CAN
+  } ${candidato.APE_CAN}"/>
           </a>
         </div>
         <div class="detail-box">

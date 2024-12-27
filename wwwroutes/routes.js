@@ -58,4 +58,8 @@ wwwrouter.use("/sugerencias_catalog", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "sugerencias_catalog.html"));
 });
 
+wwwrouter.use("/personalizacion", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "personalizar_catalog.html"));
+});
+
 export default wwwrouter;

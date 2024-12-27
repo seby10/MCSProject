@@ -1,3 +1,6 @@
+:root {
+  --color-principal: #e62081;
+}
 @import url("font-awesome.min.css");
 body {
   font-family: "Poppins", sans-serif;
@@ -145,7 +148,7 @@ input[type="radio"] {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   border-radius: 10px;
   position: absolute;
   bottom: 0;
@@ -235,10 +238,9 @@ input[type="radio"] {
 
 .btn-box {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   width: 100%;
 }
-
 
 
 .option-image {
@@ -451,7 +453,7 @@ input[type="radio"] {
   content: "";
     width: 40px;
     height: 7px;
-    background-color: #e62081;
+    background-color: var(--color-principal);
     border-radius: 10px;
     position: absolute;
     bottom: -10px; 
@@ -492,7 +494,7 @@ input[type="radio"] {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #e62081;
+  border-top: 10px solid var(--color-principal);
   position: absolute;
   bottom: -10px; 
   left: 50%;
@@ -510,7 +512,7 @@ input[type="radio"] {
 }
 
 .candidato-button.active {
-  background-color: #e62081; /* Fondo rojo cuando está activo */
+  background-color: var(--color-principal); /* Fondo rojo cuando está activo */
   color: #ffffff; /* Texto blanco cuando está activo */
   border: none; /* Eliminado el borde negro cuando está activo */
   outline: none;
@@ -575,7 +577,7 @@ input[type="radio"] {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #e62081;
+  border-top: 10px solid var(--color-principal);
   position: absolute;
   bottom: -10px; 
   left: 50%;
@@ -593,7 +595,7 @@ input[type="radio"] {
 }
 
 .tab-button.active {
-  background-color: #e62081; 
+  background-color: var(--color-principal); 
   color: #ffffff; 
   border: none; 
   outline: none;
@@ -674,7 +676,7 @@ input[type="radio"] {
 
 .header_top .contact_link-container a i {
   font-size: 20px;
-  color: #e62081;
+  color: var(--color-principal);
   margin-right: 5px;
 }
 
@@ -843,7 +845,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #e62081;
+  color: var(--color-principal);
 }
 
 .slider_section .detail-box p {
@@ -882,7 +884,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn-2 {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -891,8 +893,8 @@ a:focus {
 
 .slider_section .detail-box .btn-box .btn-2:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .slider_section .img-box {
@@ -922,7 +924,7 @@ a:focus {
   height: 20px;
   border-radius: 100%;
   text-align: center;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   opacity: 1;
   border: none;
   margin: 0 4px;
@@ -958,7 +960,7 @@ a:focus {
 .about_section .detail-box a {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -968,8 +970,8 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .service_section {
@@ -1009,7 +1011,7 @@ a:focus {
 .service_section .box .detail-box a {
   display: inline-block;
   padding: 8px 35px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1019,8 +1021,8 @@ a:focus {
 
 .service_section .box .detail-box a:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .client_section {
@@ -1105,7 +1107,7 @@ a:focus {
 
 .client_section .carousel-control-prev:hover,
 .client_section .carousel-control-next:hover {
-  background-color: #e62081;
+  background-color: var(--color-principal);
 }
 
 .client_section .carousel-control-prev {
@@ -1207,7 +1209,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1223,8 +1225,8 @@ a:focus {
 
 .contact_section .contact_form-container button:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 @media (max-width: 768px) {
@@ -1337,7 +1339,7 @@ a:focus {
 .team_section .btn-box a {
   display: inline-block;
   padding: 10px 45px;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1346,8 +1348,8 @@ a:focus {
 
 .team_section .btn-box a:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .info_section {
@@ -1436,7 +1438,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: #e62081;
+  background: var(--color-principal);
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;
