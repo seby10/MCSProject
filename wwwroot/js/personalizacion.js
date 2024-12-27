@@ -229,6 +229,10 @@ document.getElementById("saveButton").addEventListener("click", function () {
           title: "Éxito",
           message: "Datos guardados correctamente.",
         });
+
+        setTimeout(function () {
+          location.reload(); 
+        }, 2000); 
       } else {
         iziToast.error({
           title: "Error",
@@ -246,6 +250,48 @@ document.getElementById("saveButton").addEventListener("click", function () {
         message: "No se pudo enviar la solicitud al servidor.",
       });
       console.error("Error AJAX:", error);
+    },
+  });
+});
+
+$(document).ready(function () {
+  $.ajax({
+    url: direccion,
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      if (data.success) {
+        // Precargar los valores de personalización
+
+        const colorPrincipal = data.response[0].color_principal;
+
+        const title1Element = document.getElementById("Title1");
+        const title2Element = document.getElementById("Title2");
+        const title3Element = document.getElementById("Title3");
+
+        if (colorPrincipal) {
+          document.getElementById("colorInput").value = colorPrincipal;
+          document.getElementById("colorPreview").style.backgroundColor = colorPrincipal;
+        }
+
+        if (title1Element) {
+          title1Element.value = data.response[0].titulo1 || title1Element.value;
+        }
+
+        if (title2Element) {
+          title2Element.value = data.response[0].titulo2 || title2Element.value;
+        }
+
+        if (title3Element) {
+          title3Element.value = data.response[0].titulo3 || title3Element.value;
+        }
+      } else {
+        console.error("No se pudo obtener los datos de personalización.");
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
     },
   });
 });

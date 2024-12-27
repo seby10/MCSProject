@@ -1,5 +1,5 @@
 :root {
-  --color-principal: #e62081;
+  --color-principal: #ffff;
 }
 @import url("font-awesome.min.css");
 body {
@@ -707,7 +707,7 @@ input[type="radio"] {
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link,
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  background-color: #e71e83;
+  background-color: var(--color-principal);
 }
 
 a,
@@ -1469,7 +1469,7 @@ a:focus {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 10px;
-  background-color: #c06f9f;
+  background-color: var(--color-principal);
   font-size: 12px; 
 }
 

@@ -39,45 +39,92 @@
       #menuName {
         max-width: 300px;
       }
+
       .modal-body {
         display: flex;
         flex-direction: column;
         gap: 1rem;
       }
+
       .form-check {
         margin-top: 2rem;
         margin-right: 2rem;
       }
+
       .checkbox-container {
         margin-bottom: 1rem;
         margin-left: 5rem;
-
         justify-content: center;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
       }
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px; 
-        }
 
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .input-group input {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 80%;
+      }
+
+      .input-group button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        margin-left: 5px;
+      }
+
+      @media (max-width: 768px) {
         .input-group input {
-            flex-grow: 1; 
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+          width: 100%;
+          max-width: none;
         }
 
         .input-group button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            margin-left: 5px;
+          width: 100%;
+          margin-top: 10px;
         }
+      }
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
 
+      .card-body .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .card-body .col-12 {
+        flex: 1 1 100%;
+      }
+
+      .card-body .col-sm-4 {
+        flex: 1 1 33%;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        display: none;
+        margin-top: 10px;
+      }
+
+      input[type="file"] {
+        width: 100%;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
 
@@ -92,7 +139,6 @@
         <!-- Sidebar - Brand -->
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          
         >
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-paint-brush"></i>
@@ -134,9 +180,9 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Douglas McGee</span
-                  >
+                  <span
+                    class="mr-2 d-none d-lg-inline text-gray-600 small"
+                  ></span>
                   <img
                     class="img-profile rounded-circle"
                     src="images/default.png"
@@ -191,80 +237,141 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <h1 class="h3 mb-2 text-gray-800">Títulos de Carrusel</h1>
-            
+
             <div class="card shadow mb-4">
-                
-                <div class="card-body">
-                    <label for="Title1" >Título 1</label>
-                    <div class="input-group">
-                        
-                        <input type="text" value="Valor inicial 1" disabled id="Title1">
-                        <button class="edit-button"><i class="fas fa-pencil-alt"></i></button>
-                    </div>
-                    <label for="Title2" >Título 2</label>
-                    <div class="input-group">
-                        
-                        <input type="text" value="Otro valor" disabled id="Title2">
-                        <button class="edit-button"><i class="fas fa-pencil-alt"></i></button>
-                    </div>
-                    <label for="Title3" >Título 3</label>
-                    <div class="input-group">
-                        
-                        <input type="text" value="Un tercer valor" disabled id="Title3">
-                        <button class="edit-button"><i class="fas fa-pencil-alt"></i></button>
-                    </div>
+              <div class="card-body">
+                <label for="Title1">Título 1</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    value="Valor inicial 1"
+                    disabled
+                    id="Title1"
+                  />
+                  <button class="edit-button">
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>
                 </div>
+                <label for="Title2">Título 2</label>
+                <div class="input-group">
+                  <input type="text" value="Otro valor" disabled id="Title2" />
+                  <button class="edit-button">
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>
+                </div>
+                <label for="Title3">Título 3</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    value="Un tercer valor"
+                    disabled
+                    id="Title3"
+                  />
+                  <button class="edit-button">
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>
+                </div>
+              </div>
             </div>
 
             <h1 class="h3 mb-2 text-gray-800">Colores</h1>
-            
+
             <div class="card shadow mb-4">
-                
-                <div class="card-body d-flex"> 
-                    <div class="w-50 mr-2">
-                        <label for="colorInput">Color Principal:</label>
-                        <input type="color" id="colorInput" name="colorInput" value="#000000">
+              <div class="card-body d-flex">
+                <div class="w-50 mr-2">
+                  <label for="colorInput">Color Principal:</label>
+                  <input
+                    type="color"
+                    id="colorInput"
+                    name="colorInput"
+                    value="#000000"
+                  />
 
-                        <div id="colorPreview" style="width: 50px; height: 50px; border: 1px solid black; margin-top: 10px;"></div>
-
-                    </div>
-            </div>
+                  <div
+                    id="colorPreview"
+                    style="
+                      width: 80%;
+                      height: 50px;
+                      border: 1px solid black;
+                      margin-top: 10px;
+                    "
+                  ></div>
+                </div>
+              </div>
             </div>
 
             <h1 class="h3 mb-2 text-gray-800">Imágenes</h1>
-            
+
             <div class="card shadow mb-4">
-                
-                <div class="card-body d-flex"> 
-                <div class="w-50 mr-2">
+              <div class="card-body">
+                <div class="row">
+                  <!-- Logo -->
+                  <div class="col-12 col-sm-4 mb-3">
                     <label for="logoInput">Logo:</label>
-                    <br>
-                    <input type="file" id="logoInput" name="logoInput" accept="image/*">
-                    <img id="imagenPrevisualizacion" src="#" alt="Previsualización" style="max-width: 200px; max-height: 200px; display: none;">
-                </div>
-                
-                
-                <div class="w-50 mr-2">
+                    <br />
+                    <input
+                      type="file"
+                      id="logoInput"
+                      name="logoInput"
+                      accept="image/*"
+                    />
+                    <br />
+                    <img
+                      id="imagenPrevisualizacion"
+                      src="#"
+                      alt="Previsualización"
+                      style="max-width: 100%; max-height: 200px; display: none"
+                    />
+                  </div>
+
+                  <!-- Icono -->
+                  <div class="col-12 col-sm-4 mb-3">
                     <label for="iconInput">Icono:</label>
-                    <br>
-                    <input type="file" id="iconInput" name="iconInput" accept="image/*">
-                    <img id="imagenPrevisualizacion1" src="#" alt="Previsualización" style="max-width: 200px; max-height: 200px; display: none;">
+                    <br />
+                    <input
+                      type="file"
+                      id="iconInput"
+                      name="iconInput"
+                      accept="image/*"
+                    />
+                    <br />
+                    <img
+                      id="imagenPrevisualizacion1"
+                      src="#"
+                      alt="Previsualización"
+                      style="max-width: 100%; max-height: 200px; display: none"
+                    />
+                  </div>
 
-                </div>
-
-                <div class="w-50 mr-2">
+                  <!-- Imagen de Fondo -->
+                  <div class="col-12 col-sm-4 mb-3">
                     <label for="backgroundInput">Imagen de Fondo:</label>
-                    <br>
-                    <input type="file" id="backgroundInput" name="backgroundInput" accept="image/*">
-                    <img id="imagenPrevisualizacion2" src="#" alt="Previsualización" style="max-width: 200px; max-height: 200px; display: none;">
-
+                    <br />
+                    <input
+                      type="file"
+                      id="backgroundInput"
+                      name="backgroundInput"
+                      accept="image/*"
+                    />
+                    <br />
+                    <img
+                      id="imagenPrevisualizacion2"
+                      src="#"
+                      alt="Previsualización"
+                      style="max-width: 100%; max-height: 200px; display: none"
+                    />
+                  </div>
                 </div>
+              </div>
             </div>
+            <div class="d-flex justify-content-end">
+              <button id="saveButton" class="btn btn-success">
+                Guardar cambios
+              </button>
             </div>
-
-            <button id="saveButton" class="btn btn-success">Guardar cambios</button>
-
+          </div>
         </div>
+
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -285,7 +392,6 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
