@@ -62,6 +62,26 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
       }
+  /* Estilo general de la tabla */
+  table {
+    width: 100%; /* Asegura el uso completo del ancho del contenedor */
+    table-layout: auto;
+  }
+
+  /* Estilo para las celdas de texto largo */
+  .scrollable-cell {
+    max-height: 100px; /* Define un alto máximo para la celda */
+    overflow-y: auto; /* Activa el scrollbar vertical */
+    white-space: normal; /* Permite saltos de línea */
+    word-wrap: break-word; /* Divide palabras largas */
+    overflow-wrap: break-word;
+  }
+
+  /* Ajustar las celdas de la tabla */
+  td, th {
+    vertical-align: top; /* Asegura que el contenido se alinee en la parte superior */
+  
+  }
     </style>
   </head>
 
@@ -156,12 +176,7 @@
 
               <div class="card-body">
                 <div class="table-responsive">
-                  <table
-                    class="table table-bordered"
-                    id="dataTable"
-                    width="100%"
-                    cellspacing="0"
-                  >
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -182,7 +197,7 @@
                     </tfoot>
                     <tbody id="tbodysug"></tbody>
                   </table>
-                </div>
+                </div>                
               </div>
             </div>
             <h1 class="h3 mb-2 text-gray-800">Votos</h1>

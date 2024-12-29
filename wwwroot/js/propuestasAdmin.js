@@ -396,9 +396,6 @@ async function loadPropuestas() {
           <button class="btn btn-primary edit-btn mr-2" data-id="${propuesta.ID_PRO}">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-danger delete-btn" data-id="${propuesta.ID_PRO}">
-            <i class="fas fa-trash-alt"></i>
-          </button>
         </td>`;
 
       rows += `<tr>${

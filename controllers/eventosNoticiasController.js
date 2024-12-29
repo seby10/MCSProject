@@ -57,8 +57,7 @@ export const createEventoNoticia = async (req, res) => {
     // Manejar la imagen subida
     let imagenPath = null;
     if (req.file) {
-      // Guardar la ruta relativa de la imagen para almacenar en la base de datos
-      imagenPath = `/images/noticias/${req.file.filename}`;
+      imagenPath = `${req.file.filename}`;
     }
 
     const result = await addEventoNoticia({
@@ -101,7 +100,7 @@ export const updateEventoNoticiaDetails = async (req, res) => {
           fs.unlinkSync(oldImagePath);
         }
       }
-      imagenPath = `/images/noticias/${req.file.filename}`;
+      imagenPath = `${req.file.filename}`;
     }
 
     const result = await updateEventoNoticia({

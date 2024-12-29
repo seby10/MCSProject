@@ -27,7 +27,7 @@ const navigateDate = (direction) => {
   updateContent(currentDate);
 };
 
-const formatDate = (dateTimeString) => {
+const formateDate = (dateTimeString) => {
   let abreviation;
   const date = new Date(dateTimeString);
   const day = String(date.getDate()).padStart(2, "0");
@@ -84,12 +84,12 @@ const displayEventosNoticias = (eventosNoticias) => {
             <div class="event-card">
               ${item.IMG_EVE_NOT ? `
                 <div class="event-image">
-                  <img src="${item.IMG_EVE_NOT}" alt="${item.NOM_EVE_NOT}" onerror="this.style.display='none';">
+                  <img src="/images/noticias/${item.IMG_EVE_NOT}" alt="${item.NOM_EVE_NOT}" onerror="this.style.display='none';">
                 </div>
               ` : ''}
               <div class="event-header">
                 <h3>${item.NOM_EVE_NOT}</h3>
-                <div class="event-date">${formatDate(item.FEC_EVE_NOT)}</div>
+                <div class="event-date">${formateDate(item.FEC_EVE_NOT)}</div>
               </div>
               <div class="event-content">
                 <p class="event-info">${item.INF_EVE_NOT}</p>
