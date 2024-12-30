@@ -1,4 +1,8 @@
 /* Actualizar los estilos en eventos.css */
+:root {
+  --color-principal: #ffff;
+}
+
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -312,7 +316,7 @@
   padding: 10px 45px;
   text-align: center;
   color: #fff;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   text-decoration: none;
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -320,8 +324,8 @@
 
 .boton-box a:hover {
   background-color: transparent;
-  border-color:#e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .slider-event-image {
