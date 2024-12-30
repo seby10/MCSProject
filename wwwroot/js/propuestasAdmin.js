@@ -330,6 +330,7 @@ function cargarMenus() {
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
@@ -337,6 +338,7 @@ function cargarMenus() {
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/admin_catalog", MenuName: "Administradores" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },

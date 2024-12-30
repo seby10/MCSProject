@@ -1,58 +1,44 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
-
-  <title>Elecciones 2024</title>
-
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="" type="image/x-icon" id="favicon" />
   <!-- bootstrap core css -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <script src="js/custom.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    
+    <script src="js/bootstrap.js"></script>
+    <script src="js/eventos-slider.js"></script>
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
-    rel="stylesheet" />
+  </head>
 
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <link href="css/eventos.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
-</head>
-
-<body>
-  <div class="hero_area">
-    <!-- header section strats -->
-    <div class="hero_bg_box">
-      <div class="img-box">
-        <img src="images/MaryCruzHome.png" alt="" />
-      </div>
-    </div>
-
-    <header class="header_section">
-      <div class="container-fluid">
-        <a href="index">
-          <img src="./images/logomaricruz.png" alt="MaryCruz Logo" draggable="false">
-        </a>
+  <body>
+    <div class="hero_area">
+      <!-- header section strats -->
+      <div class="hero_bg_box">
+        <div class="img-box">
+          <img src="" id="background" alt="" />
+        </div>
       </div>
     </header>
-
-    <div class="header_bottom">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container">
-          <a class="navbar-brand" href="index">
-            <span> Elecciones 2024 </span>
+      <header class="header_section">
+        <div class="container-fluid">
+          <a href="index">
+            <img src="" alt="" id="logo" draggable="false">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,72 +71,107 @@
               </li>
             </ul>
           </div>
-        </nav>
-      </div>
+        </div>
+      </header>
+      <!-- end header section -->
+      <!-- slider section -->
+      <section class="slider_section">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="detail-box">
+                      <h1 id="Title1">
+                        Unión y Futuro Universitario <br />
+                      </h1>
+                      
+                      <div class="btn-box">
+                        <a href="#candidatos" class="btn-1">Candidatos </a>
+                        <a href="propuestas" class="btn-2">Propuestas</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="detail-box">
+                      <h1 id="Title2">
+                        Unidos lo haremos posible <br />
+                        
+                      </h1>
+                      
+                      <div class="btn-box">
+                        <a href="#candidatos" class="btn-1">Candidatos</a>
+                        <a href="eventos_noticias" class="btn-2">Noticias/Eventos</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="detail-box">
+                      <h1 id="Title3">
+                        Sueña, crea e innova. <br />
+                      </h1>
+                      
+                      <div class="btn-box">
+                        <a href="candidatos" class="btn-1">Candidatos</a>
+                        <a href="sugerencias" class="btn-2">Sugerencias</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container idicator_container">
+            <ol class="carousel-indicators">
+              <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to="1"
+              ></li>
+              <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to="2"
+              ></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <!-- end slider section -->
     </div>
-    </header>
-    <!-- end header section -->
-    <!-- slider section -->
-    <section class="slider_section">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Unión y Futuro Universitario <br />
-                      <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
-                    </h1>
 
-                    <div class="btn-box">
-                      <a href="#candidatos" class="btn-1">Candidatos </a>
-                      <a href="propuestas" class="btn-2">Propuestas</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Unidos lo haremos posible <br />
-                      <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
-                    </h1>
+    <!-- team section -->
 
-                    <div class="btn-box">
-                      <a href="#candidatos" class="btn-1">Candidatos</a>
-                      <a href="eventos_noticias" class="btn-2">Noticias/Eventos</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Sueña, crea e innova. <br />
-                      <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
-                    </h1>
-
-                    <div class="btn-box">
-                      <a href="candidatos" class="btn-1">Candidatos</a>
-                      <a href="sugerencias" class="btn-2">Sugerencias</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section class="team_section layout_padding" id="candidatos">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Candidatos</h2>
+          <p>
+            Conoce a cada uno de los candidatos actuales.
+          </p>
+        </div>
+        <div class="row" id="candidatos_container">
+          <!-- Aquí se agregarán los candidatos dinámicamente -->
         </div>
         <div class="container idicator_container">
           <ol class="carousel-indicators">
@@ -312,20 +333,17 @@
       </div>
     </div>
   </section>
-
-  <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <p>
-      &copy; <span id="currentYear"></span> Universidad Técnica de Ambato. Todos los derechos reservados.</a>
-    </p>
-  </footer>
-  <!-- footer section -->
-
-
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.js"></script>
-  <script src="js/custom.js"></script>
-  <script src="js/eventos-slider.js"></script>
-</body>
-
+    <!-- footer section -->
+    <footer class="container-fluid footer_section">
+      <p>
+        &copy; <span id="currentYear"></span> Universidad Técnica de Ambato. Todos los derechos reservados.</a>
+      </p>
+    </footer>
+    <script src="js/personalizar.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    
+        <link href="css/eventos.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="css/responsive.css" rel="stylesheet" />
+  </body>
 </html>
