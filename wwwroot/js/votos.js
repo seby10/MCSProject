@@ -1,7 +1,36 @@
 const submitButtonVoto = document.getElementById('submitVoto');
 const radios = document.querySelectorAll('input[name="voto"]');
 const graficaWrapper = document.getElementById('grafica-wrapper');
+const votoContainer = document.getElementById('votoContainer');
 
+window.onload = function() {
+  const votoGuardado = localStorage.getItem('voto');
+  
+  if (votoGuardado) {
+    graficaWrapper.style.display = 'block';
+    votoContainer.style.display = 'none';
+    loadVotos();
+    disableVoting();
+  } else {
+    graficaWrapper.style.display = 'none';
+    votoContainer.style.display = 'block';
+    enableVoting();
+  }
+};
+
+function disableVoting() {
+  submitButtonVoto.disabled = true;
+  radios.forEach(radio => {
+    radio.disabled = true;
+  });
+}
+
+function enableVoting() {
+  submitButtonVoto.disabled = false;
+  radios.forEach(radio => {
+    radio.disabled = false;
+  });
+}
 
 submitButtonVoto.addEventListener('click', async function () {
   const radios = document.querySelectorAll('input[name="voto"]');
@@ -9,7 +38,7 @@ submitButtonVoto.addEventListener('click', async function () {
 
   radios.forEach(radio => {
     if (radio.checked) {
-      selectedId = radio.value; 
+      selectedId = radio.value;
     }
   });
 
@@ -27,15 +56,11 @@ submitButtonVoto.addEventListener('click', async function () {
         dataType: "json",
       });
 
-      console.log(response); 
-      submitButtonVoto.disabled = true;
-      radios.forEach(radio => {
-        radio.disabled = true;
-      });
+      localStorage.setItem('voto', selectedId);
+      disableVoting();
       
       showSuccessAlert("Voto enviado correctamente.");
-      votoContainer.innerHTML = '';
-      votoContainer.appendChild(graficaWrapper);
+      votoContainer.style.display = 'none';
       graficaWrapper.style.display = 'block';
       loadVotos();
     } catch (error) {
@@ -61,6 +86,7 @@ function showSuccessAlert(message) {
     position: "topRight",
   });
 }
+
 async function showVotos() {
   try {
     const response = await $.ajax({
@@ -162,8 +188,3 @@ function createChart(porcentajesPorCandidato) {
     }
   });
 }
-
-
-window.onload = function() { 
-  graficaWrapper.style.display = 'none'; 
-  };
