@@ -9,7 +9,8 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Gestión-Sugerencias</title>
+
+    <title>Gestión-Votos</title>
     <link
       href="css/style.css"
       rel="stylesheet"
@@ -166,60 +167,71 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Sugerencias</h1>
 
-            <!-- DataTales Example -->
+            <h1 class="h3 mb-2 text-gray-800">Votos</h1>
             <div class="card shadow mb-4">
               <div class="card-header py-3"></div>
-              <div class="row mb-4">
-                <div class="col-md-4">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fas fa-search"></i>
-                      </span>
-                    </div>
-                    <select id="estadoFiltro" class="form-control">
-                      <option value="">Seleccione un estado</option>
-                      <option value="REVISADO">REVISADO</option>
-                      <option value="POR REVISAR">POR REVISAR</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              
-              
+
               <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!-- Primera tabla de votos -->
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px;">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
                     <thead>
                       <tr>
                         <th>ID</th>
                         <th>Fecha</th>
-                        <th>Descripción</th>
-                        <th>Correo</th>
-                        <th>Estado</th>
-                        <th>Omitir</th>
+                        <th>Candidato</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
                         <th>ID</th>
                         <th>Fecha</th>
-                        <th>Descripción</th>
-                        <th>Correo</th>
-                        <th>Estado</th>
-                        <th>Omitir</th>
+                        <th>Candidato</th>
                       </tr>
                     </tfoot>
-                    <tbody id="tbodysug"></tbody>
+                    <tbody id="tbodyvot"></tbody>
                   </table>
-                </div>                
+                </div>
+              
+                <!-- Segunda tabla de votos totales -->
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Total</th>
+                        <th>Candidato</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Total</th>
+                        <th>Candidato</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id="tbodyvotocantidad"></tbody>
+                  </table>
+                </div>
+              
+                <!-- Contenedor para la gráfica -->
+                <div id="grafica-wrapper">
+                  <h1>Gráfica de Votos Por Candidato</h1>
+                  <div id="grafica-container">
+                    <canvas id="grafica"></canvas>
+                  </div>
+                </div>
               </div>
-            </div>
-
-
-          </div>
+              
           <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
@@ -282,6 +294,7 @@
       </div>
     </div>
 
+    <script src="vendor/chart.js/Chart.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -299,7 +312,7 @@
 
     <!-- Page level custom scripts -->
     <script src="vendor/jquery/jquery.blockUI.js"></script>
-    <script src="js/sugerenciasAdmin.js" type="text/javascript"></script>
+    <script src="js/votosAdmin.js" type="text/javascript"></script>
     <script src="iziToast-master/dist/js/iziToast.min.js"></script>
   </body>
 </html>
