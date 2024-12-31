@@ -127,15 +127,15 @@ async function loadVotos() {
 
 
 function createChart(porcentajesPorCandidato) {
-  const ctx = document.getElementById('grafica1');
+  const ctx = document.getElementById('grafica');
   if (!ctx) {
-    console.error("No se encontró el canvas con id 'grafica1'.");
+    console.error("No se encontró el canvas con id 'grafica'.");
     return;
   }
 
     console.log(porcentajesPorCandidato);
 
-    const $grafica1 = document.querySelector("#grafica1");
+    const $grafica = document.querySelector("#grafica");
     const etiquetas = Object.keys(porcentajesPorCandidato); 
     const porcentajes = Object.values(porcentajesPorCandidato);
     
@@ -152,7 +152,7 @@ function createChart(porcentajesPorCandidato) {
       borderColor: colores.map(color => color.replace('0.2', '1')),
       borderWidth: 1,
     };
-    new Chart($grafica1, {
+    new Chart($grafica, {
       type: 'bar',
       data: {
         labels: etiquetas,
@@ -247,7 +247,6 @@ function cargarMenus() {
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
-        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
@@ -256,7 +255,6 @@ function cargarMenus() {
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
-        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/admin_catalog", MenuName: "Administradores" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },

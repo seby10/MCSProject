@@ -13,17 +13,26 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="" type="image/x-icon" id="favicon" />
-  <!-- bootstrap core css -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <script src="js/custom.js"></script>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    
-    <script src="js/bootstrap.js"></script>
-    <script src="js/eventos-slider.js"></script>
+    <title>Elecciones 2024</title>
 
+    <!-- bootstrap core css -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/eventos.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -31,43 +40,61 @@
       <!-- header section strats -->
       <div class="hero_bg_box">
         <div class="img-box">
-          <img src="" id="background" alt="" />
+          <img src="images/MaryCruzHome.png" alt="" />
         </div>
       </div>
-    </header>
+
       <header class="header_section">
         <div class="container-fluid">
           <a href="index">
-            <img src="" alt="" id="logo" draggable="false">
+            <img src="./images/logomaricruz.png" alt="MaryCruz Logo" draggable="false">
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""></span>
-          </button>
+        </div>
+      </header>
+      
+        <div class="header_bottom">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+              <a class="navbar-brand" href="index">
+                <span> Elecciones 2024 </span>
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class=""></span>
+              </button>
 
-          <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
-              </li>
+              <div
+                class="collapse navbar-collapse ml-auto"
+                id="navbarSupportedContent"
+              >
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="index"
+                      >Home <span class="sr-only">(current)</span></a
+                    >
+                  </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="informacion">Informacion</a>
-              </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="informacion">Informacion</a>
+                  </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="propuestas">Propuestas</a>
-              </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="propuestas">Propuestas</a>
+                  </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="eventos_noticias">Noticias/Eventos</a>
-              </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="eventos_noticias">Noticias/Eventos</a>
+                  </li>
 
                   <li class="nav-item">
                     <a class="nav-link" href="sugerencias">Sugerencias</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="votos">Votos</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="login">Gestión</a>
@@ -92,8 +119,9 @@
                 <div class="row">
                   <div class="col-md-7">
                     <div class="detail-box">
-                      <h1 id="Title1">
+                      <h1>
                         Unión y Futuro Universitario <br />
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
                       
                       <div class="btn-box">
@@ -110,9 +138,9 @@
                 <div class="row">
                   <div class="col-md-7">
                     <div class="detail-box">
-                      <h1 id="Title2">
+                      <h1>
                         Unidos lo haremos posible <br />
-                        
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
                       
                       <div class="btn-box">
@@ -129,8 +157,9 @@
                 <div class="row">
                   <div class="col-md-7">
                     <div class="detail-box">
-                      <h1 id="Title3">
+                      <h1>
                         Sueña, crea e innova. <br />
+                        <span style="color: #e62081;">Mary</span><span style="color: #3db1e5;"> Cruz</span>
                       </h1>
                       
                       <div class="btn-box">
@@ -172,183 +201,137 @@
         <div class="heading_container heading_center">
           <h2>Candidatos</h2>
           <p>
-            Conoce a cada uno de los candidatos actuales.
+            Es un honor presentar el proyecto político para la elección de las
+            principales autoridades de nuestra universidad, que busca fortalecer
+            el desarrollo académico, la innovación y la gestión institucional. A
+            continuación, se presentan los candidatos para los cargos de Rector
+            y Vicerrectores: Académico, de Investigación, Innovación y
+            Vinculación con la Sociedad, y Administrativo. Cada uno de ellos
+            cuenta con una trayectoria profesional destacada y un firme
+            compromiso con la excelencia de nuestra universidad. Los invitamos a
+            conocer más sobre sus perfiles y propuestas, que serán fundamentales
+            para el futuro de nuestra institución.
           </p>
         </div>
         <div class="row" id="candidatos_container">
           <!-- Aquí se agregarán los candidatos dinámicamente -->
         </div>
-        <div class="container idicator_container">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
+        <div class="btn-box">
+          <a href="informacion">Mostrar más</a>
         </div>
       </div>
     </section>
-    <!-- end slider section -->
-  </div>
 
-  <!-- team section -->
+    <!-- Eventos y Noticias Slider Section -->
+    <section class="eventos-slider-section">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Eventos y Noticias</h2>
+          <p>Mantente informado sobre los últimos eventos</p>
+        </div>
 
-  <section class="team_section layout_padding" id="candidatos">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>Candidatos</h2>
-        <p>
-          Es un honor presentar el proyecto político para la elección de las
-          principales autoridades de nuestra universidad, que busca fortalecer
-          el desarrollo académico, la innovación y la gestión institucional. A
-          continuación, se presentan los candidatos para los cargos de Rector
-          y Vicerrectores: Académico, de Investigación, Innovación y
-          Vinculación con la Sociedad, y Administrativo. Cada uno de ellos
-          cuenta con una trayectoria profesional destacada y un firme
-          compromiso con la excelencia de nuestra universidad. Los invitamos a
-          conocer más sobre sus perfiles y propuestas, que serán fundamentales
-          para el futuro de nuestra institución.
-        </p>
-      </div>
-      <div class="row" id="candidatos_container">
-        <!-- Aquí se agregarán los candidatos dinámicamente -->
-      </div>
-      <div class="btn-box">
-        <a href="informacion">Mostrar más</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="eventos-slider-section">
-    <div class="container">
-      <div class="sliders-wrapper">
-        <!-- Próximos Eventos -->
         <div class="eventos-slider-container">
-          <div class="heading_container heading_center">
-            <h2>Próximos Eventos</h2>
-            <p>Mantente informado sobre los eventos futuros</p>
-          </div>
           <div class="eventos-slider">
-            <div class="eventos-slider-content" id="eventos-futuros-content"></div>
+            <div class="eventos-slider-content"></div>
+
             <div class="slider-controls">
-              <button class="slider-btn prev-btn" id="eventos-prev">
+              <button class="slider-btn prev-btn">
                 <i class="fa fa-chevron-left"></i>
               </button>
-              <button class="slider-btn next-btn" id="eventos-next">
+              <button class="slider-btn next-btn">
                 <i class="fa fa-chevron-right"></i>
               </button>
             </div>
           </div>
-          <div class="slider-indicators" id="eventos-indicators"></div>
+          <div class="slider-indicators"></div>
         </div>
-  
-        <!-- Noticias Recientes -->
-        <div class="eventos-slider-container">
-          <div class="heading_container heading_center">
-            <h2>Noticias Recientes</h2>
-            <p>Entérate de las últimas noticias</p>
-          </div>
-          <div class="eventos-slider">
-            <div class="eventos-slider-content" id="noticias-content"></div>
-            <div class="slider-controls">
-              <button class="slider-btn prev-btn" id="noticias-prev">
-                <i class="fa fa-chevron-left"></i>
-              </button>
-              <button class="slider-btn next-btn" id="noticias-next">
-                <i class="fa fa-chevron-right"></i>
-              </button>
+        <div class="boton-box">
+          <a href="eventos_noticias">Mostrar más</a>
+        </div>
+      </div>
+    </section>
+    <!-- info section -->
+    <section class="info_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-3 text-center">
+            <div class="info_logo">
+              <a class="navbar-brand" href="index">
+                <span> Elecciones 2024 </span>
+              </a>
+              <p>
+                <i class="fa fa-gitlab" aria-hidden="true"></i>
+                <a href="https://gitlab.com/mcs8233642/MCSPROJECT"> Proyecto en GitLab</a>
+              </p>
             </div>
           </div>
-          <div class="slider-indicators" id="noticias-indicators"></div>
-        </div>
-      </div>
-  
-      <div class="boton-box">
-        <a href="eventos_noticias">Mostrar más</a>
-      </div>
-    </div>
-  </section>
-  
-  <!-- info section -->
-  <section class="info_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-3 text-center">
-          <div class="info_logo">
-            <a class="navbar-brand" href="index">
-              <span> Elecciones 2024 </span>
-            </a>
-            <p>
-              <i class="fa fa-gitlab" aria-hidden="true"></i>
-              <a href="https://gitlab.com/mcs8233642/MCSPROJECT"> Proyecto en GitLab</a>
-            </p>
+          <div class="col-12 col-md-3 text-center">
+            <div class="info_links">
+              <h5>Developers</h5>
+              <ul>
+                <li>
+                  <i class="fa fa-leaf" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/garciadayle2004"> Dayle García </a>
+                </li>
+                <li>
+                  <i class="fa fa-smile-o" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/PabloAML1"> Pablo Montero </a>
+                </li>
+                <li>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/Jhanina03"> Jhanina Conterón </a>
+                </li>
+                <li>
+                  <i class="fa fa-fire" aria-hidden="true"></i>
+                  <a href="https://gitlab.com/seby10"> Sebastián Constante </a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="col-12 col-md-3 text-center">
-          <div class="info_links">
-            <h5>Developers</h5>
-            <ul>
-              <li>
-                <i class="fa fa-leaf" aria-hidden="true"></i>
-                <a href="https://gitlab.com/garciadayle2004"> Dayle García </a>
-              </li>
-              <li>
-                <i class="fa fa-smile-o" aria-hidden="true"></i>
-                <a href="https://gitlab.com/PabloAML1"> Pablo Montero </a>
-              </li>
-              <li>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <a href="https://gitlab.com/Jhanina03"> Jhanina Conterón </a>
-              </li>
-              <li>
-                <i class="fa fa-fire" aria-hidden="true"></i>
-                <a href="https://gitlab.com/seby10"> Sebastián Constante </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-12 col-md-3 text-center">
-          <div class="info_info">
-            <h5>Contactanos</h5>
-          </div>
-          <div class="info_contact">
-            <a href="">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span> Ambato, Ecuador </span>
-            </a>
-            <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span> Telf : +593 99 596 5167 </span>
-            </a>
-            <a href="">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <span> plataformauta03@gmail.com </span>
-            </a>
-
-          </div>
-        </div>
-        <div class="col-12 col-md-3 text-center">
-          <div class="info_contact">
+          <div class="col-12 col-md-3 text-center">
             <div class="info_info">
-              <h5>Agradecimiento</h5>
+              <h5>Contactanos</h5>
             </div>
-            <p>Gracias por participar en este proceso electoral universitario. Juntos, construimos el futuro de nuestra
-              comunidad académica.</p>
+            <div class="info_contact">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span> Ambato, Ecuador </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span> Telf : +593 99 596 5167 </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> plataformauta03@gmail.com </span>
+              </a>
+              
+            </div>
           </div>
+          <div class="col-12 col-md-3 text-center">
+            <div class="info_contact">
+              <div class="info_info">
+                <h5>Agradecimiento</h5>
+              </div>
+              <p>Gracias por participar en este proceso electoral universitario. Juntos, construimos el futuro de nuestra comunidad académica.</p>
+            </div>
+          </div>        
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
     <!-- footer section -->
     <footer class="container-fluid footer_section">
       <p>
         &copy; <span id="currentYear"></span> Universidad Técnica de Ambato. Todos los derechos reservados.</a>
       </p>
     </footer>
-    <script src="js/personalizar.js"></script>
-    <link href="css/style.css" rel="stylesheet" />
-    
-        <link href="css/eventos.css" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="css/responsive.css" rel="stylesheet" />
+    <!-- footer section -->
+
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/eventos-slider.js"></script>
   </body>
 </html>

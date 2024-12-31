@@ -14,30 +14,16 @@ export const getEventosNoticiasByDateFromDB = async (date) => {
   }
 };
 
-export const getRecentEventosDB = async (limit = 5) => {
+export const getRecentEventosNoticias = async (limit = 5) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_GetRecentEventos(?)",
+      "CALL sp_GetRecentEventosNoticias(?)",
       [limit]
     );
-    return result[0];
+    return result[0]; // Recuerda acceder al primer array que contiene los resultados.
   } catch (error) {
-    console.error("Error en getRecentEventos:", error);
-    throw error;
-  }
-};
-
-export const getRecentNoticiasDB = async (limit = 5) => {
-  try {
-    const connection = await getConnection();
-    const [result] = await connection.query(
-      "CALL sp_GetRecentNoticias(?)",
-      [limit]
-    );
-    return result[0];
-  } catch (error) {
-    console.error("Error en getRecentNoticias:", error);
+    console.error("Error en getRecentEventosNoticias:", error);
     throw error;
   }
 };

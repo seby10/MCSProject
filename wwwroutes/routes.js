@@ -10,10 +10,6 @@ wwwrouter.use("/sugerencias", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "sugerencias.html"));
 });
 
-wwwrouter.use("/votos", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "votos.html"));
-});
-
 wwwrouter.use("/index", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "index.html"));
 });
@@ -63,10 +59,6 @@ wwwrouter.use("/sugerencias_catalog", function (req, res) {
 });
 wwwrouter.use("/votos_catalog", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "votos_catalog.html"));
-});
-
-wwwrouter.use("/personalizacion", function (req, res) {
-  res.sendFile(path.join(__dirname, "../wwwroot", "personalizar_catalog.html"));
 });
 
 export default wwwrouter;
