@@ -1,3 +1,6 @@
+:root {
+  --color-principal: #ffff;
+}
 .filter-menu {
     display: flex;
     justify-content: center;
@@ -12,7 +15,7 @@
   .filter-menu .form-select {
     padding: 10px;
     font-size: 1rem;
-    border: 2px solid #e62081;
+    border: 2px solid var(--color-principal);
     border-radius: 5px;
     outline: none;
     color: #333;
