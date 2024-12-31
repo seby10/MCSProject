@@ -1569,3 +1569,73 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+
+.propuestas-favoritas-section {
+  background-color: #f9f9f9;
+  padding: 60px 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra horizontalmente */
+}
+
+.propuesta-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.propuesta-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.propuesta-img-box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.propuesta-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.propuesta-content h5 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.propuesta-content p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.custom-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: #e62081;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #c71a69;
+}
+
+.btn-box {
+  text-align: center;
+  margin-top: 30px;
+}
+
