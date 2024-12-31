@@ -22,12 +22,19 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-
-const createCandidatoHTML = (candidato, index) => {
+const calcularEdad = (fechaNacimiento) => {
+  const hoy = new Date();
+  const fechaNacimientoDate = new Date(fechaNacimiento);
+  let edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+  const mes = hoy.getMonth() - fechaNacimientoDate.getMonth();
+  if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoDate.getDate())) {
+    edad--;
+  }
+  return edad;
+};
+const createCandidatoHTML = (candidato) => {
   return `
-    <section class="about_section layout_padding" id="informacion_candidato${
-      index + 1
-    }">
+    <section class="about_section layout_padding" id="informacion_candidatos">
       <div class="container">
         <div class="row">
           <div class="col-md-6 px-0">
@@ -45,11 +52,10 @@ const createCandidatoHTML = (candidato, index) => {
                 <h2>${candidato.NOM_CAN} ${candidato.APE_CAN}</h2>
               </div>
               <p>
-                <strong>Fecha de Nacimiento:</strong> ${formatDate(
-                  candidato.FEC_NAC_CAN
-                )}<br>
+                <strong>Edad:</strong> ${calcularEdad(candidato.FEC_NAC_CAN)} años<br>
                 <strong>Cargo:</strong> ${candidato.CAR_CAN}<br>
-                <strong>Información:</strong> ${candidato.INF_CAN}<br>
+                <strong>Educación:</strong> ${candidato.EDU_CAN}<br>
+                <strong>Experiencia:</strong> ${candidato.EXP_CAN}<br>
                 <strong>Partido:</strong> ${candidato.PAR_CAN}
               </p>
             </div>
@@ -66,8 +72,8 @@ $(document).ready(async () => {
 
     if (candidatos.length > 0) {
       const container = $("#contenedor-candidatos");
-      candidatos.slice(0, 6).forEach((candidato, index) => {
-        const candidatoHTML = createCandidatoHTML(candidato, index);
+      candidatos.forEach((candidato) => {
+        const candidatoHTML = createCandidatoHTML(candidato);
         container.append(candidatoHTML);
       });
     } else {
