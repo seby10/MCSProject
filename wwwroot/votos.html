@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Mobile Metas -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://me.kis.v2.scr.kaspersky-labs.com https://leostop.com https://ww99.leostop.com https://code.jquery.com;"> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -13,18 +16,18 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="" type="image/x-icon" id="favicon" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 
-    <title>Sugerencias</title>
+    <title>Votos</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
     <!-- fonts style -->
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap"
       rel="stylesheet"
-    />
+    /> -->
 
     <!-- Custom styles for this template -->
     <link href="iziToast-master/dist/css/iziToast.min.css" rel="stylesheet">
@@ -33,19 +36,20 @@
     <link href="css/responsive.css" rel="stylesheet" />
   </head>
 
+
   <body class="sub_page">
     <div class="hero_area">
       <!-- header section strats -->
       <div class="hero_bg_box">
         <div class="img-box">
-          <img src="" id="background" alt="" />
+          <img src="images/MaryCruzHome.png" alt="" />
         </div>
       </div>
 
       <header class="header_section">
         <div class="container-fluid">
           <a href="index">
-            <img src="" alt="" id="logo" draggable="false">
+            <img src="./images/logomaricruz.png" alt="MaryCruz Logo" draggable="false">
           </a>
         </div>
       </header>
@@ -54,7 +58,7 @@
           <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
               <a class="navbar-brand" href="index">
-                <span> Sugerencias </span>
+                <span> Votos </span>
               </a>
               <button
                 class="navbar-toggler"
@@ -93,10 +97,10 @@
                     </a>
                   </li>
 
-                  <li class="nav-item active">
-                    <a class="nav-link" href="sugerencias">Sugerencias </a>
-                  </li>
                   <li class="nav-item ">
+                    <a class="nav-link" href="sugerencias">Sugerencias <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
                     <a class="nav-link" href="votos">Votos</a>
                   </li>
                   <li class="nav-item">
@@ -121,67 +125,45 @@
       </div>
       <div class="container">
         <div class="heading_container heading_center">
-          <h2>Sugerencias</h2>
+          <h2>Votos</h2>
         </div>
-        <div class="">
+        <div id="votoContainer" class="">
           <div class="row">
             <div class="col-md-9 mx-auto">
-              <form action="#" id="sugerenciaForm">
+              <form action="#">
                 <div class="contact_form-container">
                   <div>
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-9 mx-auto">
-                          <form action="#" id="sugerenciaForm">
-                            <div class="contact_form-container">
-                              <div>
-                                <div class="">
-                                  <textarea
-                                    id="sugerenciaInput"
-                                    placeholder="Sugerencias"
-                                    class="message_input"
-                                  ></textarea>
-                                </div>
-                                <div class="btn-box">
-                                  <button type="button" id="submitSugerencia" class="custom-btn">Enviar Sugerencia</button>
-                                </div>                                
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal fade" id="correoModal" tabindex="-1" role="dialog" aria-labelledby="correoModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="correoModalLabel">Confirmar Correo Electrónico</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <input
-                              type="text"
-                              id="correoModalInput"
-                              placeholder="Correo Electrónico"
-                              class="form-control"
-                            />
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" id="modalAceptar" class="btn btn-primary">Aceptar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <div class="radio-group">
+                      <label for="opcion1" class="radio-label">
+                        <img src="images/t1.png" alt="Imagen Opción 1" class="option-image" />
+                        <input type="radio" name="voto" id="opcion1" value="Mary" />
+                      </label>
                     
+                      <label for="opcion2" class="radio-label">
+                        <img src="images/t5.png" alt="Imagen Opción 2" class="option-image" />
+                        <input type="radio" name="voto" id="opcion2" value="Sara" />
+                      </label>
+                    
+                      <div class="btn-box">
+                        <button type="button" id="submitVoto" class="custom-btn">Enviar Voto</button>
+                      </div>                        
+                    </div>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-        </div>
+        </div>    
+  
+      </div>
+      <div id="grafica-wrapper" class="container my-4"> 
+        <h3 class="text-center">Gráfica de Votos Por Candidato</h3> 
+        <div id="grafica-container" class="grafica-container">
+           <canvas id="grafica"></canvas>
+           </div>
+      </div>
+    </div>  
+      
         
     </section>
 
@@ -263,12 +245,13 @@
         &copy; <span id="currentYear"></span> Universidad Técnica de Ambato. Todos los derechos reservados.</a>
       </p>
     </footer>
-    <!-- footer section -->
+    <script src="vendor/chart.js/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Eliminado el CDN de jQuery 3.6.0 -->
     <script src="js/bootstrap.js"></script>
     <script src="js/custom.js"></script>
     <script src="iziToast-master/dist/js/iziToast.min.js"></script>
-    <script src="js/sugerencias.js"></script>
-    <script src="js/personalizar.js"></script>
+    <script src="js/votos.js"></script>
+
   </body>
 </html>
