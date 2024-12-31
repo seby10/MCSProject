@@ -1,6 +1,3 @@
-:root {
-  --color-principal: #ffff;
-}
 @import url("font-awesome.min.css");
 body {
   font-family: "Poppins", sans-serif;
@@ -18,22 +15,6 @@ body {
     flex-wrap: wrap; 
     justify-content: center;
   }
-  .grafica-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    overflow-x: auto;
-  }
-  
-  #grafica {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    min-width: 300px; 
-  }
   
   #grafica-wrapper {
     display: flex;
@@ -42,24 +23,40 @@ body {
     justify-content: center;
     text-align: center;
     margin-top: 20px;
-    width: 100%;
-    background-color: #ffffff;
-    display: none; 
-    color: #4c4b4b;
   }
-  #grafica-wrapper1 {
+
+  .input-group {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 20px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #4c4b4b;
+    position: relative;
+    padding: 7px;
   }
-  
-  
+
+  .input-group-prepend .input-group-text {
+    background-color: #eb4697;  
+    border: 1px solid #f48fb1;
+    color: white;
+    border-right: none;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .input-group-text i {
+    font-size: 9px; 
+  }
+
+  .form-control {
+    background-color: #f48fb1; 
+    border: 1px solid #f48fb1; 
+    color: white; 
+    font-weight: bold;
+  }
+
+  .form-control:focus {
+    background-color: #f7c5d3;  
+    border-color: #f48fb1;  
+    outline: none;
+  }
+
   table {
     table-layout: auto;
     width: 100%;
@@ -78,6 +75,23 @@ body {
   
   h1 {
     margin-bottom: 40px; 
+  }
+  
+  #grafica-container {
+    width: 400px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+  }
+  
+  #grafica {
+    width: 100%;
+    height: 100%;
+    max-width: 600px; 
+    max-height: 300px; 
   }
   
   input[type="radio"] {
@@ -164,7 +178,7 @@ input[type="radio"] {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   border-radius: 10px;
   position: absolute;
   bottom: 0;
@@ -254,9 +268,10 @@ input[type="radio"] {
 
 .btn-box {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   width: 100%;
 }
+
 
 
 .option-image {
@@ -469,7 +484,7 @@ input[type="radio"] {
   content: "";
     width: 40px;
     height: 7px;
-    background-color: var(--color-principal);
+    background-color: #e62081;
     border-radius: 10px;
     position: absolute;
     bottom: -10px; 
@@ -510,7 +525,7 @@ input[type="radio"] {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid var(--color-principal);
+  border-top: 10px solid #e62081;
   position: absolute;
   bottom: -10px; 
   left: 50%;
@@ -528,7 +543,7 @@ input[type="radio"] {
 }
 
 .candidato-button.active {
-  background-color: var(--color-principal); /* Fondo rojo cuando está activo */
+  background-color: #e62081; /* Fondo rojo cuando está activo */
   color: #ffffff; /* Texto blanco cuando está activo */
   border: none; /* Eliminado el borde negro cuando está activo */
   outline: none;
@@ -593,7 +608,7 @@ input[type="radio"] {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid var(--color-principal);
+  border-top: 10px solid #e62081;
   position: absolute;
   bottom: -10px; 
   left: 50%;
@@ -611,7 +626,7 @@ input[type="radio"] {
 }
 
 .tab-button.active {
-  background-color: var(--color-principal); 
+  background-color: #e62081; 
   color: #ffffff; 
   border: none; 
   outline: none;
@@ -692,7 +707,7 @@ input[type="radio"] {
 
 .header_top .contact_link-container a i {
   font-size: 20px;
-  color: var(--color-principal);
+  color: #e62081;
   margin-right: 5px;
 }
 
@@ -723,7 +738,7 @@ input[type="radio"] {
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link,
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  background-color: var(--color-principal);
+  background-color: #e71e83;
 }
 
 a,
@@ -861,7 +876,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: var(--color-principal);
+  color: #e62081;
 }
 
 .slider_section .detail-box p {
@@ -900,7 +915,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn-2 {
   display: inline-block;
   padding: 10px 35px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -909,8 +924,8 @@ a:focus {
 
 .slider_section .detail-box .btn-box .btn-2:hover {
   background-color: transparent;
-  border-color: var(--color-principal);
-  color: var(--color-principal);
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .slider_section .img-box {
@@ -940,7 +955,7 @@ a:focus {
   height: 20px;
   border-radius: 100%;
   text-align: center;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   opacity: 1;
   border: none;
   margin: 0 4px;
@@ -976,7 +991,7 @@ a:focus {
 .about_section .detail-box a {
   display: inline-block;
   padding: 10px 35px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -986,8 +1001,8 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  border-color: var(--color-principal);
-  color: var(--color-principal);
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .service_section {
@@ -1027,7 +1042,7 @@ a:focus {
 .service_section .box .detail-box a {
   display: inline-block;
   padding: 8px 35px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1037,8 +1052,8 @@ a:focus {
 
 .service_section .box .detail-box a:hover {
   background-color: transparent;
-  border-color: var(--color-principal);
-  color: var(--color-principal);
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .client_section {
@@ -1123,7 +1138,7 @@ a:focus {
 
 .client_section .carousel-control-prev:hover,
 .client_section .carousel-control-next:hover {
-  background-color: var(--color-principal);
+  background-color: #e62081;
 }
 
 .client_section .carousel-control-prev {
@@ -1225,7 +1240,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1241,8 +1256,8 @@ a:focus {
 
 .contact_section .contact_form-container button:hover {
   background-color: transparent;
-  border-color: var(--color-principal);
-  color: var(--color-principal);
+  border-color: #e62081;
+  color: #e62081;
 }
 
 @media (max-width: 768px) {
@@ -1355,7 +1370,7 @@ a:focus {
 .team_section .btn-box a {
   display: inline-block;
   padding: 10px 45px;
-  background-color: var(--color-principal);
+  background-color: #e62081;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -1364,8 +1379,8 @@ a:focus {
 
 .team_section .btn-box a:hover {
   background-color: transparent;
-  border-color: var(--color-principal);
-  color: var(--color-principal);
+  border-color: #e62081;
+  color: #e62081;
 }
 
 .info_section {
@@ -1454,7 +1469,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: var(--color-principal);
+  background: #e62081;
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;
@@ -1485,7 +1500,7 @@ a:focus {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 10px;
-  background-color: var(--color-principal);
+  background-color: #c06f9f;
   font-size: 12px; 
 }
 

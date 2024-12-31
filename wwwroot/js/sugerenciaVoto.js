@@ -1,6 +1,8 @@
 
 const submitButtonSugerencia = document.getElementById('submitSugerencia');
+const submitButtonVoto = document.getElementById('submitVoto');
 const modalAceptarButton = document.getElementById('modalAceptar');
+const radios = document.querySelectorAll('input[name="voto"]');
 let sugerenciaInputValue = ''; 
 
 submitButtonSugerencia.addEventListener('click', function (e) {
@@ -68,8 +70,59 @@ modalAceptarButton.addEventListener('click', async function () {
   }
 });
 
+radios.forEach(radio => {
+  radio.addEventListener('click', function() {
+    if (this.checked) {
+        this.checked=true;
+    } else {
+        radios.forEach(r => r.checked = false)
+        this.checked = true;
 
 
+    }
+  });
+});
+
+
+
+submitButtonVoto.addEventListener('click', async function () {
+  const radios = document.querySelectorAll('input[name="voto"]');
+  let selectedId = null;
+
+  radios.forEach(radio => {
+    if (radio.checked) {
+      selectedId = radio.value; 
+    }
+  });
+
+  if (selectedId) {
+    try {
+      const currentDate = new Date().toISOString().split('T')[0]; 
+      
+      const response = await $.ajax({
+        url: `${URL}/sugerenciaVoto/addVotos`, 
+        type: "POST",
+        data: {
+          canVoto: selectedId, 
+          date: currentDate
+        },
+        dataType: "json",
+      });
+
+      console.log(response); 
+      submitButtonVoto.disabled = true;
+      radios.forEach(radio => {
+        radio.disabled = true;
+      });
+      
+      showSuccessAlert("Voto enviado correctamente.");
+    } catch (error) {
+      console.error("Error al enviar el voto:", error);
+    }
+  } else {
+    showErrorAlert('Por favor, selecciona una opción antes de enviar.');
+  }
+});
 
 function showErrorAlert(message) {
   iziToast.error({

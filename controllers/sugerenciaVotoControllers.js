@@ -3,7 +3,7 @@ import {
   insertVotosDB,
   getSugerenciasDB,
   updateSugerenciaEstadoDB,
-  getVotosDB
+  getVotosDB,updateSugerenciaActivoDB
 } from "../database/sugerenciaVotoDB.js";
 import { sendMail } from "../helpers/mailer.js";
 
@@ -29,6 +29,16 @@ export const actualizarEstadoSugerencia = async (req, res) => {
   }
 };
 
+export const actualizarActivoSugerencia = async (req, res) => {
+  const { id, estadoActivo } = req.body; 
+  try {
+    const result = await updateSugerenciaActivoDB({ id, estadoActivo }); 
+    res.status(200).json({ message: "Estado ACTIVO de la sugerencia actualizado", result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al actualizar el estado ACTIVO de la sugerencia." });
+  }
+};
 
 export const addSugerencias = async (req, res) => {
   try {

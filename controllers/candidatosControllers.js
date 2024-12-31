@@ -38,8 +38,7 @@ export const putCandidato = async (req, res) => {
       apellido,
       fechaNacimiento,
       cargo,
-      experiencia,
-      educacion,
+      informacion,
       partido,
       activo,
     } = req.body;
@@ -68,8 +67,7 @@ export const putCandidato = async (req, res) => {
       apellido: apellido, 
       fechaNacimiento: fechaNacimiento, 
       cargo: cargo, 
-      experiencia:experiencia, 
-      educacion:educacion, 
+      informacion: informacion, 
       partido: partido, 
       activo: activo, 
       imagen: imagenPath,
@@ -97,9 +95,9 @@ export const postCandidato = async (req, res) => {
       apellido,
       fechaNacimiento,
       cargo,
-      experiencia,
-      educacion,
+      informacion,
       partido,
+      activo,
     } = req.body;
     
     let imagenPath = null;
@@ -112,9 +110,9 @@ export const postCandidato = async (req, res) => {
       apellido: apellido, 
       fechaNacimiento: fechaNacimiento, 
       cargo: cargo, 
-      experiencia:experiencia, 
-      educacion:educacion, 
+      informacion: informacion, 
       partido: partido, 
+      activo: activo, 
       imagen: imagenPath,
     });
 
