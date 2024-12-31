@@ -7,6 +7,7 @@ import usersRoutes from "./usersRoutes.js";
 import eventosNoticiasRoutes from "./eventosNoticiasRoutes.js";
 import loginRoutes from "./loginRoutes.js";
 import adminRoutes from "./adminRoutes.js";
+import personalizacionRoutes from "./personalizarRoutes.js";
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.use("/eventos_noticias", eventosNoticiasRoutes);
 router.use("/login", loginRoutes);
 router.use("/propuestas", propuestasRoutes);
 router.use("/admins", adminRoutes);
+router.use("/personalizacion", personalizacionRoutes);
 
 export default router;

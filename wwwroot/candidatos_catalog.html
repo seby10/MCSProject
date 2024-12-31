@@ -9,7 +9,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
+    <link rel="shortcut icon" href="" type="image/x-icon" id="favicon" />
     <title>Gestión-Candidatos</title>
 
     <!-- Custom fonts for this template -->
@@ -71,7 +71,7 @@
         <!-- Sidebar - Brand -->
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
+          
         >
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-user-check"></i>
@@ -100,10 +100,8 @@
           <nav
             class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
           >
-
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-              
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a
@@ -116,7 +114,7 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Douglas McGee</span
+                    ></span
                   >
                   <img
                     class="img-profile rounded-circle"
@@ -203,7 +201,8 @@
                         <th>Apellidos</th>
                         <th>Fecha de Nacimiento</th>
                         <th>Cargo</th>
-                        <th>Información</th>
+                        <th>Experiencia</th>
+                        <th>Educación</th>
                         <th>Partido</th>
                         <th>Imagen</th>
                         <th>Activo</th>
@@ -217,7 +216,8 @@
                         <th>Apellidos</th>
                         <th>Fecha de Nacimiento</th>
                         <th>Cargo</th>
-                        <th>Información</th>
+                        <th>Experiencia</th>
+                        <th>Educación</th>
                         <th>Partido</th>
                         <th>Imagen</th>
                         <th>Activo</th>
@@ -285,6 +285,10 @@
                     type="text"
                     class="form-control"
                     id="editCandidateName"
+                    pattern="[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+"
+                    title="Solo se permiten letras y espacios"
+                    maxlength="49"
+                    required
                   />
                 </div>
                 <div class="me-3" style="flex: 1">
@@ -295,6 +299,10 @@
                     type="text"
                     class="form-control"
                     id="editCandidatelName"
+                    pattern="[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+"
+                    title="Solo se permiten letras y espacios"
+                    maxlength="49"
+                    required
                   />
                 </div>
               </div>
@@ -304,35 +312,75 @@
                 <label for="editBirthDate" class="form-label"
                   >Fecha de Nacimiento</label
                 >
-                <input type="date" class="form-control" id="editBirthDate" />
+                <input
+                  type="date"
+                  class="form-control"
+                  id="editBirthDate"
+                  max="2006-12-31"
+                  required
+                />
               </div>
 
               <!-- Cargo -->
               <div class="mb-3">
                 <label for="editCargo" class="form-label">Cargo</label>
-                <input type="text" class="form-control" id="editCargo" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editCargo"
+                  pattern="[a-zA-Z0-9\s]+"
+                  title="Solo se permiten letras, números y espacios"
+                  maxlength="49"
+                  required
+                />
               </div>
 
-              <!-- Información -->
+              <!-- Experiencia -->
               <div class="mb-3">
-                <label for="editInfo" class="form-label">Información</label>
+                <label for="editExp" class="form-label">Experiencia</label>
                 <textarea
                   class="form-control"
-                  id="editInfo"
+                  id="editExp"
                   rows="3"
+                  maxlength="4999"
+                ></textarea>
+              </div>
+              <!-- Educación -->
+              <div class="mb-3">
+                <label for="editEdu" class="form-label">Educación</label>
+                <textarea
+                  class="form-control"
+                  id="editEdu"
+                  rows="3"
+                  maxlength="4999"
                 ></textarea>
               </div>
 
               <!-- Partido -->
               <div class="mb-3">
                 <label for="editParty" class="form-label">Partido</label>
-                <input type="text" class="form-control" id="editParty" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editParty"
+                  pattern="[a-zA-Z0-9\s]+"
+                  title="Solo se permiten letras, números y espacios"
+                  maxlength="49"
+                  required
+                />
               </div>
               <!-- Campo para Imagen -->
               <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
-                <input type="file" class="form-control" id="imagen" name="imagen">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="imagen"
+                  name="imagen"
+                  accept=".jpeg, .jpg, .png, .gif, .webp"
+                />
               </div>
+
               <!-- Estado Activo -->
               <div class="form-check">
                 <input
@@ -344,20 +392,20 @@
                   >Activo</label
                 >
               </div>
-            </form>
-          </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cerrar
+                </button>
 
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button type="button" class="btn btn-primary" id="saveChanges">
-              Guardar cambios
-            </button>
+                <button type="submit" class="btn btn-primary" id="saveChanges">
+                  Guardar Cambios
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -393,6 +441,9 @@
                     type="text"
                     class="form-control"
                     id="candidateName"
+                    pattern="[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+"
+                    title="Solo se permiten letras y espacios"
+                    maxlength="49"
                     required
                   />
                 </div>
@@ -404,6 +455,9 @@
                     type="text"
                     class="form-control"
                     id="candidateLastName"
+                    pattern="[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+"
+                    title="Solo se permiten letras y espacios"
+                    maxlength="49"
                     required
                   />
                 </div>
@@ -418,6 +472,7 @@
                   type="date"
                   class="form-control"
                   id="birthDate"
+                  max="2006-12-31"
                   required
                 />
               </div>
@@ -429,35 +484,58 @@
                   type="text"
                   class="form-control"
                   id="position"
+                  pattern="[a-zA-Z0-9\s]+"
+                  title="Solo se permiten letras, números y espacios"
+                  maxlength="49"
                   required
                 />
               </div>
 
-              <!-- Información -->
+              <!-- Experiencia -->
               <div class="mb-3">
-                <label for="info" class="form-label">Información</label>
-                <textarea class="form-control" id="info" rows="3"></textarea>
+                <label for="exp" class="form-label">Experiencia</label>
+                <textarea
+                  class="form-control"
+                  id="exp"
+                  rows="3"
+                  maxlength="4999"
+                ></textarea>
+              </div>
+
+              <!-- Educación -->
+              <div class="mb-3">
+                <label for="edu" class="form-label">Educación</label>
+                <textarea
+                  class="form-control"
+                  id="edu"
+                  rows="3"
+                  maxlength="4999"
+                ></textarea>
               </div>
 
               <!-- Partido -->
               <div class="mb-3">
                 <label for="party" class="form-label">Partido</label>
-                <input type="text" class="form-control" id="party" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="party"
+                  pattern="[a-zA-Z0-9\s]+"
+                  title="Solo se permiten letras, números y espacios"
+                  maxlength="49"
+                  required
+                />
               </div>
               <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
-                <input type="file" class="form-control" id="image" name="imagen">
-              </div>
-              <!-- Estado Activo -->
-              <div class="form-check">
                 <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="activeStatus"
+                  type="file"
+                  class="form-control"
+                  id="image"
+                  name="imagen"
+                  accept=".jpeg, .jpg, .png, .gif, .webp"
+                  required
                 />
-                <label class="form-check-label" for="activeStatus"
-                  >Activo</label
-                >
               </div>
 
               <!-- Botón Guardar -->
@@ -469,7 +547,7 @@
         </div>
       </div>
     </div>
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -489,5 +567,6 @@
     <script src="vendor/jquery/jquery.blockUI.js"></script>
     <script src="js/candidatosAdmin.js" type="text/javascript"></script>
     <script src="iziToast-master/dist/js/iziToast.min.js"></script>
+    <script src="js/personalizar.js"></script>
   </body>
 </html>
