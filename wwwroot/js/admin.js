@@ -55,18 +55,22 @@ function cargarMenus() {
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/admin_catalog", MenuName: "Administradores" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }
   }

@@ -7,10 +7,10 @@ const addCandidato = async (candidate, imageFile) => {
     formData.append("apellido", candidate.apellido);
     formData.append("fechaNacimiento", candidate.fechaNacimiento);
     formData.append("cargo", candidate.cargo);
-    formData.append("informacion", candidate.informacion);
+    formData.append("experiencia", candidate.experiencia);
+    formData.append("educacion", candidate.educacion);
     formData.append("partido", candidate.partido);
-    formData.append("activo", candidate.activo ? 1 : 0);
-    
+
     if (imageFile) {
       formData.append("imagen", imageFile);
     }
@@ -39,7 +39,8 @@ async function saveCandidate(candidate, imageFile) {
     formData.append("apellido", candidate.apellido);
     formData.append("fechaNacimiento", candidate.fechaNacimiento);
     formData.append("cargo", candidate.cargo);
-    formData.append("informacion", candidate.informacion);
+    formData.append("experiencia", candidate.experiencia);
+    formData.append("educacion", candidate.educacion);
     formData.append("partido", candidate.partido);
     formData.append("activo", candidate.activo ? 1 : 0);
     if (imageFile) {
@@ -158,18 +159,22 @@ function cargarMenus() {
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/admin_catalog", MenuName: "Administradores" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }
   }
@@ -210,40 +215,59 @@ async function loadcandidatos() {
       let fecha = new Date(candidato.FEC_NAC_CAN);
       let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
       let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
-  
+
       let maxLength = 30;
-      let infoText =
-          candidato.INF_CAN.length > maxLength
-              ? candidato.INF_CAN.substring(0, maxLength) + "..."
-              : candidato.INF_CAN;
-  
+      let expText =
+        candidato.EXP_CAN.length > maxLength
+          ? candidato.EXP_CAN.substring(0, maxLength) + "..."
+          : candidato.EXP_CAN;
+      let eduText =
+        candidato.EDU_CAN.length > maxLength
+          ? candidato.EDU_CAN.substring(0, maxLength) + "..."
+          : candidato.EDU_CAN;
+
       let id = `<td>${candidato.ID_CAN}</td>`;
       let name = `<td>${candidato.NOM_CAN}</td>`;
       let lname = `<td>${candidato.APE_CAN}</td>`;
       let fnac = `<td>${fechaFormateada}</td>`;
       let cargo = `<td>${candidato.CAR_CAN}</td>`;
-      let info = `<td>${infoText}</td>`;
+      let exp = `<td>${expText}</td>`;
+      let edu = `<td>${eduText}</td>`;
       let part = `<td>${candidato.PAR_CAN}</td>`;
-  
+
       let imagenDisplay = candidato.IMG_CAN
-          ? `<td><img src="${candidato.IMG_CAN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
-          : `<td>Sin imagen</td>`;
-  
+        ? `<td><img src="${candidato.IMG_CAN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
+        : `<td>Sin imagen</td>`;
+
       let activo = `
           <td>
-              <input type="checkbox" class="activo-checkbox" data-id="${candidato.ID_CAN}" 
+              <input type="checkbox" class="activo-checkbox" data-id="${
+                candidato.ID_CAN
+              }" 
               ${candidato.activo ? "checked" : ""} disabled>
           </td>`;
-  
+
       let actionButtons = `
           <td>
               <button class="btn btn-primary edit-btn mr-2" data-id="${candidato.ID_CAN}">
                   <i class="fas fa-edit"></i>
               </button>
           </td>`;
-  
-      rows += `<tr>${id + name + lname + fnac + cargo + info + part + imagenDisplay + activo + actionButtons}</tr>`;
-  }
+
+      rows += `<tr>${
+        id +
+        name +
+        lname +
+        fnac +
+        cargo +
+        exp +
+        edu +
+        part +
+        imagenDisplay +
+        activo +
+        actionButtons
+      }</tr>`;
+    }
 
     tableBody.innerHTML = rows;
 
@@ -258,50 +282,52 @@ async function loadcandidatos() {
         let fechaFormatoDate = fechaNacimiento.toISOString().split("T")[0];
         document.getElementById("editBirthDate").value = fechaFormatoDate;
         document.getElementById("editCargo").value = candidato.CAR_CAN;
-        document.getElementById("editInfo").value = candidato.INF_CAN;
+        document.getElementById("editExp").value = candidato.EXP_CAN;
+        document.getElementById("editEdu").value = candidato.EDU_CAN;
         document.getElementById("editParty").value = candidato.PAR_CAN;
         document.getElementById("activeStatus").checked = candidato.activo;
         $("#editModal").modal("show");
       });
     });
-
-    const saveChangesButton = document.getElementById("saveChanges");
-    saveChangesButton.removeEventListener("click", handleSaveChanges);
-    saveChangesButton.addEventListener("click", handleSaveChanges);
   } catch (error) {
     console.error("Error fetching data: ", error);
   }
 }
 
-async function handleSaveChanges() {
-  const updatedCandidate = {
-    id: document.getElementById("editCandidateId").value,
-    nombre: document.getElementById("editCandidateName").value,
-    apellido: document.getElementById("editCandidatelName").value,
-    fechaNacimiento: formatDate(document.getElementById("editBirthDate").value),
-    cargo: document.getElementById("editCargo").value,
-    informacion: document.getElementById("editInfo").value,
-    partido: document.getElementById("editParty").value,
-    activo: document.getElementById("activeStatus").checked ? 1 : 0,
-  };
+document
+  .getElementById("editForm")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  const imageFile = document.getElementById("imagen").files[0];
+    const updatedCandidate = {
+      id: document.getElementById("editCandidateId").value,
+      nombre: document.getElementById("editCandidateName").value,
+      apellido: document.getElementById("editCandidatelName").value,
+      fechaNacimiento: document.getElementById("editBirthDate").value,
+      cargo: document.getElementById("editCargo").value,
+      experiencia: document.getElementById("editExp").value,
+      educacion: document.getElementById("editEdu").value,
+      partido: document.getElementById("editParty").value,
+      activo: document.getElementById("activeStatus").checked ? 1 : 0,
+    };
 
-  try {
-    let response = await saveCandidate(updatedCandidate, imageFile);
+    const imageFile = document.getElementById("imagen").files[0];
 
-    if (response.success) {
-      showSuccessAlert("Candidato actualizado exitosamente");
-      $("#editModal").modal("hide");
-      loadcandidatos();
-    } else {
-      showErrorAlert("Error al actualizar el candidato");
+    try {
+      let response = await saveCandidate(updatedCandidate, imageFile);
+
+      if (response.success) {
+        showSuccessAlert("Candidato actualizado exitosamente");
+        $("#editModal").modal("hide");
+        loadcandidatos();
+      } else {
+        showErrorAlert("Error al actualizar el candidato");
+      }
+    } catch (error) {
+      console.error("Error al guardar los cambios:", error);
+      showErrorAlert("Hubo un error al intentar guardar los cambios");
     }
-  } catch (error) {
-    console.error("Error al guardar los cambios:", error);
-    showErrorAlert("Hubo un error al intentar guardar los cambios");
-  }
-}
+  });
 
 function formatDate(date) {
   const d = new Date(date);
@@ -317,7 +343,7 @@ document
     $("#addCandidateModal").modal("show");
   });
 
-  document
+document
   .getElementById("addCandidateForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -325,13 +351,11 @@ document
     const Candidate = {
       nombre: document.getElementById("candidateName").value,
       apellido: document.getElementById("candidateLastName").value,
-      fechaNacimiento: formatDate(
-        document.getElementById("birthDate").value
-      ),
+      fechaNacimiento: formatDate(document.getElementById("birthDate").value),
       cargo: document.getElementById("position").value,
-      informacion: document.getElementById("info").value,
+      experiencia: document.getElementById("exp").value,
+      educacion: document.getElementById("edu").value,
       partido: document.getElementById("party").value,
-      activo: document.getElementById("activeStatus").checked ? 1 : 0,
     };
 
     const imageFile = document.getElementById("image").files[0];
@@ -356,13 +380,36 @@ document
   });
 
 document.getElementById("logoutButton").addEventListener("click", function () {
-  showConfirmationQuestion(
-    "Seguro que quiere salir?",
-    function (confirmed) {
-      if (confirmed) {
-        sessionStorage.removeItem("user");
-        window.location.href = "login";
-      }
+  showConfirmationQuestion("Seguro que quiere salir?", function (confirmed) {
+    if (confirmed) {
+      sessionStorage.removeItem("user");
+      window.location.href = "login";
     }
-  );
+  });
+});
+
+document.getElementById("image").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      showErrorAlert(
+        "Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP)."
+      );
+      event.target.value = "";
+    }
+  }
+});
+
+document.getElementById("imagen").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      showErrorAlert(
+        "Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP)."
+      );
+      event.target.value = "";
+    }
+  }
 });
