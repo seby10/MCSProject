@@ -67,7 +67,11 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
+<<<<<<< HEAD
         { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" },
+=======
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+>>>>>>> caa58da933a6631e84b2205707bf21af12ce4528
         { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }

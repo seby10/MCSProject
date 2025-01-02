@@ -192,20 +192,20 @@ function cargarMenus() {
   if (usuario && usuario.role) {
     if (usuario.role === "admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
-        { MenuLink: "/votos_catalog", MenuName: "Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
+        { MenuLink: "/personalizacion", MenuName: "Personalizar" },
         { MenuLink: "/admin_catalog", MenuName: "Administradores" },
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
-        { MenuLink: "/votos_catalog", MenuName: "Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
       );
     }
   }
@@ -245,6 +245,7 @@ async function loadNoticias() {
     for (const noticia of datos.response) {
       //let fechaFormateada = new Date(noticia.FEC_EVE_NOT).toISOString().slice(0, 16).replace("T", " ");
       let fechaFormateada = formatDateTime(noticia.FEC_EVE_NOT);
+      let tipoFormat = noticia.TIP_EVE_NOT.toString().toUpperCase();
 
       let maxLength = 100;
       let infoText =
@@ -261,7 +262,7 @@ async function loadNoticias() {
       let imagenDisplay = noticia.IMG_EVE_NOT
         ? `<td><img src="/images/noticias/${noticia.IMG_EVE_NOT}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
         : `<td>Sin imagen</td>`;
-
+      let tipo = `<td>${tipoFormat}</td>`;
       let activo = `
           <td>
             <input type="checkbox" class="estado-checkbox" data-id="${
@@ -282,6 +283,7 @@ async function loadNoticias() {
         info +
         ubicacion +
         imagenDisplay +
+        tipo +
         activo +
         actionButtons
       }</tr>`;

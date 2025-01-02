@@ -8,11 +8,13 @@ import {
   updateEventoNoticiaDetails,
   toggleEventoNoticiaStatus,
   //getEventoNoticiaById
+  getRecentNoticias,
 } from "../controllers/eventosNoticiasController.js";
 const router = express.Router();
 
 router.get("/getEventosNoticias/:date", getEventosNoticiasByDate);
-router.get("/recent", getRecentEventos);
+router.get("/recentEventos", getRecentEventos);
+router.get("/recentNoticias", getRecentNoticias);
 router.get("/getEventosNoticiasAll", getEventosNoticias);
 router.post("/addEventoNoticia", upload.single('imagen'), createEventoNoticia);
 //router.get("/getEventosNoticiasById/:id", getEventoNoticiaById);
