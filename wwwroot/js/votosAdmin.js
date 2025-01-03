@@ -127,15 +127,15 @@ async function loadVotos() {
 
 
 function createChart(porcentajesPorCandidato) {
-  const ctx = document.getElementById('grafica');
+  const ctx = document.getElementById('grafica1');
   if (!ctx) {
-    console.error("No se encontró el canvas con id 'grafica'.");
+    console.error("No se encontró el canvas con id 'grafica1'.");
     return;
   }
 
     console.log(porcentajesPorCandidato);
 
-    const $grafica = document.querySelector("#grafica");
+    const $grafica1 = document.querySelector("#grafica1");
     const etiquetas = Object.keys(porcentajesPorCandidato); 
     const porcentajes = Object.values(porcentajesPorCandidato);
     
@@ -152,7 +152,7 @@ function createChart(porcentajesPorCandidato) {
       borderColor: colores.map(color => color.replace('0.2', '1')),
       borderWidth: 1,
     };
-    new Chart($grafica, {
+    new Chart($grafica1, {
       type: 'bar',
       data: {
         labels: etiquetas,
