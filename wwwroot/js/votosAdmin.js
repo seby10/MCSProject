@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   cargarUsuario();
   cargarMenus();
   loadVotos();
+  loadVotosTotales();
 });
 
 async function showVotos() {
@@ -19,6 +20,63 @@ async function showVotos() {
   }
 }
 
+
+async function loadVotosTotales() {
+  try {
+    const datos = await showVotos();
+
+    let tableBody = document.getElementById("tbodyvotocantidad");
+    let rows = "";
+
+    const votosPorCandidato = {};
+    let totalVotos = 0;
+
+    for (const voto of datos.response) {
+
+      let candidatoCompleto = `${voto.NOM_CAN} ${voto.APE_CAN}`;
+
+      if (votosPorCandidato[candidatoCompleto]) {
+        votosPorCandidato[candidatoCompleto]++;
+      } else {
+        votosPorCandidato[candidatoCompleto] = 1;
+      }
+      totalVotos++; 
+
+    }
+
+    for (const candidato in votosPorCandidato) {
+      let votos = votosPorCandidato[candidato];
+      rows += `<tr>
+                 <td>${votos}</td>
+                 <td>${candidato}</td>
+               </tr>`;
+    }
+
+    rows += `<tr>
+               <td><strong>${totalVotos}</strong></td>
+               <td><strong>Total Votos</strong></td>
+             </tr>`;
+
+    tableBody.innerHTML = rows;
+
+    const porcentajesPorCandidato = {};
+    for (const candidato in votosPorCandidato) {
+      porcentajesPorCandidato[candidato] = ((votosPorCandidato[candidato] / totalVotos) * 100).toFixed(2);
+    }
+    createChart(porcentajesPorCandidato);
+
+    const votoContainer = document.getElementById('voto-container');
+    if (votoContainer) {
+      votoContainer.style.maxHeight = '400px'; 
+      votoContainer.style.overflowY = 'auto';  
+    }
+
+  } catch (error) {
+    console.error("Error al cargar votos:", error);
+  }
+}
+
+
 async function loadVotos() {
   try {
     const datos = await showVotos();
@@ -28,6 +86,7 @@ async function loadVotos() {
 
     const votosPorCandidato = {};
     let totalVotos = 0;
+    const primeros10Votos = datos.response.slice(0, 10);
 
     for (const voto of datos.response) {
       let fecha = new Date(voto.FEC_VOT);
@@ -56,6 +115,11 @@ async function loadVotos() {
     }
     // console.log("Porcentajes por Candidato: ", porcentajesPorCandidato);
     createChart(porcentajesPorCandidato);
+    const votoContainer = document.getElementById('voto-container');
+    if (votoContainer) {
+      votoContainer.style.maxHeight = '400px'; 
+      votoContainer.style.overflowY = 'auto';  
+    }
   } catch (error) {
     console.error("Error al cargar votos:", error);
   }
@@ -121,20 +185,6 @@ function createChart(porcentajesPorCandidato) {
     });
 }
 
-
-async function showSugerencias() {
-  try {
-    const response = await $.ajax({
-      url: `${URL}/sugerenciaVoto/getSugerencias`,
-      type: "GET",
-      dataType: "json",
-    });
-    return response;
-  } catch (error) {
-    console.error("Error fetching suggestions:", error);
-    return null;
-  }
-}
 function showConfirmationQuestion(message, callback) {
   iziToast.question({
     title: "Confirmation",
@@ -200,7 +250,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
@@ -208,7 +259,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }
   }

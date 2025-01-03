@@ -45,6 +45,19 @@ export const updateSugerenciaEstadoDB = async ({ id, estado }) => {
   }
 };
 
+export const updateSugerenciaActivoDB = async ({ id, estadoActivo }) => {
+  try {
+    const connection = await getConnection();
+    const query = 'CALL spActualizarActivoSugerencia(?, ?)'; 
+    const [result] = await connection.execute(query, [id, estadoActivo]);
+    console.log('Sugerencia ACTIVO actualizada:', result);
+    return result;
+  } catch (error) {
+    console.error("Error al actualizar el estado ACTIVO de la sugerencia:", error);
+    throw new Error("Error al actualizar el estado ACTIVO de la sugerencia: " + error.message);
+  }
+};
+
 export const insertSugerenciasDB = async ({ fecha, descripcion, userId }) => {
     let connection; 
     try {
