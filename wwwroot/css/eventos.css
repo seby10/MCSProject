@@ -1,4 +1,9 @@
 /* Actualizar los estilos en eventos.css */
+:root {
+  --color-principal: #ffff;
+  --hover-color:#ffff;
+}
+
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -34,7 +39,7 @@
 }
 
 .event-date {
-  color: #007bff; /* Cambiar el color a azul */
+  color: var(--color-principal); /* Cambiar el color a azul */
   font-size: 1rem; /* Aumentar el tamaño de la fuente */
   margin-top: 5px;
   font-weight: bold;
@@ -82,12 +87,12 @@
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease;
-  color: #666;
+  color: var(--color-principal);
 }
 
 .nav-btn:hover {
   background: #f0f0f0;
-  color: #333;
+  color: var(--hover-color);
 }
 
 .nav-btn:active {
@@ -95,7 +100,7 @@
 }
 
 .today-btn {
-  background-color: #007bff;
+  background-color: var(--color-principal);
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -103,7 +108,7 @@
 }
 
 .today-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--hover-color);
 }
 
 #fecha {
@@ -123,7 +128,7 @@
 
 #fecha:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--color-principal);
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
@@ -246,7 +251,7 @@
 }
 
 .slider-event-card .event-date {
-  color: #007bff; /* Cambiar el color a azul */
+  color: var(--color-principal); /* Cambiar el color a azul */
   font-size: 1rem; /* Aumentar el tamaño de la fuente */
   margin-top: 5px;
   font-weight: bold;
@@ -315,7 +320,7 @@
 }
 
 .indicator.active {
-  background: #007bff;
+  background: var(--color-principal);
 }
 
 .boton-box {
@@ -330,7 +335,7 @@
   padding: 10px 45px;
   text-align: center;
   color: #fff;
-  background-color: #e62081;
+  background-color: var(--color-principal);
   text-decoration: none;
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -338,8 +343,8 @@
 
 .boton-box a:hover {
   background-color: transparent;
-  border-color: #e62081;
-  color: #e62081;
+  border-color: var(--color-principal);
+  color: var(--color-principal);
 }
 
 .slider-event-image {

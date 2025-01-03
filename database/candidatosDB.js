@@ -34,14 +34,15 @@ export const updateCandidatoDB = async (candidatoData)=> {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL sp_updateCandidato(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "CALL sp_updateCandidato(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         candidatoData.id,
         candidatoData.nombre, 
         candidatoData.apellido,
         candidatoData.fechaNacimiento,
         candidatoData.cargo,
-        candidatoData.informacion,
+        candidatoData.experiencia,
+        candidatoData.educacion,
         candidatoData.partido,
         candidatoData.activo,
         candidatoData.imagen
@@ -63,9 +64,9 @@ export const insertCandidatoDB = async (candidatoData) => {
         candidatoData.apellido,
         candidatoData.fechaNacimiento,
         candidatoData.cargo,
-        candidatoData.informacion,
+        candidatoData.experiencia,
+        candidatoData.educacion,
         candidatoData.partido,
-        candidatoData.activo,
         candidatoData.imagen
       ]
     );
