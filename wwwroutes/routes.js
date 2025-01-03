@@ -61,5 +61,8 @@ wwwrouter.use("/candidatos_catalog", function (req, res) {
 wwwrouter.use("/sugerencias_catalog", function (req, res) {
   res.sendFile(path.join(__dirname, "../wwwroot", "sugerencias_catalog.html"));
 });
+wwwrouter.use("/votos_catalog", function (req, res) {
+  res.sendFile(path.join(__dirname, "../wwwroot", "votos_catalog.html"));
+});
 
 export default wwwrouter;

@@ -30,6 +30,7 @@
   margin: 0;
   color: #333;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .event-date {
@@ -190,16 +191,30 @@
 }
 
 /* Estilos para el slider de eventos */
+.sliders-wrapper {
+  display: flex;
+  gap: 113px; /* Espacio entre los sliders */
+  flex-wrap: wrap; /* Permitir que los sliders se envuelvan en pantallas pequeñas */
+}
+
+.eventos-slider-container {
+  max-width: 45%; /* Toma el 45% del ancho del contenedor, ajustable según necesidades */
+  flex: 1 1 45%;
+}
+
+@media (max-width: 768px) {
+  .eventos-slider-container {
+    flex: 1 1 100%; /* Toma el 100% del ancho en pantallas pequeñas */
+    max-width: 100%; /* Asegura que no se expanda más del 100% */
+  }
+}
+
+
 .eventos-slider-section {
   padding: 60px 0;
   background: #f8f9fa;
 }
 
-.eventos-slider-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
 
 .eventos-slider {
   background: white;
@@ -225,6 +240,9 @@
 .slider-event-card h3 {
   color: #333;
   margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+
 }
 
 .slider-event-card .event-date {
@@ -248,7 +266,7 @@
   position: absolute;
   top: 50%;
   /* Modificar estas propiedades */
-  left: -20px;  /* Mover los controles más hacia afuera */
+  left: -20px; /* Mover los controles más hacia afuera */
   right: -20px; /* Mover los controles más hacia afuera */
   width: calc(100% + 40px); /* Ajustar el ancho para compensar */
   transform: translateY(-50%);
@@ -320,7 +338,7 @@
 
 .boton-box a:hover {
   background-color: transparent;
-  border-color:#e62081;
+  border-color: #e62081;
   color: #e62081;
 }
 

@@ -75,7 +75,7 @@ export const insertPropuesta = async (req, res) => {
 // Método para actualizar una propuesta existente
 export const updatePropuesta = async (req, res) => {
   try {
-    const { ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO } = req.body;
+    const { ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, FAVORITA } = req.body;
 
     // Obtener la propuesta actual para manejar la imagen
     const currentPropuesta = await getPropuestaByIdDB(ID_PRO);
@@ -109,6 +109,7 @@ export const updatePropuesta = async (req, res) => {
       INF_PRO,
       ID_CANT_PRO,
       ESTADO,
+      FAVORITA,
       imagenPath
     );
 
