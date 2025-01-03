@@ -17,8 +17,4 @@ router.get("/getVotos", getVotos);
 router.put("/updateEstadoSugerencia", actualizarEstadoSugerencia);
 router.put("/updateActivoSugerencia", actualizarActivoSugerencia);
 
-<<<<<<< HEAD
 export default router;
-=======
-export default router;
->>>>>>> caa58da933a6631e84b2205707bf21af12ce4528
