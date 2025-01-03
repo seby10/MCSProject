@@ -30,7 +30,7 @@ const limitarPalabras = (texto, limite) => {
 
 const mostrarPropuestasFavoritas = async () => {
     const propuestasFavoritas = await getPropuestaFav();
-    const contenedorPropuestas = document.querySelector(".propuestas-favoritas-section .row");
+    const contenedorPropuestas = document.querySelector(".propuestas-favoritas-section .rowPropuestas");
 
     if (!contenedorPropuestas) {
         console.error("No se encontró el contenedor de propuestas favoritas.");
