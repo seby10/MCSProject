@@ -53,11 +53,11 @@ const updateTitle = (selectedDate) => {
   const titleElement = $(".heading_container h2");
   if (selectedDate >= today) {
     titleElement.fadeOut(300, function() {
-      $(this).text("Eventos Próximos").fadeIn(300);
+      $(this).text("Eventos").fadeIn(300);
     });
   } else {
     titleElement.fadeOut(300, function() {
-      $(this).text("Noticias Pasadas").fadeIn(300);
+      $(this).text("Noticias").fadeIn(300);
     });
   }
 };
