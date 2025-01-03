@@ -3,12 +3,12 @@ import { getConnection } from "../helpers/connection.js";
 export const getPropuestaByGrupDirDB = async (grup, idCandidato) => {
   try {
     const connection = await getConnection();
-    // Ejecutamos el procedimiento pasando ambos parámetros
+    
     const [result] = await connection.query("CALL GetPropuestaByGrupDir(?, ?)", [
       grup,
       idCandidato,
     ]);
-    return result[0]; // Se asume que result es un array de propuestas
+    return result[0];
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener la propuesta");
@@ -20,7 +20,7 @@ export const getCategoriasDB = async () => {
     const connection = await getConnection();
     const [result] = await connection.query("CALL GetCategorias()");
     console.log(result);
-    return result; // Devuelve las categorías únicas
+    return result;
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener las categorías");
@@ -49,7 +49,7 @@ export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_
     const connection = await getConnection();
     const [result] = await connection.query(
       "CALL InsertarPropuesta(?, ?, ?, ?, ?)",
-      [NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN]  // Pasar los parámetros como valores
+      [NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, URL_IMAGEN] 
     );
     console.log(result);
     return result;
@@ -60,12 +60,12 @@ export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_
 };
 
 
-export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN) => {
+export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, FAVORITA,  URL_IMAGEN) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL ActualizarPropuesta(?, ?, ?, ?, ?, ?, ?)",
-      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN]
+      "CALL ActualizarPropuesta(?, ?, ?, ?, ?, ?, ?, ?)",
+      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, FAVORITA, URL_IMAGEN]
     );
     return result;
   } catch (error) {

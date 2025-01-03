@@ -2,123 +2,30 @@ const URL = "http://localhost:4000/MCSPROJECT";
 document.addEventListener("DOMContentLoaded", function () {
   cargarUsuario();
   cargarMenus();
-  loadVotos();
 });
 
-async function showVotos() {
-  try {
-    const response = await $.ajax({
-      url: `${URL}/sugerenciaVoto/getVotos`,
-      type: "GET",
-      dataType: "json",
-    });
-    return response;
-  } catch (error) {
-    console.error("Error fetching votes:", error);
-    return null;
-  }
-}
+$(document).ready(function() {
+  $('#estadoFiltro').change(function() {
+    var estadoSeleccionado = $(this).val().trim(); 
+    filtrarPorEstado(estadoSeleccionado);
+  });
+});
 
-async function loadVotos() {
-  try {
-    const datos = await showVotos();
-
-    let tableBody = document.getElementById("tbodyvot");
-    let rows = "";
-
-    const votosPorCandidato = {};
-    let totalVotos = 0;
-
-    for (const voto of datos.response) {
-      let fecha = new Date(voto.FEC_VOT);
-      let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
-      let fechaFormateada = fecha.toLocaleDateString("es-ES", opciones);
-
-      let id = `<td>${voto.ID_VOT}</td>`;
-      let fechaTd = `<td>${fechaFormateada}</td>`;
-      let candidatoCompleto = `${voto.NOM_CAN} ${voto.APE_CAN}`;
-      let candidato = `<td>${candidatoCompleto}</td>`;
-
-      if (votosPorCandidato[candidatoCompleto]) {
-        votosPorCandidato[candidatoCompleto]++;
-      } else {
-        votosPorCandidato[candidatoCompleto] = 1;
-      }
-      totalVotos++; 
-
-      rows += `<tr>${id + fechaTd + candidato}</tr>`;
-    }
-    tableBody.innerHTML = rows;
-    // console.log("Votos por Candidato: ", votosPorCandidato);
-    const porcentajesPorCandidato = {};
-    for (const candidato in votosPorCandidato) {
-      porcentajesPorCandidato[candidato] = ((votosPorCandidato[candidato] / totalVotos) * 100).toFixed(2);
-    }
-    // console.log("Porcentajes por Candidato: ", porcentajesPorCandidato);
-    createChart(porcentajesPorCandidato);
-  } catch (error) {
-    console.error("Error al cargar votos:", error);
-  }
-}
-
-
-function createChart(porcentajesPorCandidato) {
-  const ctx = document.getElementById('grafica');
-  if (!ctx) {
-    console.error("No se encontró el canvas con id 'grafica'.");
+function filtrarPorEstado(estado) {
+  if (estado === "") {
+    $('#dataTable tbody tr').show();
     return;
   }
 
-    console.log(porcentajesPorCandidato);
+  $('#dataTable tbody tr').each(function() {
+    var estadoFila = $(this).find('td:nth-child(5) select').val().trim();
 
-    const $grafica = document.querySelector("#grafica");
-    const etiquetas = Object.keys(porcentajesPorCandidato); 
-    const porcentajes = Object.values(porcentajesPorCandidato);
-    
-
-    const colores = [
-      'rgba(242, 99, 255, 0.2)',
-      'rgba(150, 103, 198, 0.2)',
-      'rgba(255, 206, 86, 0.2)'
-    ];
-    const votos = {
-      label: "Porcentajes de votos por candidatos ",
-      data: porcentajes,
-      backgroundColor: colores.slice(0, porcentajes.length),
-      borderColor: colores.map(color => color.replace('0.2', '1')),
-      borderWidth: 1,
-    };
-    new Chart($grafica, {
-      type: 'bar',
-      data: {
-        labels: etiquetas,
-        datasets: [votos],
-      },
-      options: {
-        legend: {
-          display: false, 
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              max: 100, 
-              callback: function(value) {
-                return value + '%';
-              }
-            }
-          }],
-        },
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItem, data) {
-              const value = tooltipItem.yLabel;
-              return value + '%';
-            }
-          }
-        }
-      }
-    });
+    if (estadoFila === estado) {
+      $(this).show(); 
+    } else {
+      $(this).hide();
+    }
+  });
 }
 
 
@@ -201,7 +108,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
@@ -210,7 +118,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }
   }
@@ -258,7 +167,6 @@ async function loadSugerencias() {
     let tableBody = document.getElementById("tbodysug");
     let rows = "";
 
-    // Generar filas para cada sugerencia
     for (const sugerencia of datos.response) {
       let fecha = new Date(sugerencia.FEC_SUG);
       let opciones = { day: "2-digit", month: "2-digit", year: "numeric" };
@@ -287,13 +195,36 @@ async function loadSugerencias() {
           </button>
         </td>
       `;
+      let checkbox = `
+        <td>
+          <input type="checkbox" class="check-estado" data-id="${sugerencia.ID_SUG}" ${sugerencia.ACTIVO === '0' ? 'checked' : ''}>
+        </td>
+      `;
+
       let correo = `<td>${sugerencia.COR_USU}</td>`;
 
-      rows += `<tr id="row-${sugerencia.ID_SUG}">${id + fnac + desc + correo + est + saveButton}</tr>`;
+      rows += `<tr id="row-${sugerencia.ID_SUG}">${id + fnac + desc + correo + est + checkbox + saveButton}</tr>`;
     }
 
     tableBody.innerHTML = rows;
-
+    document.querySelectorAll(".check-estado").forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        const id = this.getAttribute("data-id");
+        const estadoActivo = this.checked ? 1 : 0;
+        showConfirmationQuestion(
+          "¿Seguro que desea cambiar el estado a omitir de esta sugerencia?",
+          function (confirmed) {
+            if (confirmed) {
+              actualizarActivoSugerencia(id, estadoActivo).then(() => {
+                loadSugerencias();
+              });
+            } else {
+              checkbox.checked = !checkbox.checked;
+            }
+          }
+        );
+      });
+    });
     document.querySelectorAll(".save-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const id = this.getAttribute("data-id");
@@ -330,5 +261,25 @@ async function actualizarEstadoSugerencia(id, estado, button) {
     }
   } catch (error) {
     console.error("Error al actualizar el estado:", error);
+  }
+}
+
+async function actualizarActivoSugerencia(id, estadoActivo) {
+  try {
+    const response = await $.ajax({
+      url: `${URL}/sugerenciaVoto/updateActivoSugerencia`,
+      type: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify({ id, estadoActivo }),
+      dataType: 'json',
+    });
+
+    if (response.message === 'Estado ACTIVO de la sugerencia actualizado') {
+      console.log(`Estado ACTIVO para la sugerencia ${id} actualizado a ${estadoActivo}`);
+    } else {
+      console.error("Error al actualizar el estado ACTIVO");
+    }
+  } catch (error) {
+    console.error("Error al actualizar el estado ACTIVO:", error);
   }
 }

@@ -1,6 +1,7 @@
 import {
   getEventosNoticiasByDateFromDB,
-  getRecentEventosNoticias,
+  getRecentEventosDB,
+  getRecentNoticiasDB,
   getAllEventosNoticias,
   addEventoNoticia,
   updateEventoNoticia,
@@ -29,7 +30,7 @@ export const getEventosNoticiasByDate = async (req, res) => {
 export const getRecentEventos = async (req, res) => {
   try {
     const limit = req.query.limit || 5;
-    const result = await getRecentEventosNoticias(limit);
+    const result = await getRecentEventosDB(limit);
     //console.log('Resultados:', result);
     res.json(result);
   } catch (error) {
@@ -37,6 +38,20 @@ export const getRecentEventos = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error al obtener eventos recientes", error });
+  }
+};
+
+export const getRecentNoticias = async (req, res) => {
+  try {
+    const limit = req.query.limit || 5;
+    const result = await getRecentNoticiasDB(limit);
+    //console.log('Resultados:', result);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "Error al obtener noticias recientes", error });
   }
 };
 

@@ -1,6 +1,7 @@
 /* Actualizar los estilos en eventos.css */
 :root {
   --color-principal: #ffff;
+  --hover-color:#ffff;
 }
 
 .events-grid {
@@ -34,10 +35,11 @@
   margin: 0;
   color: #333;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .event-date {
-  color: #007bff; /* Cambiar el color a azul */
+  color: var(--color-principal); /* Cambiar el color a azul */
   font-size: 1rem; /* Aumentar el tamaño de la fuente */
   margin-top: 5px;
   font-weight: bold;
@@ -85,12 +87,12 @@
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.2s ease;
-  color: #666;
+  color: var(--color-principal);
 }
 
 .nav-btn:hover {
   background: #f0f0f0;
-  color: #333;
+  color: var(--hover-color);
 }
 
 .nav-btn:active {
@@ -98,7 +100,7 @@
 }
 
 .today-btn {
-  background-color: #007bff;
+  background-color: var(--color-principal);
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -106,7 +108,7 @@
 }
 
 .today-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--hover-color);
 }
 
 #fecha {
@@ -126,7 +128,7 @@
 
 #fecha:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--color-principal);
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
@@ -194,16 +196,30 @@
 }
 
 /* Estilos para el slider de eventos */
+.sliders-wrapper {
+  display: flex;
+  gap: 113px; /* Espacio entre los sliders */
+  flex-wrap: wrap; /* Permitir que los sliders se envuelvan en pantallas pequeñas */
+}
+
+.eventos-slider-container {
+  max-width: 45%; /* Toma el 45% del ancho del contenedor, ajustable según necesidades */
+  flex: 1 1 45%;
+}
+
+@media (max-width: 768px) {
+  .eventos-slider-container {
+    flex: 1 1 100%; /* Toma el 100% del ancho en pantallas pequeñas */
+    max-width: 100%; /* Asegura que no se expanda más del 100% */
+  }
+}
+
+
 .eventos-slider-section {
   padding: 60px 0;
   background: #f8f9fa;
 }
 
-.eventos-slider-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
 
 .eventos-slider {
   background: white;
@@ -229,10 +245,13 @@
 .slider-event-card h3 {
   color: #333;
   margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+
 }
 
 .slider-event-card .event-date {
-  color: #007bff; /* Cambiar el color a azul */
+  color: var(--color-principal); /* Cambiar el color a azul */
   font-size: 1rem; /* Aumentar el tamaño de la fuente */
   margin-top: 5px;
   font-weight: bold;
@@ -252,7 +271,7 @@
   position: absolute;
   top: 50%;
   /* Modificar estas propiedades */
-  left: -20px;  /* Mover los controles más hacia afuera */
+  left: -20px; /* Mover los controles más hacia afuera */
   right: -20px; /* Mover los controles más hacia afuera */
   width: calc(100% + 40px); /* Ajustar el ancho para compensar */
   transform: translateY(-50%);
@@ -301,7 +320,7 @@
 }
 
 .indicator.active {
-  background: #007bff;
+  background: var(--color-principal);
 }
 
 .boton-box {

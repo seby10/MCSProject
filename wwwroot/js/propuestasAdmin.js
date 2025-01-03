@@ -102,6 +102,7 @@ async function updatePropuesta(propuesta, imageFile) {
     formData.append("INF_PRO", propuesta.INF_PRO);
     formData.append("ID_CANT_PRO", propuesta.ID_CANT_PRO);
     formData.append("ESTADO", propuesta.ESTADO); // Asegúrate de incluir estado
+    formData.append("FAVORITA", propuesta.FAVORITA);
 
     // Si se ha cargado una nueva imagen, añadirla al FormData
     if (imageFile) {
@@ -134,6 +135,7 @@ document.getElementById("saveChanges").addEventListener("click", function () {
   const group = document.getElementById("editRoleGroup").value.trim();
   const description = document.getElementById("editDescription").value.trim();
   const estado = document.getElementById("editEstado").checked ? 1 : 0;
+  const favorita = document.getElementById("editFavorita").checked ? 1 : 0;
   const candidateId = document.getElementById("candidateSelect").value;
   const file = document.getElementById("editUrlImagen").files[0]; // Obtener archivo de imagen
 
@@ -149,6 +151,7 @@ document.getElementById("saveChanges").addEventListener("click", function () {
     GRUP_DIR_PRO: group,
     INF_PRO: description,
     ESTADO: estado,
+    FAVORITA: favorita,
     ID_CANT_PRO: candidateId,
   };
 
@@ -334,7 +337,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     } else if (usuario.role === "super_admin") {
       menus.push(
@@ -343,7 +347,8 @@ function cargarMenus() {
         { MenuLink: "/candidatos_catalog", MenuName: "Candidatos" },
         { MenuLink: "/noticias_catalog", MenuName: "Noticias/Eventos" },
         { MenuLink: "/propuestas_catalog", MenuName: "Propuestas" },
-        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias/Votos" }
+        { MenuLink: "/sugerencias_catalog", MenuName: "Sugerencias" },
+        { MenuLink: "/votos_catalog", MenuName: "Votos" }
       );
     }
   }
@@ -389,6 +394,7 @@ async function loadPropuestas() {
       let group = `<td>${propuesta.GRUP_DIR_PRO}</td>`;
       let info = `<td>${infoText}</td>`;
       let estado = `<td>${propuesta.ESTADO ? "Activo" : "Inactivo"}</td>`;
+      let favorita = `<td>${propuesta.FAVORITA ? "Favorita" : "No es favorita"}</td>`;
       let imagenDisplay = propuesta.URL_IMAGEN
         ? `<td><img src="${propuesta.URL_IMAGEN}" alt="Imagen" style="max-width: 100px; max-height: 100px; display: block; margin: 0 auto;"></td>`
         : `<td>Sin imagen</td>`;
@@ -401,7 +407,7 @@ async function loadPropuestas() {
         </td>`;
 
       rows += `<tr>${
-        id + name + group + info + estado + imagenDisplay + actionButtons
+        id + name + group + info + estado + favorita + imagenDisplay + actionButtons
       }</tr>`;
     }
 
@@ -427,6 +433,9 @@ async function loadPropuestas() {
         document.getElementById("editDescription").value = propuesta.INF_PRO;
         const estadoCheckbox = document.getElementById("editEstado");
         estadoCheckbox.checked = propuesta.ESTADO === 1;
+
+        const favoritaCheckbox = document.getElementById("editFavorita");
+        favoritaCheckbox.checked = propuesta.FAVORITA === 1;
 
         // Cargar candidatos y seleccionar el actual
         await loadCandidates(); // Asegúrate de que esta función se ejecute
