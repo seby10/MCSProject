@@ -11,39 +11,41 @@ const getCandidatosPropuestas = async () => {
   return response.response;
 };
 
-// Almacén de candidatos seleccionados
 const selectedCandidates = new Set();
 
+const getCandidatosActivosPropuestas = async () => {
+  const allCandidatos = await getCandidatosPropuestas();
+  return allCandidatos.filter((candidato) => candidato.activo === 1);
+};
+
 const generarBotonesCandidatos = async () => {
-  const candidatos = await getCandidatosPropuestas();
+  const candidatos = await getCandidatosActivosPropuestas();
   if (!Array.isArray(candidatos) || candidatos.length === 0) {
     console.error("La lista de candidatos no es válida o está vacía.");
     return;
   }
-
+  
   const candidatoContainer = document.querySelector(".candidato-menu");
   if (!candidatoContainer) return;
 
-  candidatoContainer.innerHTML = ""; // Limpiar botones previos
+  candidatoContainer.innerHTML = ""; // Limpiar contenedor previo
 
   candidatos.forEach((candidato) => {
     const button = document.createElement("button");
-    button.classList.add("tab-button"); // Usamos la misma clase para estilo
+    button.classList.add("tab-button");
     button.setAttribute("data-candidato-id", candidato.ID_CAN);
-    button.textContent = `${candidato.NOM_CAN}`;
+    button.textContent = `${candidato.CAR_CAN}`;
 
     button.addEventListener("click", async () => {
       if (selectedCandidates.has(candidato.ID_CAN)) {
-        // Si el candidato ya está seleccionado, desmarcar
         selectedCandidates.delete(candidato.ID_CAN);
         button.classList.remove("active");
       } else {
-        // Si no está seleccionado, marcar
         selectedCandidates.add(candidato.ID_CAN);
         button.classList.add("active");
       }
 
-      // Actualizar las propuestas mostradas
+      // Actualizar propuestas y encabezado
       await updateDisplayedPropuestas();
       actualizarEncabezado();
     });
@@ -53,13 +55,13 @@ const generarBotonesCandidatos = async () => {
 };
 
 
-// Función para obtener las propuestas de una categoría
+
 const getPropuestaByGrupDir = async (grup, candidatoId = null) => {
   try {
     const response = await $.ajax({
       url: `${URL}/propuestas/getPropuestas/${grup}`,
       type: "GET",
-      data: { idCandidato: candidatoId }, // Se pasa el idCandidato como parámetro de la query
+      data: { idCandidato: candidatoId }, 
       dataType: "json",
     });
     return response;
@@ -69,7 +71,6 @@ const getPropuestaByGrupDir = async (grup, candidatoId = null) => {
 };
 
 
-// Función para obtener las categorías disponibles
 const getCategorias = async () => {
   try {
     const response = await $.ajax({
