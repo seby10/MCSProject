@@ -60,12 +60,12 @@ export const insertPropuestaDB = async (NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_
 };
 
 
-export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN) => {
+export const updatePropuestaDB = async (ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, FAVORITA,  URL_IMAGEN) => {
   try {
     const connection = await getConnection();
     const [result] = await connection.query(
-      "CALL ActualizarPropuesta(?, ?, ?, ?, ?, ?, ?)",
-      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, URL_IMAGEN]
+      "CALL ActualizarPropuesta(?, ?, ?, ?, ?, ?, ?, ?)",
+      [ID_PRO, NOM_PRO, GRUP_DIR_PRO, INF_PRO, ID_CANT_PRO, ESTADO, FAVORITA, URL_IMAGEN]
     );
     return result;
   } catch (error) {
