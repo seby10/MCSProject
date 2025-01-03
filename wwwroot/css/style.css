@@ -1,7 +1,7 @@
+@import url("font-awesome.min.css");
 :root {
   --color-principal: #ffff;
 }
-@import url("font-awesome.min.css");
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
