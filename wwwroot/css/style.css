@@ -196,14 +196,14 @@ input[type="radio"] {
   background: #ffffff; 
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.23); 
+  box-shadow: 0 10px 20px var(--color-principal), 0 6px 6px rgba(0, 0, 0, 0.23); 
 }
 
 .heading_container h2::before {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--color-principal);
   border-radius: 10px;
   position: absolute;
   bottom: 0;

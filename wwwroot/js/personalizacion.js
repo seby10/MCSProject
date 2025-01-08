@@ -32,6 +32,18 @@ function showConfirmationQuestion(message, callback) {
     ],
   });
 }
+
+const usuario = JSON.parse(sessionStorage.getItem("user"));
+
+if (!usuario) {
+  window.location.replace("login");
+} else {
+  document.addEventListener("DOMContentLoaded", function () {
+    cargarUsuario(usuario);
+    cargarMenus();
+    loadPropuestas();
+  });
+}
 function cargarUsuario() {
   const usuario = JSON.parse(sessionStorage.getItem("user"));
 

@@ -285,6 +285,7 @@ async function loadcandidatos() {
         document.getElementById("editExp").value = candidato.EXP_CAN;
         document.getElementById("editEdu").value = candidato.EDU_CAN;
         document.getElementById("editParty").value = candidato.PAR_CAN;
+        document.getElementById("imagen").value = "";
         document.getElementById("activeStatus").checked = candidato.activo;
         $("#editModal").modal("show");
       });
