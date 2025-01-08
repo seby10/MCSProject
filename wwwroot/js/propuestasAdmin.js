@@ -431,6 +431,7 @@ async function loadPropuestas() {
         document.getElementById("editRoleName").value = propuesta.NOM_PRO;
         document.getElementById("editRoleGroup").value = propuesta.GRUP_DIR_PRO;
         document.getElementById("editDescription").value = propuesta.INF_PRO;
+        document.getElementById("editUrlImagen").value = "";
         const estadoCheckbox = document.getElementById("editEstado");
         estadoCheckbox.checked = propuesta.ESTADO === 1;
 
