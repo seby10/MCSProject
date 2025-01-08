@@ -33,7 +33,7 @@ Este proyecto es una plataforma web diseñada para gestionar y visualizar inform
 - 🗭️ **HTML5 y CSS3**: Lenguajes base para la estructura y estilos de la interfaz de usuario. HTML5 permite incluir multimedia y formularios avanzados, mientras que CSS3 asegura personalización estética.
 
 ### Base de Datos:
-- 💾 **MongoDB**: Base de datos NoSQL utilizada para almacenar información estructurada y no estructurada, como candidatos, propuestas y eventos. Ofrece flexibilidad y escalabilidad.
+- 💾 **MySQL**: Base de datos SQL utilizada para almacenar información estructurada, como candidatos, propuestas y eventos. Ofrece flexibilidad y escalabilidad.
 
 ---
 
@@ -48,10 +48,17 @@ Este proyecto es una plataforma web diseñada para gestionar y visualizar inform
    cd MCSProject
    npm install
    ```
-3. Configura la conexión a la base de datos en el archivo `.env`:
-   ```env
-   DB_URI=mongodb://localhost:27017/gestion-electoral
-   PORT=4000
+3. Configura la conexión a la base de datos en el archivo `connection.js`:
+   ```
+    export const getConnection = async () => {
+      return await mysql.createConnection({
+        host: 'localhost',   //Tu host     
+        user: 'root',       //Tu usuario de base de datos
+        password: '',       //Tu contraseña
+        database: 'elecciones2024',  //Nombre de tu base de datos
+        port:3306, //Puerto de la base de datos
+      });
+    };
    ```
 4. Inicia el servidor:
    ```bash
@@ -96,7 +103,7 @@ Este proyecto sigue la metodología GitFlow para un flujo de trabajo profesional
 - ✅ Desarrollo de una página web funcional para la gestión de contenido electoral.
 - ✅ Implementación de una API REST para interacción entre frontend y backend.
 - ✅ Uso efectivo de GitHub para control de versiones, con seguimiento de cambios en cada etapa del proyecto.
-- ✅ Integración de MongoDB como base de datos para almacenamiento eficiente de datos.
+- ✅ Integración de MySQL como base de datos para almacenamiento eficiente de datos.
 - ✅ Uso de Bootstrap para garantizar un diseño responsivo.
 
 ### Mejoras Futuras:
@@ -111,10 +118,10 @@ Este proyecto sigue la metodología GitFlow para un flujo de trabajo profesional
 ## 📝 **Créditos y Colaboradores**
 
 Equipo de desarrollo comprometido con la creación de una solución integral para la gestión de procesos electorales:
-- **Sebastián Constante**: Líder de desarrollo y backend.
-- **Jhanina Conterón**: Diseñadora de interfaz y frontend.
-- **Pablo Montero**: Especialista en integración y base de datos.
-- **Daylé García**: Gestor de contenido y documentación.
+- **Sebastián Constante**
+- **Jhanina Conterón**
+- **Pablo Montero**
+- **Daylé García**
 
 ---
 
@@ -124,5 +131,5 @@ Equipo de desarrollo comprometido con la creación de una solución integral par
 - **Node.js**: Entorno de ejecución de JavaScript que opera en el lado del servidor.
 - **Express.js**: Framework web para Node.js que simplifica la gestión de solicitudes y respuestas.
 - **Bootstrap**: Herramienta para crear interfaces web modernas y responsivas.
-- **MongoDB**: Base de datos orientada a documentos para manejo eficiente de datos no relacionales.
+- **MySQL**: Base de datos orientada a documentos para manejo eficiente de datos relacionales.
 
