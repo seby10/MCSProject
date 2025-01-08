@@ -96,26 +96,31 @@ export const createEventoNoticia = async (req, res) => {
 export const updateEventoNoticiaDetails = async (req, res) => {
   try {
     const { id, nombre, fecha, informacion, ubicacion } = req.body;
-
     console.log("Datos recibidos del cliente:", req.body);
-    if (req.file) {
-      console.log("Imagen recibida:", req.file.filename);
+
+    // Obtener la noticia actual
+    const currentNoticia = await getEventoNoticiaByIdFromDB(id);
+    if (!currentNoticia) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Noticia no encontrada" 
+      });
     }
 
-    const currentNoticia = await getEventoNoticiaByIdFromDB(id);
-
+    // Mantener la imagen existente por defecto
     let imagenPath = currentNoticia.IMG_EVE_NOT;
 
+    // Solo actualizar la imagen si se envía una nueva
     if (req.file) {
+      // Si existe una imagen anterior, eliminarla
       if (currentNoticia.IMG_EVE_NOT) {
-        const oldImagePath = path(
-          currentNoticia.IMG_EVE_NOT
-        );
+        const oldImagePath = path.join(__dirname, '../wwwroot/images/noticias', currentNoticia.IMG_EVE_NOT);
         if (fs.existsSync(oldImagePath)) {
           fs.unlinkSync(oldImagePath);
         }
       }
-      imagenPath = `${req.file.filename}`;
+      // Actualizar con la nueva imagen
+      imagenPath = req.file.filename;
     }
 
     const result = await updateEventoNoticia({
@@ -124,17 +129,20 @@ export const updateEventoNoticiaDetails = async (req, res) => {
       fecha,
       informacion,
       ubicacion,
-      imagen: imagenPath,
+      imagen: imagenPath // Usar la imagen existente o la nueva
     });
 
     res.json({
       success: true,
       message: "Noticia actualizada con éxito",
-      response: result,
+      response: result
     });
   } catch (error) {
     console.error("Error en updateEventoNoticiaDetails:", error);
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ 
+      success: false, 
+      message: error.message 
+    });
   }
 };
 
@@ -157,9 +165,9 @@ export const updateEventoNoticiaDetails = async (req, res) => {
 // };
 
 export const toggleEventoNoticiaStatus = async (req, res) => {
-  console.log("Método de solicitud:", req.method);
-  console.log("Encabezados de la solicitud:", req.headers);
-  console.log("Cuerpo de la solicitud:", req.body);
+  // console.log("Método de solicitud:", req.method);
+  // console.log("Encabezados de la solicitud:", req.headers);
+  // console.log("Cuerpo de la solicitud:", req.body);
 
   try {
     const { id, estado } = req.body;

@@ -38,6 +38,8 @@ async function saveNoticia(noticia, imageFile) {
     formData.append("fecha", noticia.fecha);
     formData.append("informacion", noticia.informacion);
     formData.append("ubicacion", noticia.ubicacion);
+
+    // Solo agregar la imagen si se proporciona una nueva
     if (imageFile) {
       formData.append("imagen", imageFile);
     }
@@ -51,10 +53,14 @@ async function saveNoticia(noticia, imageFile) {
       dataType: "json",
     });
 
+    if (!response.success) {
+      throw new Error(response.message || "Error al actualizar la noticia");
+    }
+
     return response;
   } catch (error) {
     console.error("Error al actualizar la noticia:", error);
-    showErrorAlert("Hubo un error al actualizar la noticia");
+    throw error;
   }
 }
 
@@ -185,6 +191,7 @@ function cargarUsuario() {
     container.appendChild(loginButton);
   }
 }
+
 function cargarMenus() {
   const usuario = JSON.parse(sessionStorage.getItem("user"));
   const menus = [];
@@ -299,12 +306,12 @@ async function loadNoticias() {
         const currentStatus = this.getAttribute("data-estado");
 
         // Diagnóstico detallado
-        console.log("Detalles de la noticia:");
-        console.log("ID:", noticiaID);
-        console.log("Estado actual (como string):", currentStatus);
-        console.log("Tipo de estado:", typeof currentStatus);
-        console.log("Comparación con '1':", currentStatus === "1");
-        console.log("Comparación con 1:", currentStatus == 1);
+        // console.log("Detalles de la noticia:");
+        // console.log("ID:", noticiaID);
+        // console.log("Estado actual (como string):", currentStatus);
+        // console.log("Tipo de estado:", typeof currentStatus);
+        // console.log("Comparación con '1':", currentStatus === "1");
+        // console.log("Comparación con 1:", currentStatus == 1);
 
         const confirmationMessage =
           currentStatus === "1"
@@ -363,30 +370,29 @@ async function loadNoticias() {
 }
 
 async function handleSaveChanges() {
-  const updatedNoticia = {
-    id: document.getElementById("editNewsId").value,
-    nombre: document.getElementById("editNewsTitle").value,
-    fecha: formatDateTime(document.getElementById("editNewsDate").value),
-    informacion: document.getElementById("editNewsContent").value,
-    ubicacion: document.getElementById("editNewsLocation").value,
-    //activo: document.getElementById("newsActiveStatus").checked ? 1 : 0,
-  };
-
-  const imageFile = document.getElementById("editNewsImage").files[0];
-
   try {
-    let response = await saveNoticia(updatedNoticia, imageFile);
+    const updatedNoticia = {
+      id: document.getElementById("editNewsId").value,
+      nombre: document.getElementById("editNewsTitle").value,
+      fecha: formatDateTime(document.getElementById("editNewsDate").value),
+      informacion: document.getElementById("editNewsContent").value,
+      ubicacion: document.getElementById("editNewsLocation").value,
+      //activo: document.getElementById("newsActiveStatus").checked ? 1 : 0,
+    };
+
+    // Solo obtener el archivo si se seleccionó uno nuevo
+    const imageInput = document.getElementById("editNewsImage");
+    const imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;
+    const response = await saveNoticia(updatedNoticia, imageFile);
 
     if (response.success) {
       showSuccessAlert("Noticia actualizada exitosamente");
       $("#editModal").modal("hide");
-      loadNoticias();
-    } else {
-      showErrorAlert("Error al actualizar la noticia");
+      await loadNoticias(); // Esperar a que se recarguen las noticias
     }
   } catch (error) {
     console.error("Error al guardar los cambios:", error);
-    showErrorAlert("Hubo un error al intentar guardar los cambios");
+    showErrorAlert("Error al actualizar la noticia: " + error.message);
   }
 }
 
